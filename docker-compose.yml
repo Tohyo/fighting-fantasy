@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  front:
+    image: node:15.12-alpine3.13
+    command: /app/command
+    working_dir: /app
+    depends_on:
+      - api
+      - db
+    ports:
+      - 3000:3000
+    volumes:
+      - /home/kev/Documents/Perso/fighting-fantasy/front:/app
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - 8080:80
+    volumes:
+        - /home/kev/Documents/Perso/fighting-fantasy/api:/app
+        - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - api
+
+  api:
+    build: ./api
+    depends_on:
+      - db
+    volumes:
+      - /home/kev/Documents/Perso/fighting-fantasy/api:/app
+
+  db:
+    image: postgres
+    volumes:
+      - ./db:/var/lib/postgresql/ff-data
+    environment:
+      POSTGRES_DB: ffantasy
+      POSTGRES_PASSWORD: xoxo
