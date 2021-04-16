@@ -1,12 +1,16 @@
 import axios from 'axios'
 import { GetServerSideProps } from 'next'
-import AdventureComp from '../../../../components/adventure'
-import { AdventureInterface, AdventureProps } from '../../../../components/interfaces'
+import AdventureComp from '../../../../components/adventure/adventure'
+import { AdventureInterface } from '../../../../components/adventure/adventureInterface'
+
+interface AdventureProps {
+  adventure: AdventureInterface
+}
 
 const Adventure: React.FC<AdventureProps> = ({ adventure }) => {
   return (
     <>
-    <AdventureComp { ...adventure } />
+      <AdventureComp { ...adventure } />
     </>
   )
 }

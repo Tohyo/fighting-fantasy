@@ -34,6 +34,7 @@ class AdventureController extends AbstractController
     $em->persist($adventure);
     $em->flush();
 
+
     return $this->json($adventure, Response::HTTP_CREATED, [], ['groups' => 'adventures']);
   }
 }

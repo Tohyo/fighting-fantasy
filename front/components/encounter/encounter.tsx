@@ -1,4 +1,4 @@
-import { EncouterInterface } from "./interfaces"
+import { EncouterInterface } from "./encounterInterface"
 
 const Encounter: React.FC<EncouterInterface> = ({ name, dexterity, toughness }) => {
   return (

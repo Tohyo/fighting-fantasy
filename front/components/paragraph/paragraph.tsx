@@ -1,6 +1,18 @@
 import { useEffect } from "react";
-import Encounter from "./encounter";
-import { ParagraphCompInterface } from "./interfaces";
+import { LinkedParagraphInterface } from "./linkedParagraphInterface";
+import { EncouterInterface } from "../encounter/encounterInterface";
+import { BookInterface } from "../book/bookInterface";
+import Encounter from "../encounter/encounter";
+
+interface ParagraphCompInterface {
+  id: string
+  number: number
+  text: string
+  encounters: EncouterInterface[]
+  linkedParagraphs: LinkedParagraphInterface[]
+  book: BookInterface
+  handleClick: (number: number) => void
+}
 
 const ParagraphComp: React.FC<ParagraphCompInterface> = ({ text, linkedParagraphs, encounters, handleClick }) => {
 
@@ -18,13 +30,14 @@ const ParagraphComp: React.FC<ParagraphCompInterface> = ({ text, linkedParagraph
 
     });
   }, [])
+  console.log(encounters)
 
   return (
     <>
       <div dangerouslySetInnerHTML={ { __html: text } } />
-      { encounters.map(encounter => {
-        <Encounter { ...encounter } />
-      })}
+      { encounters.map((encounter, index) => (
+        <Encounter key={`paragraph-encounter-${ index }`} { ...encounter } />
+      ))}
     </>
   )
 }

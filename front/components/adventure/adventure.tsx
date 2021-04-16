@@ -1,7 +1,8 @@
 import axios from "axios"
 import { useState } from "react"
-import { AdventureInterface, ParagraphInterface } from "./interfaces"
-import ParagraphComp from "./paragraph"
+import ParagraphComp from "../paragraph/paragraph"
+import { ParagraphInterface } from "../paragraph/paragraphInterface"
+import { AdventureInterface } from "./adventureInterface"
 
 const AdventureComp: React.FC<AdventureInterface> = ( adventure ) => {
 

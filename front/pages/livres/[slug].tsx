@@ -2,14 +2,21 @@
 import axios from 'axios'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
-import { BookInterface, BookProps, GameInterface } from '../../components/interfaces'
+import { AdventureInterface } from '../../components/adventure/adventureInterface'
+import { BookInterface } from '../../components/book/bookInterface'
+import { ParagraphInterface } from '../../components/paragraph/paragraphInterface'
+
+export interface BookProps {
+  book: BookInterface,
+  firstParagraph: ParagraphInterface
+}
 
 const Book: React.FC<BookProps> = ({ book }) => {
 
   const router = useRouter()
 
   const newAdventure = async () => {
-    const adventure = await axios.post<GameInterface>(`http://localhost:8080/adventures`, {
+    const adventure = await axios.post<AdventureInterface>(`http://localhost:8080/adventures`, {
       'book': book.slug,
     }).then(response => {
       return response.data
