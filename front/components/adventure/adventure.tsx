@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useState } from "react"
+import Character from "../character/character"
 import ParagraphComp from "../paragraph/paragraph"
 import { ParagraphInterface } from "../paragraph/paragraphInterface"
 import { AdventureInterface } from "./adventureInterface"
@@ -19,7 +20,9 @@ const AdventureComp: React.FC<AdventureInterface> = ( adventure ) => {
 
   return (
     <>
+      <Character { ...adventure.character } />
       <ParagraphComp { ...paragraph } handleClick={handleClick} />
+
     </>
   )
 }

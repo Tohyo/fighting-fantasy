@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Adventure;
 use App\Entity\Book;
+use App\Entity\Character;
 use App\Entity\Paragraph;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -29,7 +30,8 @@ class AdventureController extends AbstractController
 
     $adventure = (new Adventure())
       ->setBook($book)
-      ->setParagraph($paragraph);
+      ->setParagraph($paragraph)
+      ->setCharacter(new Character());
 
     $em->persist($adventure);
     $em->flush();

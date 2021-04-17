@@ -7,7 +7,7 @@ use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity()
  */
 class Adventure
 {
@@ -31,6 +31,12 @@ class Adventure
    */
   #[Groups(['adventures'])]
   private Paragraph $paragraph;
+
+  /**
+   * @ORM\OneToOne(targetEntity="Character", cascade={"persist"})
+   */
+  #[Groups(['adventures'])]
+  private Character $character;
 
   /**
    * Get the value of id
@@ -86,6 +92,30 @@ class Adventure
   public function setParagraph(Paragraph $paragraph) : self
   {
     $this->paragraph = $paragraph;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of character
+   *
+   * @return Character
+   */
+  public function getCharacter() : Character
+  {
+    return $this->character;
+  }
+
+  /**
+   * Set the value of character
+   *
+   * @param Character $character
+   *
+   * @return self
+   */
+  public function setCharacter(Character $character) : self
+  {
+    $this->character = $character;
 
     return $this;
   }
