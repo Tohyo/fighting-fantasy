@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ORM\Table(name="`user`")
+ * @ORM\Table(name="`users`")
  */
 class User implements UserInterface
 {
@@ -28,7 +28,7 @@ class User implements UserInterface
   /**
    * @ORM\Column(type="string", length=180, unique=true)
    */
-  private $usename;
+  private $username;
 
   /**
    * @ORM\Column(type="json")
@@ -46,18 +46,6 @@ class User implements UserInterface
       return $this->id;
   }
 
-  public function getUsename(): ?string
-  {
-      return $this->usename;
-  }
-
-  public function setUsename(string $usename): self
-  {
-      $this->usename = $usename;
-
-      return $this;
-  }
-
   /**
    * A visual identifier that represents this user.
    *
@@ -65,7 +53,7 @@ class User implements UserInterface
    */
   public function getUsername(): string
   {
-      return (string) $this->usename;
+      return (string) $this->username;
   }
 
   /**
