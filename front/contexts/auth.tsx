@@ -1,6 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react'
 import Cookies from 'js-cookie'
-import Router, { useRouter } from 'next/router'
 
 import api from '../lib/api';
 
@@ -13,11 +12,10 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     async function loadUserFromCookies() {
-      const token = Cookies.get('token')
+      const token  = Cookies.get('token')
       if (token) {
-        console.log("Got a token in the cookies, let's see if it is valid")
         api.defaults.headers.Authorization = `Bearer ${token}`
-        const { data: user } = await api.get('users/me')
+        const { data: user } = await api.get('api/users')
         if (user) {
           setUser(user)
         }
@@ -27,19 +25,18 @@ export const AuthProvider = ({ children }) => {
     loadUserFromCookies()
   }, [])
 
-  const login = async (email, password) => {
-    const { data: token } = await api.post('auth/login', { email, password })
+  const login = async (username: string, password: string) => {
+    const { data: token } = await api.post('api/login_check', { username, password })
     if (token) {
-      console.log("Got token")
-      Cookies.set('token', token, { expires: 60 })
+
+      Cookies.set('token', token.token, { expires: 3600 })
       api.defaults.headers.Authorization = `Bearer ${token.token}`
-      const { data: user } = await api.get('users/me')
+      const { data: user } = await api.get('api/users')
       setUser(user)
-      console.log("Got user", user)
     }
   }
 
-  const logout = (email, password) => {
+  const logout = () => {
     Cookies.remove('token')
     setUser(null)
     delete api.defaults.headers.Authorization
@@ -48,7 +45,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ isAuthenticated: !!user, user, login, loading, logout }}>
-        {children}
+      {children}
     </AuthContext.Provider>
   )
 }

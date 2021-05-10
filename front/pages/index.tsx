@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next'
 import axios from 'axios'
 import Link from 'next/link'
+import Login from '../components/login/login'
 
 interface BookInterface {
 	id: number
@@ -16,6 +17,7 @@ const Home: React.FC<HomeProps> = ({ books }) => {
 
 	return (
 		<>
+      <Login />
       { books.map(book => (
         <Link
           key={ `home-book-${ book.title }` }
