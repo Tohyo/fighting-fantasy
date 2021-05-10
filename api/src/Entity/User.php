@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -11,7 +10,7 @@ use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\Entity()
  * @ORM\Table(name="`users`")
  */
 class User implements UserInterface
@@ -22,12 +21,13 @@ class User implements UserInterface
    * @ORM\GeneratedValue(strategy="CUSTOM")
    * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
    */
-
+  #[Groups(['users'])]
   private $id;
 
   /**
    * @ORM\Column(type="string", length=180, unique=true)
    */
+  #[Groups(['users'])]
   private $username;
 
   /**
@@ -36,12 +36,22 @@ class User implements UserInterface
   private $roles = [];
 
   /**
-   * @var string The hashed password
+   * @ORM\OneToMany(targetEntity="Adventure", mappedBy="user")
+   */
+  #[Groups(['users'])]
+  private Collection $adventures;
+
+  /**
    * @ORM\Column(type="string")
    */
   private $password;
 
-  public function getId(): ?int
+  public function __construct()
+  {
+    $this->adventures = new ArrayCollection();
+  }
+
+  public function getId(): string
   {
       return $this->id;
   }
@@ -108,5 +118,29 @@ class User implements UserInterface
   {
       // If you store any temporary, sensitive data on the user, clear it here
       // $this->plainPassword = null;
+  }
+
+  /**
+   * Get the value of adventures
+   *
+   * @return Collection
+   */
+  public function getAdventures() : Collection
+  {
+    return $this->adventures;
+  }
+
+  /**
+   * Set the value of adventures
+   *
+   * @param Collection $adventures
+   *
+   * @return self
+   */
+  public function setAdventures(Collection $adventures) : self
+  {
+    $this->adventures = $adventures;
+
+    return $this;
   }
 }

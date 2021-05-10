@@ -39,6 +39,12 @@ class Adventure
   private Character $character;
 
   /**
+   * @ORM\ManyToOne(targetEntity="User", inversedBy="adventures")
+   */
+  #[Groups(['adventures'])]
+  private User $user;
+
+  /**
    * Get the value of id
    *
    * @return string
@@ -116,6 +122,30 @@ class Adventure
   public function setCharacter(Character $character) : self
   {
     $this->character = $character;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of user
+   *
+   * @return User
+   */
+  public function getUser() : User
+  {
+    return $this->user;
+  }
+
+  /**
+   * Set the value of user
+   *
+   * @param User $user
+   *
+   * @return self
+   */
+  public function setUser(User $user) : self
+  {
+    $this->user = $user;
 
     return $this;
   }

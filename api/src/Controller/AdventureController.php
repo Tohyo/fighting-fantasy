@@ -20,7 +20,7 @@ class AdventureController extends AbstractController
     return $this->json($adventure, Response::HTTP_CREATED, [], ['groups' => 'adventures']);
   }
 
-  #[Route('/adventures', name: 'app_post_adventures', methods: ['POST'])]
+  #[Route('/api/adventures', name: 'app_post_adventures', methods: ['POST'])]
   public function createGame(Request $request): JsonResponse
   {
     $em = $this->getDoctrine()->getManager();
@@ -31,7 +31,8 @@ class AdventureController extends AbstractController
     $adventure = (new Adventure())
       ->setBook($book)
       ->setParagraph($paragraph)
-      ->setCharacter(new Character());
+      ->setCharacter(new Character())
+      ->setUser($this->getUser());
 
     $em->persist($adventure);
     $em->flush();

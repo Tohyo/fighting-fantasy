@@ -13,6 +13,7 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ books }) => {
+
 	return (
 		<>
       { books.map(book => (
