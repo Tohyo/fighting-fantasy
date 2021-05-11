@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Adventure;
+use App\Entity\Book;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,8 +12,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
   #[Route('/api/users', name: 'app_get_users', methods: ['GET'])]
-  public function getAdventure(): JsonResponse
+  public function getUsers(): JsonResponse
   {
     return $this->json($this->getUser(), Response::HTTP_OK, [], ['groups' => 'users']);
+  }
+
+  #[Route('/api/users/adventures/{slug}', name: 'app_get_users_adventures', methods: ['GET'])]
+  public function getUserAdventure(string $slug): JsonResponse
+  {
+    $em = $this->getDoctrine()->getManager();
+
+    $book = $em->getRepository(Book::class)->findOneBy(['slug' => $slug]);
+    $adventure = $em->getRepository(Adventure::class)->findOneBy(['user' => $this->getUser(), 'book' => $book]);
+
+    return $this->json($adventure, Response::HTTP_CREATED, [], ['groups' => 'adventures']);
   }
 }

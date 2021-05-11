@@ -17,7 +17,7 @@ class Adventure
    * @ORM\GeneratedValue(strategy="CUSTOM")
    * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
    */
-  #[Groups(['adventures'])]
+  #[Groups(['adventures', 'user_adventures'])]
   private string $id;
 
   /**

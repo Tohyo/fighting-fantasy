@@ -3,14 +3,14 @@ import { useAuth } from "../../contexts/auth";
 
 const Login = () => {
 
-  const { login, user } = useAuth()
+  const { isAuthenticated, login, user } = useAuth()
 
   const [username, setUsername] = useState<string>()
   const [password, setPassword] = useState<string>()
 
   return (
     <>
-      { user ?
+      { isAuthenticated ?
         <>
           { user.username }
         </> :
