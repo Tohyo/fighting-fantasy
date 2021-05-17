@@ -15,9 +15,13 @@ export const AuthProvider = ({ children }) => {
       const token  = Cookies.get('token')
       if (token) {
         api.defaults.headers.Authorization = `Bearer ${token}`
-        const { data: user } = await api.get('api/users')
-        if (user) {
-          setUser(user)
+        try {
+          const { data: user } = await api.get('api/users')
+          if (user) {
+            setUser(user)
+          }
+        } catch (error) {
+          logout()
         }
       }
       setLoading(false)
@@ -40,7 +44,7 @@ export const AuthProvider = ({ children }) => {
     Cookies.remove('token')
     setUser(null)
     delete api.defaults.headers.Authorization
-    window.location.pathname = '/login'
+    window.location.pathname = '/'
   }
 
   return (

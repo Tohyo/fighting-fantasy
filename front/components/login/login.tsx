@@ -3,7 +3,7 @@ import { useAuth } from "../../contexts/auth";
 
 const Login = () => {
 
-  const { isAuthenticated, login, user } = useAuth()
+  const { isAuthenticated, login, user, logout } = useAuth()
 
   const [username, setUsername] = useState<string>()
   const [password, setPassword] = useState<string>()
@@ -13,6 +13,7 @@ const Login = () => {
       { isAuthenticated ?
         <>
           { user.username }
+          <button onClick={() => logout()}>Logout</button>
         </> :
         <>
           <input type="input" name="username" onChange={e => setUsername(e.target.value)} />
