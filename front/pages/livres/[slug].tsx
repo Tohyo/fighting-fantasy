@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { AdventureInterface } from '../../components/adventure/adventureInterface'
 import { BookInterface } from '../../components/book/bookInterface'
 import { ParagraphInterface } from '../../components/paragraph/paragraphInterface'
-import api from '../../lib/api';
+import api from '../../lib/api'
 import useSWR from 'swr'
 import Link from 'next/link'
 
@@ -22,15 +22,12 @@ const Book: React.FC<BookProps> = ({ book }) => {
       })
   })
 
-
   const newAdventure = async () => {
-    const adventure = await api.post<AdventureInterface>(`http://localhost:8080/api/adventures`, {
+    await api.post<AdventureInterface>(`http://localhost:8080/api/adventures`, {
       'book': book.slug,
     }).then(response => {
-      return response.data
+      router.push(`/livres/${ book.slug }/aventure`)
     })
-
-    router.push(`/livres/${ book.slug }/aventure/${ adventure.id }`)
   }
 
 	return (
@@ -38,7 +35,7 @@ const Book: React.FC<BookProps> = ({ book }) => {
       { book.title }
       {!data
         ? <a onClick={newAdventure}>Nouvelle aventure</a>
-        : <Link href={ `/livres/${ book.slug }/aventure/${ data.id }` } >Continuez votre aventure</Link>
+        : <Link href={ `/livres/${ book.slug }/aventure` } >Continuez votre aventure</Link>
       }
     </>
 	)

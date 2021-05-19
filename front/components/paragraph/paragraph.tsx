@@ -27,10 +27,8 @@ const ParagraphComp: React.FC<ParagraphCompInterface> = ({ text, linkedParagraph
       if (linkParagraph.length !== 0) {
         handleClick(linkParagraph[0].number)
       }
-
     });
   }, [])
-  console.log(encounters)
 
   return (
     <>

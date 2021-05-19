@@ -14,9 +14,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdventureController extends AbstractController
 {
-  #[Route('/adventures/{id}', name: 'app_get_adventures', methods: ['GET'])]
-  public function getAdventure(Adventure $adventure): JsonResponse
+  #[Route('/api/adventures/{slug}', name: 'app_get_adventures', methods: ['GET'])]
+  public function getAdventure(string $slug): JsonResponse
   {
+    $em = $this->getDoctrine()->getManager();
+
+    $adventure = $em->getRepository(Adventure::class)->findOneBy([
+      'book' => $em->getRepository(Book::class)->findOneBy(['slug' => $slug]),
+      'user' => $this->getUser()
+    ]);
+
     return $this->json($adventure, Response::HTTP_CREATED, [], ['groups' => 'adventures']);
   }
 
