@@ -20,9 +20,14 @@ const AdventureComp: React.FC<AdventureInterface> = ( adventure ) => {
 
   return (
     <>
-      <Character { ...adventure.character } />
-      <ParagraphComp { ...paragraph } handleClick={handleClick} />
-
+      <div className="flex container mx-auto">
+        <div className="w-3/4 rounded border-gray-300 dark:border-gray-700 border-2 h-24">
+          <ParagraphComp { ...paragraph } handleClick={handleClick} />
+        </div>
+        <div className="w-1/4 rounded border-gray-300 dark:border-gray-700 border-2 h-24">
+          <Character { ...adventure.character } />
+        </div>
+      </div>
     </>
   )
 }
