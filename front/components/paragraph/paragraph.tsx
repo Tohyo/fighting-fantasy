@@ -14,7 +14,7 @@ interface ParagraphCompInterface {
   handleClick: (number: number) => void
 }
 
-const ParagraphComp: React.FC<ParagraphCompInterface> = ({ text, linkedParagraphs, encounters, handleClick }) => {
+const ParagraphComp: React.FC<ParagraphCompInterface> = ({ text, linkedParagraphs, handleClick }) => {
 
   useEffect(() => {
     window.addEventListener('click', (event) => {
@@ -33,9 +33,6 @@ const ParagraphComp: React.FC<ParagraphCompInterface> = ({ text, linkedParagraph
   return (
     <>
       <div dangerouslySetInnerHTML={ { __html: text } } />
-      { encounters.map((encounter, index) => (
-        <Encounter key={`paragraph-encounter-${ index }`} { ...encounter } />
-      ))}
     </>
   )
 }

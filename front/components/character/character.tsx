@@ -1,13 +1,14 @@
 import { CharacterInterface } from "./characterInterface"
 
 const Character: React.FC<CharacterInterface> = (character) => {
-
   return (
     <>
       habilete
       endurance
       chance
-      {character.initialDexterity}
+      {character.dexterity}
+      {character.stamina}
+      {character.luck}
     </>
   )
 }
