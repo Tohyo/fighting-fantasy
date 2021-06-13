@@ -1,41 +1,52 @@
 import { useState } from "react"
 
-const Encounter: React.FC = ({ name, dexterity, toughness, character, updateCharacterStamina }) => {
+const Encounter: React.FC = ({
+  encounter,
+  character
+}) => {
 
-  const [currentDexterity, seCurrentDexterity] = useState(dexterity)
-  const [currentToughness, setCurrentToughness] = useState(toughness)
+  console.log('greiojg', encounter.toughness)
+  const [currentToughness, setCurrentToughness] = useState<number>(encounter.toughness)
   const [heroToughness, setHeroToughness] = useState<number>(character.stamina)
-  const [heroDexterity, setHeroDexterity] = useState<number>(character.dexterity)
+
+  const [encounterDiceRoll, setEncounterDiceRoll] = useState<number[][]>([])
+  const [encounterReport, setEncounterReport] = useState<boolean>(false)
 
   const resolveEncounter = () => {
+    encounterDiceRoll.push([
+      rollDice() + encounter.dexterity,
+      rollDice() + character.dexterity
+    ])
+    setEncounterDiceRoll(encounterDiceRoll)
 
-    const monsterStrength = rollDice() + currentDexterity
-    const heroStrength = rollDice() + heroDexterity
-
-    if (monsterStrength > heroStrength) {
-      setHeroToughness(heroToughness - 2)
-    } else {
-      setCurrentToughness(currentToughness - 2)
+    if (!encounterReport) {
+      setEncounterReport(true)
     }
-
-    console.log(monsterStrength, heroStrength, currentToughness, heroToughness)
-    if (heroToughness <= 0) {
-      updateCharacterStamina(0)
-    }
+    console.log(encounterDiceRoll)
   }
 
   const rollDice = () => {
     return Math.floor((Math.random() * 6) + 1)
   }
 
+
   return (
     <>
-      <span>{ name }</span>
-      <span>{ currentDexterity }</span>
+      <span>{ encounter.name }</span>
+      <span>{ encounter.dexterity }</span>
       <span>{ currentToughness }</span>
+
+      { encounterReport && encounterDiceRoll.map(dice => {
+        return (
+          <>
+            {dice[0]} X {dice[1]}
+          </>
+        ) })
+      }
       <button onClick={() => resolveEncounter()}>Combat</button>
     </>
   )
 }
+
 
 export default Encounter

@@ -3,6 +3,7 @@ import { LinkedParagraphInterface } from "./linkedParagraphInterface";
 import { EncouterInterface } from "../encounter/encounterInterface";
 import { BookInterface } from "../book/bookInterface";
 import Encounter from "../encounter/encounter";
+import { CharacterInterface } from "../character/characterInterface";
 
 interface ParagraphCompInterface {
   id: string
@@ -11,10 +12,11 @@ interface ParagraphCompInterface {
   encounters: EncouterInterface[]
   linkedParagraphs: LinkedParagraphInterface[]
   book: BookInterface
+  character: CharacterInterface
   handleClick: (number: number) => void
 }
 
-const ParagraphComp: React.FC<ParagraphCompInterface> = ({ text, linkedParagraphs, handleClick }) => {
+const ParagraphComp: React.FC<ParagraphCompInterface> = ({ character, encounters, text, linkedParagraphs, handleClick }) => {
 
   useEffect(() => {
     window.addEventListener('click', (event) => {
@@ -33,6 +35,9 @@ const ParagraphComp: React.FC<ParagraphCompInterface> = ({ text, linkedParagraph
   return (
     <>
       <div dangerouslySetInnerHTML={ { __html: text } } />
+      { encounters.map((encounter, index) => (
+        <Encounter key={`paragraph-encounter-${ index }`} encounter={encounter} character={character} />
+      ))}
     </>
   )
 }

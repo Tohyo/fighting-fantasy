@@ -44,7 +44,24 @@ class AdventureController extends AbstractController
     $em->persist($adventure);
     $em->flush();
 
-
     return $this->json($adventure, Response::HTTP_CREATED, [], ['groups' => 'adventures']);
+  }
+
+  #[Route('/api/adventures/{id}', name: 'app_put_adventures', methods: ['PUT'])]
+  public function updateGame(Request $request, Adventure $adventure): JsonResponse
+  {
+    $em = $this->getDoctrine()->getManager();
+
+    $paragraph = $em->getRepository(Paragraph::class)->findOneBy([
+      'number' => $request->request->get('paragraph'),
+      'book' => $adventure->getBook()
+    ]);
+
+    $adventure->setParagraph($paragraph);
+
+    $em->persist($adventure);
+    $em->flush();
+
+    return $this->json($adventure, Response::HTTP_OK, [], ['groups' => 'adventures']);
   }
 }
