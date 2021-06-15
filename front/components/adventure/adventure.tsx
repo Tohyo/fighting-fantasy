@@ -31,14 +31,16 @@ const Adventure: React.FC<AdventureInterface> = ( adventure ) => {
 
   return (
     <>
-      <div className="flex container mx-auto">
-        <div className="w-3/4 rounded border-gray-300 dark:border-gray-700 border-2 h-24">
-          <Paragraph { ...paragraph } character={ character } handlePagraphChange={ handlePagraphChange } updateCharacterStamina={ updateCharacterStamina } />
+      <section className="py-8 px-4">
+        <div className="flex flex-wrap -mx-2">
+          <div className="lg:w-2/5 px-2 lg:pr-16 mb-6 lg:mb-0">
+            <Character {...character} />
+          </div>
+          <div className="lg:w-3/5 px-2">
+            <Paragraph { ...paragraph } character={ character } handlePagraphChange={ handlePagraphChange } updateCharacterStamina={ updateCharacterStamina } />
+          </div>
         </div>
-        <div className="w-1/4 rounded border-gray-300 dark:border-gray-700 border-2 h-24">
-          <Character {...character} />
-        </div>
-      </div>
+      </section>
     </>
   )
 }

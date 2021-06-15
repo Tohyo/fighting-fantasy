@@ -21,7 +21,11 @@ const AdventurePage: React.FC<AdventurePageProps> = ({ bookSlug }) => {
       {!data ? (
         <>Loading</>
       ) : (
-        <Adventure { ...data } />
+        <>
+          <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <Adventure { ...data } />
+          </div>
+        </>
       )}
     </>
   )

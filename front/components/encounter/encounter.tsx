@@ -39,10 +39,10 @@ const Encounter: React.FC<EncounterProps> = ({ encounter, character, updateChara
       <button onClick={() => resolveEncounter()}>Fight</button>
 
       ----------------------
-      {rollRecap.map(roll => (
-        <>
+      {rollRecap.map((roll, index) => (
+        <div key={`${ encounter.name }-${ index }`}>
           Hero Power: { roll[0] } X Encounter Power: { roll[1] }
-        </>
+        </div>
       ))}
     </>
   )
