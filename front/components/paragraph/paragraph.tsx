@@ -13,10 +13,11 @@ interface ParagraphInterface {
   linkedParagraphs: LinkedParagraphInterface[]
   book: BookInterface
   character: CharacterInterface
-  handleClick: (number: number) => void
+  handlePagraphChange: (number: number) => void
+  updateCharacterStamina: (number: number) => void
 }
 
-const Paragraph: React.FC<ParagraphInterface> = ({ character, encounters, text, linkedParagraphs, handleClick }) => {
+const Paragraph: React.FC<ParagraphInterface> = ({ character, encounters, text, linkedParagraphs, handlePagraphChange, updateCharacterStamina }) => {
 
   useEffect(() => {
     window.addEventListener('click', (event) => {
@@ -27,7 +28,7 @@ const Paragraph: React.FC<ParagraphInterface> = ({ character, encounters, text, 
       const linkParagraph = linkedParagraphs.filter(lp => lp.text === event.target.innerText)
 
       if (linkParagraph.length !== 0) {
-        handleClick(linkParagraph[0].number)
+        handlePagraphChange(linkParagraph[0].number)
       }
     });
   }, [])
@@ -36,7 +37,7 @@ const Paragraph: React.FC<ParagraphInterface> = ({ character, encounters, text, 
     <>
       <div dangerouslySetInnerHTML={ { __html: text } } />
       { encounters.map((encounter, index) => (
-        <Encounter key={`paragraph-encounter-${ index }`} encounter={encounter} character={character} />
+        <Encounter key={`paragraph-encounter-${ index }`} encounter={encounter} character={character} updateCharacterStamina={ updateCharacterStamina } />
       ))}
     </>
   )

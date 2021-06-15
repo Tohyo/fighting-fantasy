@@ -5,28 +5,22 @@ import { EncouterInterface } from "./encounterInterface"
 interface EncounterProps {
   encounter: EncouterInterface
   character: CharacterInterface
+  updateCharacterStamina: (number: number) => void
 }
 
-const Encounter: React.FC<EncounterProps> = ({ encounter, character }) => {
+const Encounter: React.FC<EncounterProps> = ({ encounter, character, updateCharacterStamina }) => {
 
-  console.log('greiojg', encounter.toughness)
-  const [currentToughness, setCurrentToughness] = useState<number>(encounter.toughness)
-  const [heroToughness, setHeroToughness] = useState<number>(character.stamina)
-
-  const [encounterDiceRoll, setEncounterDiceRoll] = useState<number[][]>([])
-  const [encounterReport, setEncounterReport] = useState<boolean>(false)
+  const [toughness, setToughness] = useState<number>(encounter.toughness)
 
   const resolveEncounter = () => {
-    encounterDiceRoll.push([
-      rollDice() + encounter.dexterity,
-      rollDice() + character.dexterity
-    ])
-    setEncounterDiceRoll(encounterDiceRoll)
+    const heroPower = rollDice()
+    const encounterPower = rollDice()
 
-    if (!encounterReport) {
-      setEncounterReport(true)
+    if (heroPower > encounterPower) {
+      setToughness(toughness - 1)
+    } else {
+      updateCharacterStamina(2)
     }
-    console.log(encounterDiceRoll)
   }
 
   const rollDice = () => {
@@ -38,16 +32,9 @@ const Encounter: React.FC<EncounterProps> = ({ encounter, character }) => {
     <>
       <span>{ encounter.name }</span>
       <span>{ encounter.dexterity }</span>
-      <span>{ currentToughness }</span>
+      <span>{ toughness }</span>
+      <button onClick={() => resolveEncounter()}>Fight</button>
 
-      { encounterReport && encounterDiceRoll.map(dice => {
-        return (
-          <>
-            {dice[0]} X {dice[1]}
-          </>
-        ) })
-      }
-      <button onClick={() => resolveEncounter()}>Combat</button>
     </>
   )
 }

@@ -1,14 +1,9 @@
 import { CharacterInterface } from "./characterInterface"
 
-const Character: React.FC<CharacterInterface> = (character) => {
+const Character: React.FC<CharacterInterface> = ({ stamina }) => {
   return (
     <>
-      habilete
-      endurance
-      chance
-      {character.dexterity}
-      {character.stamina}
-      {character.luck}
+      { stamina }
     </>
   )
 }
