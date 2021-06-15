@@ -11,22 +11,25 @@ interface EncounterProps {
 const Encounter: React.FC<EncounterProps> = ({ encounter, character, updateCharacterStamina }) => {
 
   const [toughness, setToughness] = useState<number>(encounter.toughness)
+  const [rollRecap, setRollRecap] = useState<number[][]>([])
 
   const resolveEncounter = () => {
-    const heroPower = rollDice()
-    const encounterPower = rollDice()
+    const heroPower = rollDice() + character.dexterity
+    const encounterPower = rollDice() + encounter.dexterity
+
+    rollRecap.push([heroPower, encounterPower])
+    setRollRecap(rollRecap)
 
     if (heroPower > encounterPower) {
-      setToughness(toughness - 1)
+      setToughness(toughness - 2)
     } else {
-      updateCharacterStamina(2)
+      updateCharacterStamina(character.stamina - 2)
     }
   }
 
   const rollDice = () => {
     return Math.floor((Math.random() * 6) + 1)
   }
-
 
   return (
     <>
@@ -35,6 +38,12 @@ const Encounter: React.FC<EncounterProps> = ({ encounter, character, updateChara
       <span>{ toughness }</span>
       <button onClick={() => resolveEncounter()}>Fight</button>
 
+      ----------------------
+      {rollRecap.map(roll => (
+        <>
+          Hero Power: { roll[0] } X Encounter Power: { roll[1] }
+        </>
+      ))}
     </>
   )
 }
