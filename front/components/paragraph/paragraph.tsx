@@ -5,7 +5,7 @@ import { BookInterface } from "../book/bookInterface";
 import Encounter from "../encounter/encounter";
 import { CharacterInterface } from "../character/characterInterface";
 
-interface ParagraphCompInterface {
+interface ParagraphInterface {
   id: string
   number: number
   text: string
@@ -16,7 +16,7 @@ interface ParagraphCompInterface {
   handleClick: (number: number) => void
 }
 
-const ParagraphComp: React.FC<ParagraphCompInterface> = ({ character, encounters, text, linkedParagraphs, handleClick }) => {
+const Paragraph: React.FC<ParagraphInterface> = ({ character, encounters, text, linkedParagraphs, handleClick }) => {
 
   useEffect(() => {
     window.addEventListener('click', (event) => {
@@ -42,4 +42,4 @@ const ParagraphComp: React.FC<ParagraphCompInterface> = ({ character, encounters
   )
 }
 
-export default ParagraphComp
+export default Paragraph

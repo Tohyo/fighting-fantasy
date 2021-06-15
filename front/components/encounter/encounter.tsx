@@ -1,9 +1,13 @@
 import { useState } from "react"
+import { CharacterInterface } from "../character/characterInterface"
+import { EncouterInterface } from "./encounterInterface"
 
-const Encounter: React.FC = ({
-  encounter,
-  character
-}) => {
+interface EncounterProps {
+  encounter: EncouterInterface
+  character: CharacterInterface
+}
+
+const Encounter: React.FC<EncounterProps> = ({ encounter, character }) => {
 
   console.log('greiojg', encounter.toughness)
   const [currentToughness, setCurrentToughness] = useState<number>(encounter.toughness)

@@ -1,9 +1,13 @@
 import { GetServerSideProps } from 'next'
-import AdventureComp from '../../../components/adventure/adventure'
+import Adventure from '../../../components/adventure/adventure'
 import api from '../../../lib/api'
 import useSWR from 'swr'
 
-const Adventure: React.FC<String> = ({ bookSlug }) => {
+interface AdventurePageProps {
+  bookSlug: string
+}
+
+const AdventurePage: React.FC<AdventurePageProps> = ({ bookSlug }) => {
 
   const { data } = useSWR(`http://localhost:8080/api/adventures/${ bookSlug }`, async (url) => {
     return await api.get(url)
@@ -17,7 +21,7 @@ const Adventure: React.FC<String> = ({ bookSlug }) => {
       {!data ? (
         <>Loading</>
       ) : (
-        <AdventureComp { ...data } />
+        <Adventure { ...data } />
       )}
     </>
   )
@@ -31,4 +35,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 }
 
-export default Adventure
+export default AdventurePage
