@@ -4,6 +4,8 @@ namespace App\DataFixtures;
 
 use App\Entity\Book;
 use App\Entity\Encounter;
+use App\Entity\Inventory;
+use App\Entity\Item;
 use App\Entity\LinkedParagraph;
 use App\Entity\Paragraph;
 use Doctrine\Bundle\FixturesBundle\Fixture;

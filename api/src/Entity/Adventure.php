@@ -45,6 +45,12 @@ class Adventure
   private User $user;
 
   /**
+   * @ORM\OneToOne(targetEntity="Inventory", cascade={"persist"})
+   */
+  #[Groups(['adventures'])]
+  private ?Inventory $inventory = null;
+
+  /**
    * Get the value of id
    *
    * @return string
@@ -146,6 +152,30 @@ class Adventure
   public function setUser(User $user) : self
   {
     $this->user = $user;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of inventory
+   *
+   * @return Inventory|null
+   */
+  public function getInventory(): ?Inventory
+  {
+    return $this->inventory;
+  }
+
+  /**
+   * Set the value of inventory
+   *
+   * @param Inventory $inventory
+   *
+   * @return self
+   */
+  public function setInventory(Inventory $inventory): self
+  {
+    $this->inventory = $inventory;
 
     return $this;
   }
