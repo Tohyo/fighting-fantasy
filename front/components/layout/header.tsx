@@ -40,8 +40,8 @@ export default function IndexPage() {
                     </div>
                     { profile && (
                       <>
-                        <input type="input" name="username" onChange={e => setUsername(e.target.value)} />
-                        <input type="password" name="password" onChange={e => setPassword(e.target.value)} />
+                        <input className="text-black" type="input" name="username" onChange={e => setUsername(e.target.value)} />
+                        <input className="text-black" type="password" name="password" onChange={e => setPassword(e.target.value)} />
                         <button onClick={() => login(username, password)}>Login</button>
                       </>
                     )}
