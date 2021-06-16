@@ -6,7 +6,7 @@ import { ParagraphInterface } from "../paragraph/paragraphInterface"
 import { AdventureInterface } from "./adventureInterface"
 import api from '../../lib/api'
 import { CharacterInterface } from "../character/characterInterface"
-
+import Inventory from "../inventory/inventory"
 
 const Adventure: React.FC<AdventureInterface> = ( adventure ) => {
 
@@ -35,8 +35,9 @@ const Adventure: React.FC<AdventureInterface> = ( adventure ) => {
         <div className="flex flex-wrap -mx-2">
           <div className="lg:w-2/5 px-2 lg:pr-16 mb-6 lg:mb-0">
             <Character {...character} />
+            <Inventory />
           </div>
-          <div className="lg:w-3/5 px-2">
+          <div className="lg:w-3/5 px-2 border-grey border-solid border-2">
             <Paragraph { ...paragraph } character={ character } handlePagraphChange={ handlePagraphChange } updateCharacterStamina={ updateCharacterStamina } />
           </div>
         </div>

@@ -34,7 +34,7 @@ const Book: React.FC<BookProps> = ({ book }) => {
 		<>
       { book.title }
       {!data
-        ? <a onClick={newAdventure}>Nouvelle aventure</a>
+        ? <a onClick={ newAdventure }>Nouvelle aventure</a>
         : <Link href={ `/livres/${ book.slug }/aventure` } >Continuez votre aventure</Link>
       }
     </>

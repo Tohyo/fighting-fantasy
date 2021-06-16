@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { useAuth } from "../../contexts/auth"
+import Link from "next/link"
 
 export default function IndexPage() {
 
@@ -20,7 +21,9 @@ export default function IndexPage() {
               </div>
               <ul className="hidden xl:flex items-center h-full">
                 <li className="cursor-pointer h-full flex items-center text-sm text-white tracking-normal transition duration-150 ease-in-out">
-                  Liste des livres
+                  <Link href="/">
+                    Liste des livres
+                  </Link>
                 </li>
               </ul>
             </div>
