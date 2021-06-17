@@ -16,15 +16,4 @@ class UserController extends AbstractController
   {
     return $this->json($this->getUser(), Response::HTTP_OK, [], ['groups' => 'users']);
   }
-
-  #[Route('/api/users/adventures/{slug}', name: 'app_get_users_adventures', methods: ['GET'])]
-  public function getUserAdventure(string $slug): JsonResponse
-  {
-    $em = $this->getDoctrine()->getManager();
-
-    $book = $em->getRepository(Book::class)->findOneBy(['slug' => $slug]);
-    $adventure = $em->getRepository(Adventure::class)->findOneBy(['user' => $this->getUser(), 'book' => $book]);
-
-    return $this->json($adventure, Response::HTTP_CREATED, [], ['groups' => 'adventures']);
-  }
 }

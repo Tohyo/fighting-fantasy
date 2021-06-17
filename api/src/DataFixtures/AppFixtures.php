@@ -8,6 +8,7 @@ use App\Entity\Inventory;
 use App\Entity\Item;
 use App\Entity\LinkedParagraph;
 use App\Entity\Paragraph;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -15,9 +16,23 @@ class AppFixtures extends Fixture
 {
   public function load(ObjectManager $manager)
   {
+    $user = (new User())
+      ->setUsername('tohyo')
+      ->setPassword('$argon2id$v=19$m=65536,t=4,p=1$qwBS2zIAb4lJ0lKACX5rJw$phCjXTfew8R8tDGjBi619bKXH3b3DVTZDTcm5OBxDHw');
+
+    $item = (new Item())
+      ->setName('Or')
+      ->setQuantity('20');
+
+    $inventory = (new Inventory())
+      ->addItem($item);
+
+    $item->setInventory($inventory);
+
     $book = (new Book())
       ->setTitle('Le sorcier de la montagne de feu')
-      ->setSlug('le-sorcier-de-la-montagne-de-feu');
+      ->setSlug('le-sorcier-de-la-montagne-de-feu')
+      ->setStartingInventory($inventory);
 
     $paragraph2 = (new Paragraph())
       ->setNumber(2)
@@ -48,6 +63,7 @@ class AppFixtures extends Fixture
     $manager->persist($linkedParagraph);
     $manager->persist($paragraph);
     $manager->persist($encounter);
+    $manager->persist($user);
 
     $manager->flush();
   }

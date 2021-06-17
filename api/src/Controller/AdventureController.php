@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Adventure;
 use App\Entity\Book;
 use App\Entity\Character;
+use App\Entity\Inventory;
+use App\Entity\Item;
 use App\Entity\Paragraph;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -24,7 +26,7 @@ class AdventureController extends AbstractController
       'user' => $this->getUser()
     ]);
 
-    return $this->json($adventure, Response::HTTP_CREATED, [], ['groups' => 'adventures']);
+    return $this->json($adventure, Response::HTTP_OK, [], ['groups' => 'adventures']);
   }
 
   #[Route('/api/adventures', name: 'app_post_adventures', methods: ['POST'])]
@@ -35,11 +37,22 @@ class AdventureController extends AbstractController
     $book = $em->getRepository(Book::class)->findOneBy(['slug' => json_decode($request->getContent(), true)['book']]);
     $paragraph = $em->getRepository(Paragraph::class)->findOneBy(['number' => 1, 'book' => $book]);
 
+    $inventory = new Inventory();
+    foreach ($book->getStartingInventory()->getItems() as $startingItem) {
+      $item = (new Item())
+        ->setName($startingItem->getName())
+        ->setQuantity($startingItem->getQuantity());
+
+      $inventory->addItem($item);
+      $item->setInventory($inventory);
+    }
+
     $adventure = (new Adventure())
       ->setBook($book)
       ->setParagraph($paragraph)
       ->setCharacter(new Character())
-      ->setUser($this->getUser());
+      ->setUser($this->getUser())
+      ->setInventory($inventory);
 
     $em->persist($adventure);
     $em->flush();

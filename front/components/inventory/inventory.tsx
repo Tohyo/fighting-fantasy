@@ -1,22 +1,16 @@
-import { useState } from "react"
+import { InventoryInterface } from "./inventoryInterface"
 
 
-interface Item {
-  name: string
-  quantity: number
-}
-
-const Inventory = () => {
-  const [inventory, setInventory] = useState<Item[]>([])
+const Inventory: React.FC<InventoryInterface> = ({ items }) => {
 
   return (
     <>
       <div className="flex w-full md:min-h-full h-40 mt-8 border-grey border-solid border-2">
         Equipement
-        { inventory.map(item => (
-          <>
+        { items.map((item, index) => (
+          <div key={`inventory-${index}`}>
             { item.quantity } - { item.name }
-          </>
+          </div>
         ))}
       </div>
     </>

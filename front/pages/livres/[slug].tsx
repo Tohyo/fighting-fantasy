@@ -15,7 +15,7 @@ export interface BookProps {
 const Book: React.FC<BookProps> = ({ book }) => {
 
   const router = useRouter()
-  const { data } = useSWR(`http://localhost:8080/api/users/adventures/${ book.slug }`, async (url) => {
+  const { data } = useSWR(`http://localhost:8080/api/adventures/${ book.slug }`, async (url) => {
     return await api.get(url)
       .then(result => {
         return result.data

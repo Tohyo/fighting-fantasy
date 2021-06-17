@@ -34,6 +34,11 @@ class Book
   #[Groups(['books', 'adventures'])]
   private string $slug;
 
+   /**
+   * @ORM\OneToOne(targetEntity="Inventory", cascade={"persist"})
+   */
+  private Inventory $startingInventory;
+
   /**
    * @ORM\OneToMany(targetEntity="Paragraph", mappedBy="book")
    */
@@ -110,6 +115,30 @@ class Book
   public function setAdventures(Collection $adventures) : self
   {
     $this->adventures = $adventures;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of startingInventory
+   *
+   * @return Inventory
+   */
+  public function getStartingInventory(): Inventory
+  {
+    return $this->startingInventory;
+  }
+
+  /**
+   * Set the value of startingInventory
+   *
+   * @param Inventory $startingInventory
+   *
+   * @return self
+   */
+  public function setStartingInventory(Inventory $startingInventory): self
+  {
+    $this->startingInventory = $startingInventory;
 
     return $this;
   }

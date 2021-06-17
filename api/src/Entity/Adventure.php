@@ -48,7 +48,7 @@ class Adventure
    * @ORM\OneToOne(targetEntity="Inventory", cascade={"persist"})
    */
   #[Groups(['adventures'])]
-  private ?Inventory $inventory = null;
+  private Inventory $inventory;
 
   /**
    * Get the value of id
@@ -159,9 +159,9 @@ class Adventure
   /**
    * Get the value of inventory
    *
-   * @return Inventory|null
+   * @return Inventory
    */
-  public function getInventory(): ?Inventory
+  public function getInventory(): Inventory
   {
     return $this->inventory;
   }

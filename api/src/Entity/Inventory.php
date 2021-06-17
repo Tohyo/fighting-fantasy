@@ -22,7 +22,7 @@ class Inventory
   private string $id;
 
   /**
-   * @ORM\OneToMany(targetEntity="Item", mappedBy="inventory")
+   * @ORM\OneToMany(targetEntity="Item", mappedBy="inventory", cascade={"persist"})
    */
   #[Groups(['adventures'])]
   private Collection $items;
@@ -62,6 +62,18 @@ class Inventory
   public function setItems(Collection $items): self
   {
     $this->items = $items;
+
+    return $this;
+  }
+
+  /**
+   * @param Item $item
+   *
+   * @return self
+   */
+  public function addItem(Item $item): self
+  {
+    $this->items->add($item);
 
     return $this;
   }

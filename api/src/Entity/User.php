@@ -53,7 +53,7 @@ class User implements UserInterface
 
   public function getId(): string
   {
-      return $this->id;
+    return $this->id;
   }
 
   /**
@@ -63,7 +63,7 @@ class User implements UserInterface
    */
   public function getUsername(): string
   {
-      return (string) $this->username;
+    return (string) $this->username;
   }
 
   /**
@@ -71,18 +71,18 @@ class User implements UserInterface
    */
   public function getRoles(): array
   {
-      $roles = $this->roles;
-      // guarantee every user at least has ROLE_USER
-      $roles[] = 'ROLE_USER';
+    $roles = $this->roles;
+    // guarantee every user at least has ROLE_USER
+    $roles[] = 'ROLE_USER';
 
-      return array_unique($roles);
+    return array_unique($roles);
   }
 
   public function setRoles(array $roles): self
   {
-      $this->roles = $roles;
+    $this->roles = $roles;
 
-      return $this;
+    return $this;
   }
 
   /**
@@ -90,14 +90,14 @@ class User implements UserInterface
    */
   public function getPassword(): string
   {
-      return (string) $this->password;
+    return (string) $this->password;
   }
 
   public function setPassword(string $password): self
   {
-      $this->password = $password;
+    $this->password = $password;
 
-      return $this;
+    return $this;
   }
 
   /**
@@ -108,7 +108,7 @@ class User implements UserInterface
    */
   public function getSalt(): ?string
   {
-      return null;
+    return null;
   }
 
   /**
@@ -140,6 +140,16 @@ class User implements UserInterface
   public function setAdventures(Collection $adventures) : self
   {
     $this->adventures = $adventures;
+
+    return $this;
+  }
+
+  /**
+   * Set the value of username
+   */
+  public function setUsername($username): self
+  {
+    $this->username = $username;
 
     return $this;
   }
