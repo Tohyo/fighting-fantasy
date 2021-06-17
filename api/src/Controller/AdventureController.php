@@ -66,7 +66,7 @@ class AdventureController extends AbstractController
     $em = $this->getDoctrine()->getManager();
 
     $paragraph = $em->getRepository(Paragraph::class)->findOneBy([
-      'number' => $request->request->get('paragraph'),
+      'number' => json_decode($request->getContent(), true)['paragraph'],
       'book' => $adventure->getBook()
     ]);
 

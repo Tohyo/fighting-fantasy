@@ -17,7 +17,14 @@ interface ParagraphInterface {
   updateCharacterStamina: (number: number) => void
 }
 
-const Paragraph: React.FC<ParagraphInterface> = ({ character, encounters, text, linkedParagraphs, handlePagraphChange, updateCharacterStamina }) => {
+const Paragraph: React.FC<ParagraphInterface> = ({
+  character,
+  encounters,
+  text,
+  linkedParagraphs,
+  handlePagraphChange,
+  updateCharacterStamina
+}) => {
 
   useEffect(() => {
     window.addEventListener('click', (event) => {
