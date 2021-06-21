@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ItemController extends AbstractController
 {
-  #[Route('/api/items/{id}', name: 'app_put_adventures', methods: ['PUT'])]
+  #[Route('/api/items/{id}', name: 'app_put_items', methods: ['PUT'])]
   public function updateGame(Request $request, Item $item): JsonResponse
   {
     $em = $this->getDoctrine()->getManager();

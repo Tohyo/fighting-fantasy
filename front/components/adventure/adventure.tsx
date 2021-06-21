@@ -28,7 +28,14 @@ const Adventure: React.FC<AdventureInterface> = ( adventure ) => {
   }
 
   async function updateCharacterStamina(number: number) {
-    setCharacter({ ...character, stamina: number })
+    if (number <= 0) {
+      setCharacter({ ...character, stamina: 0 })
+      await api.put(`api/adventures/${ adventure.id }`, {
+        'status': 'done'
+      })
+    } else {
+      setCharacter({ ...character, stamina: number })
+    }
   }
 
   return (

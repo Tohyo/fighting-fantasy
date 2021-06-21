@@ -23,7 +23,8 @@ class AdventureController extends AbstractController
 
     $adventure = $em->getRepository(Adventure::class)->findOneBy([
       'book' => $em->getRepository(Book::class)->findOneBy(['slug' => $slug]),
-      'user' => $this->getUser()
+      'user' => $this->getUser(),
+      'status' => Adventure::STATUS_IN_PROGRESS
     ]);
 
     return $this->json($adventure, Response::HTTP_OK, [], ['groups' => 'adventures']);
@@ -65,12 +66,18 @@ class AdventureController extends AbstractController
   {
     $em = $this->getDoctrine()->getManager();
 
-    $paragraph = $em->getRepository(Paragraph::class)->findOneBy([
-      'number' => json_decode($request->getContent(), true)['paragraph'],
-      'book' => $adventure->getBook()
-    ]);
+    if (isset(json_decode($request->getContent(), true)['paragraph'])) {
+      $paragraph = $em->getRepository(Paragraph::class)->findOneBy([
+        'number' => json_decode($request->getContent(), true)['paragraph'],
+        'book' => $adventure->getBook()
+      ]);
 
-    $adventure->setParagraph($paragraph);
+      $adventure->setParagraph($paragraph);
+    }
+
+    if (isset(json_decode($request->getContent(), true)['status'])) {
+      $adventure->setStatus(json_decode($request->getContent(), true)['status']);
+    }
 
     $em->persist($adventure);
     $em->flush();

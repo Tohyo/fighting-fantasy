@@ -11,6 +11,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class Adventure
 {
+  public const STATUS_IN_PROGRESS = 'in progress';
+  public const STATUS_DONE = 'done';
+
   /**
    * @ORM\Id
    * @ORM\Column(type="uuid", unique=true)
@@ -49,6 +52,11 @@ class Adventure
    */
   #[Groups(['adventures'])]
   private Inventory $inventory;
+
+  /**
+   * @ORM\Column(type="string", length=255)
+   */
+  private string $status = self::STATUS_IN_PROGRESS;
 
   /**
    * Get the value of id
@@ -176,6 +184,30 @@ class Adventure
   public function setInventory(Inventory $inventory): self
   {
     $this->inventory = $inventory;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of status
+   *
+   * @return string
+   */
+  public function getStatus(): string
+  {
+    return $this->status;
+  }
+
+  /**
+   * Set the value of status
+   *
+   * @param string $status
+   *
+   * @return self
+   */
+  public function setStatus(string $status): self
+  {
+    $this->status = $status;
 
     return $this;
   }

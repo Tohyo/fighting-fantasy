@@ -46,7 +46,7 @@ class AppFixtures extends Fixture
 
     $paragraph = (new Paragraph())
       ->setNumber(1)
-      ->setText('paragraph 1 content')
+      ->setText('paragraph 1 <a class="link-paragraph">content</a>')
       ->addLinkedParagraph($linkedParagraph)
       ->setBook($book);
 

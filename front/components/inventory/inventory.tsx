@@ -22,7 +22,6 @@ const ItemRow: React.FC<ItemInterface> = ({ id, name, quantity }) => {
   const [itemQuantity, setItemQuantity] = useState<number>(quantity)
 
   const updateItemQuantity = async (itemId: string, quantity) => {
-    console.log('geoigje')
     await api.put(`api/items/${ itemId }`, {
       'quantity': quantity
     })
