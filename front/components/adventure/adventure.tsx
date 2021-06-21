@@ -16,7 +16,6 @@ const Adventure: React.FC<AdventureInterface> = ( adventure ) => {
   const [inventory, setInventory] = useState<InventoryInterface>(adventure.inventory)
 
   async function handlePagraphChange(number: number) {
-    console.log('xixixi')
     setParagraph(
       await axios.get<ParagraphInterface>(`http://localhost:8080/paragraphs/${ number }/books/${ adventure.book.id }`)
         .then(async response => {
@@ -41,7 +40,12 @@ const Adventure: React.FC<AdventureInterface> = ( adventure ) => {
             <Inventory {...inventory} />
           </div>
           <div className="lg:w-3/5 px-2 border-grey border-solid border-2">
-            <Paragraph { ...paragraph } character={ character } handlePagraphChange={ handlePagraphChange } updateCharacterStamina={ updateCharacterStamina } />
+            <Paragraph
+              { ...paragraph }
+              character={ character }
+              handlePagraphChange={ handlePagraphChange }
+              updateCharacterStamina={ updateCharacterStamina }
+            />
           </div>
         </div>
       </section>

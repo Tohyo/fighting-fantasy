@@ -17,6 +17,7 @@ class Item
    * @ORM\GeneratedValue(strategy="CUSTOM")
    * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
    */
+  #[Groups(['adventures'])]
   private string $id;
 
   /**
