@@ -43,8 +43,8 @@ const Adventure: React.FC<AdventureInterface> = ( adventure ) => {
       <section className="py-8 px-4">
         <div className="flex flex-wrap -mx-2">
           <div className="lg:w-2/5 px-2 lg:pr-16 mb-6 lg:mb-0">
-            <Character {...character} />
-            <Inventory {...inventory} />
+            <Character {...character } />
+            <Inventory {...inventory } />
           </div>
           <div className="lg:w-3/5 px-2 border-grey border-solid border-2">
             <Paragraph

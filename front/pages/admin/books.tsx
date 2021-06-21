@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next'
-import axios from 'axios'
+import api from '../../lib/api'
 import Link from 'next/link'
 
 interface BookInterface {
@@ -8,18 +8,18 @@ interface BookInterface {
 	slug: string
 }
 
-interface HomeProps {
+interface BookProps {
   books: BookInterface[]
 }
 
-const Home: React.FC<HomeProps> = ({ books }) => {
+const Book: React.FC<BookProps> = ({ books }) => {
 
 	return (
 		<>
       { books.map(book => (
         <Link
           key={ `home-book-${ book.title }` }
-          href={ `/livres/${ book.slug }` }
+          href={ `/admin/books/${ book.slug }` }
         >
           <a>{ book.title }</a>
         </Link>
@@ -29,7 +29,7 @@ const Home: React.FC<HomeProps> = ({ books }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-	const books = await axios.get<BookInterface[]>(`http://nginx/books`)
+	const books = await api.get<BookInterface[]>(`http://nginx/books`)
     .then(response => {
       return response.data
     })
@@ -39,4 +39,4 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-export default Home
+export default Book
