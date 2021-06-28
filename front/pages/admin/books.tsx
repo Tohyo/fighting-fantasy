@@ -15,16 +15,15 @@ interface BookProps {
 const Book: React.FC<BookProps> = ({ books }) => {
 
 	return (
-		<>
+		<ul className="divide-y divide-gray-200">
       { books.map(book => (
-        <Link
-          key={ `home-book-${ book.title }` }
-          href={ `/admin/books/${ book.slug }` }
-        >
-          <a>{ book.title }</a>
-        </Link>
+        <li key={ `home-book-${ book.title }` } className="py-4">
+          <Link href={ `/admin/books/${ book.slug }` }>
+            <a>{ book.title }</a>
+          </Link>
+        </li>
       ))}
-    </>
+    </ul>
 	)
 }
 
