@@ -29,15 +29,34 @@ class AppFixtures extends Fixture
 
     $item->setInventory($inventory);
 
+    $item1 = (new Item())
+      ->setName('Or')
+      ->setQuantity('200');
+
+    $inventory1 = (new Inventory())
+      ->addItem($item);
+
+    $item1->setInventory($inventory1);
+
     $book = (new Book())
       ->setTitle('Le sorcier de la montagne de feu')
       ->setSlug('le-sorcier-de-la-montagne-de-feu')
       ->setStartingInventory($inventory);
 
+    $book2 = (new Book())
+      ->setTitle('La citadelle du chaos')
+      ->setSlug('la-citadelle-du-chaos')
+      ->setStartingInventory($inventory1);
+
     $paragraph2 = (new Paragraph())
       ->setNumber(2)
       ->setBook($book)
       ->setText('super paragraph2');
+
+    $paragraph3 = (new Paragraph())
+      ->setNumber(1)
+      ->setBook($book2)
+      ->setText('la citadelle du chaos paragraph1');
 
     $linkedParagraph = (new LinkedParagraph())
       ->setType(LinkedParagraph::LINK)
@@ -60,6 +79,8 @@ class AppFixtures extends Fixture
 
     $manager->persist($book);
     $manager->persist($paragraph2);
+    $manager->persist($book2);
+    $manager->persist($paragraph3);
     $manager->persist($linkedParagraph);
     $manager->persist($paragraph);
     $manager->persist($encounter);

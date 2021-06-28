@@ -15,16 +15,15 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ books }) => {
 
 	return (
-		<>
+    <ul className="divide-y divide-gray-200">
       { books.map(book => (
-        <Link
-          key={ `home-book-${ book.title }` }
-          href={ `/livres/${ book.slug }` }
-        >
-          <a>{ book.title }</a>
-        </Link>
+        <li key={ `home-book-${ book.title }` } className="py-4">
+          <Link href={ `/livres/${ book.slug }` } >
+            <a>{ book.title }</a>
+          </Link>
+        </li>
       ))}
-    </>
+    </ul>
 	)
 }
 
