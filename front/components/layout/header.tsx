@@ -39,9 +39,16 @@ export default function IndexPage() {
                 ) : (
                   <>
                     { !displayLoginForm ? (
+                      <>
                         <div className="flex items-center pl-8 relative cursor-pointer" onClick={() => setDisplayLoginForm(!displayLoginForm)}>
-                        Connexion
-                      </div>
+                          Connexion
+                        </div>
+                        <div className="flex items-center pl-8 relative cursor-pointer">
+                          <Link href='/inscription'>
+                            Inscription
+                          </Link>
+                        </div>
+                      </>
                       ) : (
                         <>
                           <input
