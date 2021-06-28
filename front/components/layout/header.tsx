@@ -6,7 +6,7 @@ export default function IndexPage() {
 
   const { isAuthenticated, login, user, logout } = useAuth()
 
-  const [profile, setProfile] = useState(false)
+  const [displayLoginForm, setDisplayLoginForm] = useState(false)
   const [username, setUsername] = useState<string>()
   const [password, setPassword] = useState<string>()
 
@@ -38,16 +38,30 @@ export default function IndexPage() {
                   </>
                 ) : (
                   <>
-                    <div className="flex items-center pl-8 relative cursor-pointer" onClick={() => setProfile(!profile)}>
-                      Connexion
-                    </div>
-                    { profile && (
-                      <>
-                        <input className="text-black" type="input" name="username" onChange={e => setUsername(e.target.value)} />
-                        <input className="text-black" type="password" name="password" onChange={e => setPassword(e.target.value)} />
-                        <button onClick={() => login(username, password)}>Login</button>
-                      </>
-                    )}
+                    { !displayLoginForm ? (
+                        <div className="flex items-center pl-8 relative cursor-pointer" onClick={() => setDisplayLoginForm(!displayLoginForm)}>
+                        Connexion
+                      </div>
+                      ) : (
+                        <>
+                          <input
+                            className="text-black"
+                            type="input"
+                            name="username"
+                            placeholder="username"
+                            onChange={e => setUsername(e.target.value)}
+                          />
+                          <input
+                            className="text-black"
+                            type="password"
+                            name="password"
+                            placeholder="********"
+                            onChange={e => setPassword(e.target.value)}
+                          />
+                          <button onClick={() => login(username, password)}>Login</button>
+                        </>
+                      )
+                    }
                   </>
                 )}
               </div>
