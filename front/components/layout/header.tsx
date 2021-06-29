@@ -1,17 +1,17 @@
 import React, { useState } from "react"
 import { useAuth } from "../../contexts/auth"
 import Link from "next/link"
+import Login from "../login/login"
 
 export default function Header() {
 
-  const { isAuthenticated, login, user, logout } = useAuth()
+  const { isAuthenticated, user, logout } = useAuth()
 
   const [displayLoginForm, setDisplayLoginForm] = useState(false)
-  const [username, setUsername] = useState<string>()
-  const [password, setPassword] = useState<string>()
+
 
   return (
-    // <div className="bg-gray-200 h-full w-full">
+    <>
       <nav className="w-full bg-gray-800 hidden xl:block shadow">
         <div className="container px-6 h-16 flex justify-between items-center lg:items-stretch mx-auto">
           <div className="flex items-center">
@@ -37,43 +37,23 @@ export default function Header() {
                 </>
               ) : (
                 <>
-                  { !displayLoginForm ? (
-                    <>
-                      <div className="flex items-center pl-8 relative cursor-pointer" onClick={() => setDisplayLoginForm(!displayLoginForm)}>
-                        Connexion
-                      </div>
-                      <div className="flex items-center pl-8 relative cursor-pointer">
-                        <Link href='/inscription'>
-                          Inscription
-                        </Link>
-                      </div>
-                    </>
-                    ) : (
-                      <>
-                        <input
-                          className="text-black"
-                          type="input"
-                          name="username"
-                          placeholder="username"
-                          onChange={e => setUsername(e.target.value)}
-                        />
-                        <input
-                          className="text-black"
-                          type="password"
-                          name="password"
-                          placeholder="********"
-                          onChange={e => setPassword(e.target.value)}
-                        />
-                        <button onClick={() => login(username, password)}>Login</button>
-                      </>
-                    )
-                  }
+                  <div className="flex items-center pl-8 relative cursor-pointer" onClick={() => setDisplayLoginForm(!displayLoginForm)}>
+                    Connexion
+                  </div>
+                  <div className="flex items-center pl-8 relative cursor-pointer">
+                    <Link href='/inscription'>
+                      Inscription
+                    </Link>
+                  </div>
                 </>
               )}
             </div>
           </div>
         </div>
       </nav>
-    // </div>
+
+      { displayLoginForm && <Login /> }
+
+    </>
   )
 }
