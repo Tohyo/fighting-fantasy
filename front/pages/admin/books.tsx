@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next'
 import api from '../../lib/api'
 import Link from 'next/link'
+import { needAuthorization } from '../../contexts/authorization'
 
 interface BookInterface {
 	id: number
@@ -38,4 +39,4 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-export default Book
+export default needAuthorization(Book)

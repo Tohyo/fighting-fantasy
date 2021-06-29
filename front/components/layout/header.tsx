@@ -9,7 +9,6 @@ export default function Header() {
 
   const [displayLoginForm, setDisplayLoginForm] = useState(false)
 
-
   return (
     <>
       <nav className="w-full bg-gray-800 hidden xl:block shadow">
