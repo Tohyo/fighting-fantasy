@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class BookController extends AbstractController
 {
@@ -19,6 +21,7 @@ class BookController extends AbstractController
     return $this->json($em->getRepository(Book::class)->findAll(), Response::HTTP_OK, [], ['groups' => 'books']);
   }
 
+  #[IsGranted(User::ROLE_ADMIN)]
   #[Route('/api/books/{id}', name: 'app_put_books', methods: ['PUT'])]
   public function updateBooks(Book $book, Request $request): JsonResponse
   {

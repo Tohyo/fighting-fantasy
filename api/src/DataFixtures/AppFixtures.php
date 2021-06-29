@@ -11,14 +11,24 @@ use App\Entity\Paragraph;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+  private UserPasswordEncoderInterface $userPasswordEncoder;
+
+  public function __construct(UserPasswordEncoderInterface $userPasswordEncoder)
+  {
+    $this->userPasswordEncoder = $userPasswordEncoder;
+  }
+
   public function load(ObjectManager $manager)
   {
     $user = (new User())
       ->setUsername('tohyo')
-      ->setPassword('$argon2id$v=19$m=65536,t=4,p=1$qwBS2zIAb4lJ0lKACX5rJw$phCjXTfew8R8tDGjBi619bKXH3b3DVTZDTcm5OBxDHw');
+      ->setRoles([User::ROLE_ADMIN]);
+
+    $user->setPassword($this->userPasswordEncoder->encodePassword($user, 'kevin'));
 
     $item = (new Item())
       ->setName('Or')
