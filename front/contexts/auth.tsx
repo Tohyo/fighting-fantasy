@@ -1,6 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react'
 import Cookies from 'js-cookie'
-
 import api from '../lib/api'
 
 const AuthContext = createContext({});
@@ -28,26 +27,32 @@ export const AuthProvider = ({ children }) => {
     loadUserFromCookies()
   }, [])
 
-  const login = async (username: string, password: string) => {
-    const { data: token } = await api.post('api/login_check', { username, password })
-    if (token) {
+  interface Login {
+    token: string
+    refresh_token: string
+  }
 
-      Cookies.set('token', token.token, { expires: 3600 })
-      api.defaults.headers.Authorization = `Bearer ${token.token}`
+  const login = async (username: string, password: string) => {
+    const { data } = await api.post<Login>('api/login_check', { username, password })
+    if (data.token) {
+      Cookies.set('token', data.token, { expires: 3600 })
+      Cookies.set('refresh_token', data.refresh_token, { expires: 3600 })
+      api.defaults.headers.Authorization = `Bearer ${data.token}`
       const { data: user } = await api.get('api/users')
       setUser(user)
     }
   }
 
+
   const logout = () => {
     Cookies.remove('token')
+    Cookies.remove('refresh_token')
     setUser(null)
     delete api.defaults.headers.Authorization
     window.location.pathname = '/'
   }
 
   const isAdmin = () => {
-    console.log(user)
     return user !== null && user.roles.includes('ROLE_ADMIN')
   }
 
