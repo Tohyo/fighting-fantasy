@@ -33,7 +33,8 @@ services:
   db:
     image: postgres
     volumes:
-      - ./db:/var/lib/postgresql/ff-data
+      - /home/kev/Documents/Perso/fighting-fantasy/db:/var/lib/postgresql/ff-data
     environment:
       POSTGRES_DB: ffantasy
-      POSTGRES_PASSWORD: xoxo
+      POSTGRES_PASSWORD: ffantasy
+      POSTGRES_USER: ffantasy
