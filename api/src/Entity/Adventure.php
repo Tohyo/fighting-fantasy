@@ -6,56 +6,40 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-/**
- * @ORM\Entity()
- */
+#[ORM\Entity()]
 class Adventure
 {
   public const STATUS_IN_PROGRESS = 'in progress';
   public const STATUS_DONE = 'done';
 
-  /**
-   * @ORM\Id
-   * @ORM\Column(type="uuid", unique=true)
-   * @ORM\GeneratedValue(strategy="CUSTOM")
-   * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'uuid', unique: true)]
+  #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+  #[ORM\CustomIdGenerator(class: UuidV4Generator::class)]
   #[Groups(['adventures', 'user_adventures'])]
   private string $id;
 
-  /**
-   * @ORM\ManyToOne(targetEntity="Book", inversedBy="adventures", fetch="EAGER")
-   */
+  #[ORM\ManyToOne(targetEntity: Book::class , inversedBy: "adventures", fetch: "EAGER")]
   #[Groups(['adventures'])]
   private Book $book;
 
-  /**
-   * @ORM\ManyToOne(targetEntity="Paragraph", inversedBy="adventures", fetch="EAGER")
-   */
+  #[ORM\ManyToOne(targetEntity: Paragraph::class, inversedBy: "adventures", fetch: "EAGER")]
   #[Groups(['adventures'])]
   private Paragraph $paragraph;
 
-  /**
-   * @ORM\OneToOne(targetEntity="Character", cascade={"persist"})
-   */
+  #[ORM\OneToOne(targetEntity: Character::class, cascade: ["persist"])]
   #[Groups(['adventures'])]
   private Character $character;
 
-  /**
-   * @ORM\ManyToOne(targetEntity="User", inversedBy="adventures")
-   */
+  #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "adventures")]
   #[Groups(['adventures'])]
   private User $user;
 
-  /**
-   * @ORM\OneToOne(targetEntity="Inventory", cascade={"persist"})
-   */
+  #[ORM\OneToOne(targetEntity: Inventory::class, cascade: ["persist"])]
   #[Groups(['adventures'])]
   private Inventory $inventory;
 
-  /**
-   * @ORM\Column(type="string", length=255)
-   */
+  #[ORM\Column(type: "string", length: 255)]
   private string $status = self::STATUS_IN_PROGRESS;
 
   /**

@@ -8,52 +8,37 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-/**
- * @ORM\Entity()
- */
+#[ORM\Entity()]
 class Paragraph
 {
-  /**
-   * @ORM\Id
-   * @ORM\Column(type="uuid", unique=true)
-   * @ORM\GeneratedValue(strategy="CUSTOM")
-   * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'uuid', unique: true)]
+  #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+  #[ORM\CustomIdGenerator(class: UuidV4Generator::class)]
+  #[Groups(['adventures', 'user_adventures'])]
   #[Groups(['paragraphs', 'adventures'])]
   private string $id;
 
-  /**
-   * @ORM\Column(type="integer")
-   */
+  #[ORM\Column(type: "integer")]
   #[Groups(['paragraphs', 'adventures'])]
   private int $number;
 
-  /**
-   * @ORM\Column(type="text")
-   */
+  #[ORM\Column(type: "text")]
   #[Groups(['paragraphs', 'adventures'])]
   private string $text;
 
-  /**
-   * @ORM\OneToMany(targetEntity="Encounter", mappedBy="paragraph")
-   */
+  #[ORM\OneToMany(targetEntity: Encounter::class, mappedBy: "paragraph")]
   #[Groups(['paragraphs', 'adventures'])]
   private Collection $encounters;
 
-  /**
-   * @ORM\OneToMany(targetEntity="LinkedParagraph", mappedBy="paragraph")
-   */
+  #[ORM\OneToMany(targetEntity: LinkedParagraph::class, mappedBy: "paragraph")]
   #[Groups(['paragraphs', 'adventures'])]
   private Collection $linkedParagraphs;
 
-  /**
-   * @ORM\ManyToOne(targetEntity="Book", inversedBy="paragraphs")
-   */
+  #[ORM\ManyToOne(targetEntity: Book::class, inversedBy: "paragraphs")]
   private Book $book;
 
-  /**
-   * @ORM\OneToMany(targetEntity="Adventure", mappedBy="paragraph")
-   */
+  #[ORM\OneToMany(targetEntity: Adventure::class, mappedBy: "paragraph")]
   private Collection $adventures;
 
   public function __construct()

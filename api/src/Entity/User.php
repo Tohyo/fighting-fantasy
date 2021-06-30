@@ -9,45 +9,33 @@ use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-/**
- * @ORM\Entity()
- * @ORM\Table(name="`users`")
- */
+#[ORM\Entity()]
+#[ORM\Table(name: "`users`")]
 class User implements UserInterface
 {
   public const ROLE_USER = 'ROLE_USER';
   public const ROLE_ADMIN = 'ROLE_ADMIN';
 
-  /**
-   * @ORM\Id
-   * @ORM\Column(type="uuid", unique=true)
-   * @ORM\GeneratedValue(strategy="CUSTOM")
-   * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'uuid', unique: true)]
+  #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+  #[ORM\CustomIdGenerator(class: UuidV4Generator::class)]
   #[Groups(['users'])]
   private $id;
 
-  /**
-   * @ORM\Column(type="string", length=180, unique=true)
-   */
+  #[ORM\Column(type: "string", length: 180, unique: true)]
   #[Groups(['users'])]
   private $username;
 
-  /**
-   * @ORM\Column(type="json")
-   */
+  #[ORM\Column(type: "json")]
   #[Groups(['users'])]
   private $roles = [];
 
-  /**
-   * @ORM\OneToMany(targetEntity="Adventure", mappedBy="user")
-   */
+  #[ORM\OneToMany(targetEntity: Adventure::class, mappedBy: "user")]
   #[Groups(['users'])]
   private Collection $adventures;
 
-  /**
-   * @ORM\Column(type="string")
-   */
+  #[ORM\Column(type: "string")]
   private $password;
 
   public function __construct()

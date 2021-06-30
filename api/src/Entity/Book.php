@@ -8,45 +8,31 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-/**
- * @ORM\Entity()
- */
+#[ORM\Entity()]
 class Book
 {
-  /**
-   * @ORM\Id
-   * @ORM\Column(type="uuid", unique=true)
-   * @ORM\GeneratedValue(strategy="CUSTOM")
-   * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'uuid', unique: true)]
+  #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+  #[ORM\CustomIdGenerator(class: UuidV4Generator::class)]
   #[Groups(['books', 'adventures'])]
   private string $id;
 
-  /**
-   * @ORM\Column(type="string", length=255)
-   */
+  #[ORM\Column(type: "string", length: 255)]
   #[Groups(['books', 'adventures'])]
   private string $title;
 
-  /**
-   * @ORM\Column(type="string", length=255)
-   */
+  #[ORM\Column(type: "string", length: 255)]
   #[Groups(['books', 'adventures'])]
   private string $slug;
 
-   /**
-   * @ORM\OneToOne(targetEntity="Inventory", cascade={"persist"})
-   */
+  #[ORM\OneToOne(targetEntity: Inventory::class, cascade: ["persist"])]
   private Inventory $startingInventory;
 
-  /**
-   * @ORM\OneToMany(targetEntity="Paragraph", mappedBy="book")
-   */
+  #[ORM\OneToMany(targetEntity: Paragraph::class, mappedBy: "book")]
   private Collection $paragraphs;
 
-  /**
-   * @ORM\OneToMany(targetEntity="Adventure", mappedBy="paragraph")
-   */
+  #[ORM\OneToMany(targetEntity: Adventure::class, mappedBy: "paragraph")]
   private Collection $adventures;
 
   public function __construct()

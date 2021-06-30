@@ -8,53 +8,37 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-/**
- * @ORM\Entity()
- */
+#[ORM\Entity()]
 class Character
 {
-  /**
-   * @ORM\Id
-   * @ORM\Column(type="uuid", unique=true)
-   * @ORM\GeneratedValue(strategy="CUSTOM")
-   * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'uuid', unique: true)]
+  #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+  #[ORM\CustomIdGenerator(class: UuidV4Generator::class)]
   #[Groups(['adventures'])]
   private string $id;
 
-  /**
-   * @ORM\Column(type="integer")
-   */
+  #[ORM\Column(type: "integer")]
   #[Groups(['adventures'])]
   private int $initialDexterity;
 
-  /**
-   * @ORM\Column(type="integer")
-   */
+  #[ORM\Column(type: "integer")]
   #[Groups(['adventures'])]
   private int $initialStamina;
 
-  /**
-   * @ORM\Column(type="integer")
-   */
+  #[ORM\Column(type: "integer")]
   #[Groups(['adventures'])]
   private int $initialLuck;
 
-  /**
-   * @ORM\Column(type="integer")
-   */
+  #[ORM\Column(type: "integer")]
   #[Groups(['adventures'])]
   private int $dexterity;
 
-  /**
-   * @ORM\Column(type="integer")
-   */
+  #[ORM\Column(type: "integer")]
   #[Groups(['adventures'])]
   private int $stamina;
 
-  /**
-   * @ORM\Column(type="integer")
-   */
+  #[ORM\Column(type: "integer")]
   #[Groups(['adventures'])]
   private int $luck;
 

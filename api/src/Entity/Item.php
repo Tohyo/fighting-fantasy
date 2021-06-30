@@ -6,35 +6,25 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-/**
- * @ORM\Entity()
- */
+#[ORM\Entity()]
 class Item
 {
-  /**
-   * @ORM\Id
-   * @ORM\Column(type="uuid", unique=true)
-   * @ORM\GeneratedValue(strategy="CUSTOM")
-   * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'uuid', unique: true)]
+  #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+  #[ORM\CustomIdGenerator(class: UuidV4Generator::class)]
   #[Groups(['adventures'])]
   private string $id;
 
-  /**
-   * @ORM\Column(type="integer")
-   */
+  #[ORM\Column(type: "integer")]
   #[Groups(['adventures'])]
   private int $quantity;
 
-  /**
-   * @ORM\Column(type="string", length=255)
-   */
+  #[ORM\Column(type: "string", length: 255)]
   #[Groups(['adventures'])]
   private string $name;
 
-  /**
-   * @ORM\ManyToOne(targetEntity="Inventory", inversedBy="items")
-   */
+  #[ORM\ManyToOne(targetEntity: Inventory::class, inversedBy: "items")]
   public Inventory $inventory;
 
   /**
