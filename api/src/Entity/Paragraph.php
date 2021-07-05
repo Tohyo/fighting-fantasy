@@ -15,8 +15,7 @@ class Paragraph
   #[ORM\Column(type: 'uuid', unique: true)]
   #[ORM\GeneratedValue(strategy: 'CUSTOM')]
   #[ORM\CustomIdGenerator(class: UuidV4Generator::class)]
-  #[Groups(['adventures', 'user_adventures'])]
-  #[Groups(['paragraphs', 'adventures'])]
+  #[Groups(['paragraphs', 'adventures', 'user_adventures'])]
   private string $id;
 
   #[ORM\Column(type: "integer")]
