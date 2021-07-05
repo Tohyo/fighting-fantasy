@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class BookController extends AbstractController
 {
@@ -42,5 +44,17 @@ class BookController extends AbstractController
   public function getBooksBySlug(Book $book): JsonResponse
   {
     return $this->json($book, Response::HTTP_OK, [], ['groups' => 'books']);
+  }
+
+  #[Route('/api/books', name: 'app_post_books', methods: ['POST'])]
+  public function createBooks(Request $request, SerializerInterface $serializer): JsonResponse
+  {
+    $em = $this->getDoctrine()->getManager();
+    $book = $serializer->deserialize($request->getContent(), Book::class, 'json');
+
+    $em->persist($book);
+    $em->flush();
+
+    return $this->json($book, Response::HTTP_CREATED, [], ['groups' => 'books']);
   }
 }

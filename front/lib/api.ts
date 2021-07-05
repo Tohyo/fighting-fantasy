@@ -15,17 +15,17 @@ interface RefreshToken {
   refresh_token: string
 }
 
-const refreshAuthLogic = async (failedRequest) => {
-  const { data } = await api.post<RefreshToken>('api/token/refresh')
+// const refreshAuthLogic = async (failedRequest) => {
+//   const { data } = await api.post<RefreshToken>('api/token/refresh')
 
-  Cookies.set('token', data.token, { expires: 3600 })
-  Cookies.set('refresh_token', data.refresh_token)
+//   Cookies.set('token', data.token, { expires: 3600 })
+//   Cookies.set('refresh_token', data.refresh_token)
 
-  api.defaults.headers.Authorization = `Bearer ${data.token}`
-  // failedRequest.response.config.headers['Authorization'] = 'Bearer ' + data.token
-  return Promise.resolve()
-}
+//   api.defaults.headers.Authorization = `Bearer ${data.token}`
+//   // failedRequest.response.config.headers['Authorization'] = 'Bearer ' + data.token
+//   return Promise.resolve()
+// }
 
-createAuthRefreshInterceptor(api, refreshAuthLogic);
+// createAuthRefreshInterceptor(api, refreshAuthLogic);
 
 export default api
