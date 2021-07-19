@@ -1,15 +1,19 @@
 import { GetStaticPaths, GetStaticProps } from "next"
-import { BookInterface } from "../../../components/book/bookInterface"
-import { ParagraphInterface } from "../../../components/paragraph/paragraphInterface"
-import api from "../../../lib/api"
+import { BookInterface } from "../../../../components/book/bookInterface"
+import { ParagraphInterface } from "../../../../components/paragraph/paragraphInterface"
+import api from "../../../../lib/api"
 
-const ParagraphList = (paragraphs) => {
+interface ParagraphListProps {
+  paragraphs: ParagraphInterface[]
+}
+
+const ParagraphList = (paragraphList: ParagraphListProps) => {
 
   return (
     <>
-      {paragraphs.map(paragraph => (
+      {paragraphList.paragraphs.map(paragraph => (
         <div>
-
+          { paragraph.number }
         </div>
       ))}
     </>
