@@ -15,19 +15,19 @@ class Paragraph
   #[ORM\Column(type: 'uuid', unique: true)]
   #[ORM\GeneratedValue(strategy: 'CUSTOM')]
   #[ORM\CustomIdGenerator(class: UuidV4Generator::class)]
-  #[Groups(['paragraphs', 'adventures', 'user_adventures'])]
+  #[Groups(['paragraphs', 'adventures', 'user_adventures', 'all_paragraphs'])]
   private string $id;
 
   #[ORM\Column(type: "integer")]
-  #[Groups(['paragraphs', 'adventures'])]
+  #[Groups(['paragraphs', 'adventures', 'all_paragraphs'])]
   private int $number;
 
   #[ORM\Column(type: "text")]
-  #[Groups(['paragraphs', 'adventures'])]
+  #[Groups(['paragraphs', 'adventures', 'all_paragraphs'])]
   private string $text;
 
   #[ORM\OneToMany(targetEntity: Encounter::class, mappedBy: "paragraph")]
-  #[Groups(['paragraphs', 'adventures'])]
+  #[Groups(['paragraphs', 'adventures', 'all_paragraphs'])]
   private Collection $encounters;
 
   #[ORM\OneToMany(targetEntity: LinkedParagraph::class, mappedBy: "paragraph")]

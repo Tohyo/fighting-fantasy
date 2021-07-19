@@ -30,6 +30,7 @@ class Book
   private Inventory $startingInventory;
 
   #[ORM\OneToMany(targetEntity: Paragraph::class, mappedBy: "book")]
+  #[Groups(['books', 'all_paragraphs'])]
   private Collection $paragraphs;
 
   #[ORM\OneToMany(targetEntity: Adventure::class, mappedBy: "paragraph")]

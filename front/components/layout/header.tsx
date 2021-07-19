@@ -5,7 +5,7 @@ import Login from "../login/login"
 
 export default function Header() {
 
-  const { isAuthenticated, user, logout } = useAuth()
+  const { isAuthenticated, user, logout, isAdmin } = useAuth()
 
   const [displayLoginForm, setDisplayLoginForm] = useState(false)
 
@@ -17,6 +17,15 @@ export default function Header() {
             <div className="mr-10 flex items-center">
               <h3 className="text-base text-white font-bold tracking-normal leading-tight ml-3 hidden lg:block">Fighting Fantasy</h3>
             </div>
+            { isAdmin && (
+              <ul className="hidden xl:flex items-center h-full">
+                <li className="cursor-pointer h-full flex items-center text-sm text-white tracking-normal transition duration-150 ease-in-out">
+                  <Link href="/admin/books">
+                    Admin
+                  </Link>
+                </li>
+              </ul>
+            )}
             <ul className="hidden xl:flex items-center h-full">
               <li className="cursor-pointer h-full flex items-center text-sm text-white tracking-normal transition duration-150 ease-in-out">
                 <Link href="/">

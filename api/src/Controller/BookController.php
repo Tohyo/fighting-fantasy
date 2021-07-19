@@ -57,4 +57,10 @@ class BookController extends AbstractController
 
     return $this->json($book, Response::HTTP_CREATED, [], ['groups' => 'books']);
   }
+
+  #[Route('/books/{slug}/paragraphs', name: 'app_get_book_paragraphs', methods: ['GET'])]
+  public function getParagraphsByBook(Book $book): JsonResponse
+  {
+    return $this->json($book, Response::HTTP_OK, [], ['groups' => 'all_paragraphs']);
+  }
 }
