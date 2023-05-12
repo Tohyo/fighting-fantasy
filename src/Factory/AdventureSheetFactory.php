@@ -47,9 +47,9 @@ final class AdventureSheetFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'luck' => self::faker()->randomNumber(),
-            'skill' => self::faker()->randomNumber(),
-            'stamina' => self::faker()->randomNumber(),
+            'luck' => self::faker()->numberBetween(1, 12),
+            'skill' => self::faker()->randomNumber(1,12),
+            'stamina' => self::faker()->randomNumber(2, 24),
         ];
     }
 
