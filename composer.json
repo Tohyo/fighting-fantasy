@@ -14,6 +14,7 @@
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.20",
         "sensio/framework-extra-bundle": "^6.1",
+        "stof/doctrine-extensions-bundle": "^1.7",
         "symfony/asset": "6.3.*",
         "symfony/console": "6.3.*",
         "symfony/doctrine-messenger": "6.3.*",
@@ -89,7 +90,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": true,
             "require": "6.3.*"
         }
     },
