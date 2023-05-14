@@ -1,24 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdventureController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    <turbo-frame id="chapter-content">
-        <div>
-            {{ chapter.getContent() }}
-            <a href="{{ path('app_get_chapter', { 'id': 11 }) }}">Next</a>
+<div class="w-4/5 m-auto">
+    <div class="flex">
+        <div class="w-3/4">
+            <turbo-frame id="chapter-content">
+                {% include 'chapter/chapter.html.twig' %}
+            </turbo-frame>
         </div>
-    </turbo-frame>
-    <turbo-frame id="adventure-sheet">
-        {% include 'adventure_sheet/_adventure_sheet.html.twig' %}
-    </turbo-frame>
+        <div>
+            <turbo-frame id="adventure-sheet">
+                {% include 'adventure_sheet/adventure_sheet.html.twig' %}
+            </turbo-frame>
+        </div>
+    </div>
 </div>
 {% endblock %}

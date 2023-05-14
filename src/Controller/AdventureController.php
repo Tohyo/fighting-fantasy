@@ -14,7 +14,6 @@ class AdventureController extends AbstractController
     public function index(): Response
     {
         return $this->render('adventure/index.html.twig', [
-            'controller_name' => 'AdventureController',
             'adventure_sheet' => AdventureSheetFactory::last(),
             'chapter' => ChapterFactory::last(),
         ]);
