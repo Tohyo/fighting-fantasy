@@ -1,11 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Adventure sheet{% endblock %}
 
 {% block body %}
-  <turbo-frame id="adventure-sheet">
-    <div>
-      {{ adventure_sheet.getLuck() }}
-    </div>
-  </turbo-frame>
+  {% include 'adventure_sheet/_adventure_sheet.html.twig' %}
 {% endblock %}

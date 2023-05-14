@@ -50,6 +50,9 @@ final class AdventureSheetFactory extends ModelFactory
             'luck' => self::faker()->numberBetween(1, 12),
             'skill' => self::faker()->numberBetween(1,12),
             'stamina' => self::faker()->numberBetween(2, 24),
+            'initialLuck' => self::faker()->numberBetween(1, 12),
+            'initialSkill' => self::faker()->numberBetween(1,12),
+            'initialStamina' => self::faker()->numberBetween(2, 24),
         ];
     }
 

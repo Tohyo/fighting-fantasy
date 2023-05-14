@@ -22,6 +22,15 @@ class AdventureSheet
     #[ORM\Column]
     private ?int $luck = null;
 
+    #[ORM\Column]
+    private ?int $initialSkill = null;
+
+    #[ORM\Column]
+    private ?int $initialStamina = null;
+
+    #[ORM\Column]
+    private ?int $initialLuck = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +68,42 @@ class AdventureSheet
     public function setLuck(int $luck): self
     {
         $this->luck = $luck;
+
+        return $this;
+    }
+
+    public function getInitialSkill(): ?int
+    {
+        return $this->initialSkill;
+    }
+
+    public function setInitialSkill(int $initialSkill): self
+    {
+        $this->initialSkill = $initialSkill;
+
+        return $this;
+    }
+
+    public function getInitialStamina(): ?int
+    {
+        return $this->initialStamina;
+    }
+
+    public function setInitialStamina(int $initialStamina): self
+    {
+        $this->initialStamina = $initialStamina;
+
+        return $this;
+    }
+
+    public function getInitialLuck(): ?int
+    {
+        return $this->initialLuck;
+    }
+
+    public function setInitialLuck(int $initialLuck): self
+    {
+        $this->initialLuck = $initialLuck;
 
         return $this;
     }

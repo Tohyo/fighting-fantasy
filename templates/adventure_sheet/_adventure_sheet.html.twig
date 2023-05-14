@@ -1,0 +1,19 @@
+<turbo-frame id="adventure-sheet">
+  <div class="grid grid-cols-3 gap-4">
+    <div class="border border-black">
+      Skill<br>
+      Initial Skill: {{ adventure_sheet.getInitialSkill() }}<br>
+      {{ adventure_sheet.getSkill() }}
+    </div>
+    <div class="border border-black">
+      Stamina<br>
+      Initial Stamina: {{ adventure_sheet.getInitialStamina() }}<br>
+      {{ adventure_sheet.getStamina() }}
+    </div>
+    <div class="border border-black">
+      Luck<br>
+      Initial Luck: {{ adventure_sheet.getInitialLuck() }}<br>
+      {{ adventure_sheet.getLuck() }}
+    </div>
+  </div>
+</turbo-frame>

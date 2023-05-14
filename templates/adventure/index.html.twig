@@ -18,10 +18,7 @@
         </div>
     </turbo-frame>
     <turbo-frame id="adventure-sheet">
-        <div>
-            {{ adventure_sheet.getLuck() }}
-            <a href="{{ path('app_get_adventure_sheet', { 'id': 39 }) }}">up luck</a>
-        </div>
+        {% include 'adventure_sheet/_adventure_sheet.html.twig' %}
     </turbo-frame>
 </div>
 {% endblock %}
