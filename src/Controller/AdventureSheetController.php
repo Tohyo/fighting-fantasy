@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\AdventureSheet;
 use App\Factory\AdventureSheetFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,14 @@ class AdventureSheetController extends AbstractController
         return $this->render('adventure_sheet/index.html.twig', [
             'controller_name' => 'AdventureSheetController',
             'adventure_sheet' => AdventureSheetFactory::last(),
+        ]);
+    }
+
+    #[Route('/adventure/sheet/{id}', name: 'app_get_adventure_sheet')]
+    public function getAdventureSheet(AdventureSheet $adventureSheet): Response
+    {
+        return $this->render('adventure_sheet/adventure_sheet.html.twig', [
+            'adventure_sheet' => $adventureSheet,
         ]);
     }
 }

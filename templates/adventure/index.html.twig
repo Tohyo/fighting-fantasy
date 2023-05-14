@@ -14,12 +14,13 @@
     <turbo-frame id="chapter-content">
         <div>
             {{ chapter.getContent() }}
-            <a href="{{ path('app_get_chapter', { 'id': 1 }) }}">Next</a>
+            <a href="{{ path('app_get_chapter', { 'id': 11 }) }}">Next</a>
         </div>
     </turbo-frame>
     <turbo-frame id="adventure-sheet">
         <div>
             {{ adventure_sheet.getLuck() }}
+            <a href="{{ path('app_get_adventure_sheet', { 'id': 39 }) }}">up luck</a>
         </div>
     </turbo-frame>
 </div>

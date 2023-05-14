@@ -11,7 +11,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        AdventureSheetFactory::createOne();
+        AdventureSheetFactory::createMany(2);
         ChapterFactory::createMany(10);
         
         $manager->flush();
