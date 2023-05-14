@@ -7,8 +7,18 @@
     <h1>Hello {{ controller_name }}! ✅</h1>
 
     This friendly message is coming from:
-    <ul>
-        <li>{{ adventure_sheet.getLuck() }}</li>
-    </ul>
+    <div
+        {{ stimulus_controller('adventure-sheet', {
+            'luck': adventure_sheet.getLuck()
+        }) }} 
+    >
+        <button data-action="adventure-sheet#addLuck" >🍀</button>
+        <span
+             
+            data-adventure-sheet-target="luck"
+        >
+            {{ adventure_sheet.getLuck() }}
+        </span>
+    </div>
 </div>
 {% endblock %}

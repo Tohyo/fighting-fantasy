@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Hello ChapterController!{% endblock %}
 
 {% block body %}
 <style>
@@ -9,8 +9,12 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello </h1>
+    <h1>Hello xoxo ✅</h1>
 
-    <a href="{{ path('app_adventure_sheet') }}">Dernière ficher d'aventure</a>
+    <turbo-frame id="chapter-content">
+        <div>
+            {{ chapter.getContent() }}
+        </div>
+    </turbo-frame>
 </div>
 {% endblock %}

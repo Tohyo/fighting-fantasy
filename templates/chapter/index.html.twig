@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ChapterController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ '/home/kev/Documents/Perso/fighting-fantasy/src/Controller/ChapterController.php'|file_link(0) }}">src/Controller/ChapterController.php</a></code></li>
+        <li>Your template at <code><a href="{{ '/home/kev/Documents/Perso/fighting-fantasy/templates/chapter/index.html.twig'|file_link(0) }}">templates/chapter/index.html.twig</a></code></li>
+    </ul>
+</div>
+{% endblock %}

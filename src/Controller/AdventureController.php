@@ -3,18 +3,20 @@
 namespace App\Controller;
 
 use App\Factory\AdventureSheetFactory;
+use App\Factory\ChapterFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdventureSheetController extends AbstractController
+class AdventureController extends AbstractController
 {
-    #[Route('/adventure/sheet', name: 'app_adventure_sheet')]
+    #[Route('/adventure', name: 'app_adventure')]
     public function index(): Response
     {
-        return $this->render('adventure_sheet/index.html.twig', [
-            'controller_name' => 'AdventureSheetController',
+        return $this->render('adventure/index.html.twig', [
+            'controller_name' => 'AdventureController',
             'adventure_sheet' => AdventureSheetFactory::last(),
+            'chapter' => ChapterFactory::last(),
         ]);
     }
 }
