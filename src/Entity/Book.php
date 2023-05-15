@@ -30,9 +30,13 @@ class Book
     #[ORM\OneToMany(mappedBy: 'book', targetEntity: Chapter::class)]
     private Collection $chapters;
 
+    #[ORM\OneToMany(mappedBy: 'book', targetEntity: Adventure::class, orphanRemoval: true)]
+    private Collection $adventures;
+
     public function __construct()
     {
         $this->chapters = new ArrayCollection();
+        $this->adventures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -100,6 +104,36 @@ class Book
             // set the owning side to null (unless already changed)
             if ($chapter->getBook() === $this) {
                 $chapter->setBook(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Adventure>
+     */
+    public function getAdventures(): Collection
+    {
+        return $this->adventures;
+    }
+
+    public function addAdventure(Adventure $adventure): self
+    {
+        if (!$this->adventures->contains($adventure)) {
+            $this->adventures->add($adventure);
+            $adventure->setBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdventure(Adventure $adventure): self
+    {
+        if ($this->adventures->removeElement($adventure)) {
+            // set the owning side to null (unless already changed)
+            if ($adventure->getBook() === $this) {
+                $adventure->setBook(null);
             }
         }
 

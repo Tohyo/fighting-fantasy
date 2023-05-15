@@ -5,12 +5,12 @@
     <div class="flex">
         <div class="w-3/4">
             <turbo-frame id="chapter-content">
-                {% include 'chapter/chapter.html.twig' %}
+                {% include 'chapter/chapter.html.twig' with { chapter: adventure.getChapter() } %}
             </turbo-frame>
         </div>
         <div>
             <turbo-frame id="adventure-sheet">
-                {% include 'adventure_sheet/adventure_sheet.html.twig' %}
+                {% include 'adventure_sheet/adventure_sheet.html.twig' with { adventure_sheet: adventure.getAdventureSheet() } %}
             </turbo-frame>
         </div>
     </div>

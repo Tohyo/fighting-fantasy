@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Factory\AdventureFactory;
 use App\Factory\AdventureSheetFactory;
 use App\Factory\BookFactory;
 use App\Factory\ChapterFactory;
@@ -12,10 +13,13 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        BookFactory::createMany(10, [
-            'chapters' => ChapterFactory::new()->many(4)
+        BookFactory::createMany(1, [
+            'chapters' => ChapterFactory::new()->many(4),
         ]);
-        AdventureSheetFactory::createMany(2);
+
+        AdventureFactory::createOne([
+            'adventureSheet' => AdventureSheetFactory::createOne()
+        ]);
         
         $manager->flush();
     }
