@@ -5,7 +5,7 @@
     {% for book in books %}
         <div>
             <a href='{{ path("app_book", { slug: book.getSlug() }) }}'>{{ book.getTitle()}}</a>
-        </div
+        </div>
     {% endfor %}
 </div>
 {% endblock %}

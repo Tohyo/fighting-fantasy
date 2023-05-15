@@ -64,6 +64,7 @@ final class ChapterFactory extends ModelFactory
     {
         return [
             'content' => self::faker()->text(),
+            'number' => self::faker()->randomNumber(),
         ];
     }
 

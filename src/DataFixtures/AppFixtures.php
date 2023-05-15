@@ -12,9 +12,10 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        BookFactory::createMany(10);
+        BookFactory::createMany(10, [
+            'chapters' => ChapterFactory::new()->many(4)
+        ]);
         AdventureSheetFactory::createMany(2);
-        ChapterFactory::createMany(10);
         
         $manager->flush();
     }
