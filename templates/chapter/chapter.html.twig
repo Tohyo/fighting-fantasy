@@ -1,5 +1,5 @@
 <turbo-frame id="chapter-content">
     <div>
-        {{ chapter.getContent() }}
+        {{ chapter.getContent()|adventure|raw }}
     </div>
 </turbo-frame>
