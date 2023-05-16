@@ -22,7 +22,7 @@ class AdventureExtension extends AbstractExtension
     public function formatAdventure(string $content): ?string
     {
         return preg_replace(
-            '/\[#(\d+)\][a-zA-Z]+[(?<=\d\s]([a-zA-Z]+\s)*[a-zA-Z]+\[#\]/', 
+            '/\[#(\d+)\][a-zA-Z.-]+[(?<=\d\s]([a-zA-Z.-]+\s)*[a-zA-Z.-]+\[#\]/', 
             $this->generateLink(1), 
             $content
         );
