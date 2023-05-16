@@ -18,6 +18,7 @@ class Chapter
     private ?string $content = null;
 
     #[ORM\ManyToOne(inversedBy: 'chapters')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Book $book = null;
 
     #[ORM\Column]

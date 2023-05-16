@@ -13,12 +13,19 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        BookFactory::createMany(1, [
-            'chapters' => ChapterFactory::new()->many(4),
+        BookFactory::createOne();
+
+        ChapterFactory::createOne(['book' => BookFactory::last()]);
+        $chapter = ChapterFactory::random();
+        ChapterFactory::createMany(4, [
+            'book' => BookFactory::last(),
+            'content' => ChapterFactory::faker()->text(100) .  ' [#'.$chapter->object()->getId().']test de[#]',
         ]);
 
         AdventureFactory::createOne([
-            'adventureSheet' => AdventureSheetFactory::createOne()
+            'adventureSheet' => AdventureSheetFactory::createOne(),
+            'book' => BookFactory::last(),
+            'chapter' => ChapterFactory::last()
         ]);
         
         $manager->flush();

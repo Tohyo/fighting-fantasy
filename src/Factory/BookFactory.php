@@ -64,8 +64,7 @@ final class BookFactory extends ModelFactory
     {
         return [
             'description' => self::faker()->text(),
-            'slug' => self::faker()->text(255),
-            'title' => self::faker()->text(255),
+            'title' => self::faker()->text(50),
         ];
     }
 
