@@ -27,9 +27,11 @@ class Book
     #[Slug(fields: ['title'])]
     private ?string $slug = null;
 
+    /** @var Collection<int, Chapter> $chapters */
     #[ORM\OneToMany(mappedBy: 'book', targetEntity: Chapter::class)]
     private Collection $chapters;
 
+    /** @var Collection<int, Adventure> $adventures */
     #[ORM\OneToMany(mappedBy: 'book', targetEntity: Adventure::class, orphanRemoval: true)]
     private Collection $adventures;
 

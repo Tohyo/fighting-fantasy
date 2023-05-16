@@ -19,7 +19,7 @@ class AdventureExtension extends AbstractExtension
         ];
     }
 
-    public function formatAdventure(string $content): string
+    public function formatAdventure(string $content): ?string
     {
         $content = "[#40]Test-9[#]";
 
