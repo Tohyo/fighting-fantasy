@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Factory\BookFactory;
+use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,10 +10,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(): Response
+    public function index(BookRepository $bookRepository): Response
     {
         return $this->render('home/index.html.twig', [
-            'books' => BookFactory::all(),
+            'books' => $bookRepository->findAll(),
         ]);
     }
 }

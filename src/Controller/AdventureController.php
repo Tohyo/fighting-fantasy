@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Factory\AdventureFactory;
+use App\Repository\AdventureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,12 +10,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdventureController extends AbstractController
 {
     #[Route('/adventure', name: 'app_adventure')]
-    public function index(): Response
+    public function index(AdventureRepository $adventureRepository): Response
     {
-        $adventure = AdventureFactory::last();
-        
         return $this->render('adventure/index.html.twig', [
-            'adventure' => $adventure,
+            'adventure' => $adventureRepository->findOneBy([], null, 1),
         ]);
     }
 }
