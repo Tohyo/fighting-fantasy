@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ChapterController extends AbstractController
 {
-    #[Route('/chapter/{id}', name: 'app_get_chapter')]
+    #[Route('/chapter/{id}', name: 'app_chapter')]
     public function getChapter(Chapter $chapter): Response
     {
         return $this->render('chapter/chapter.html.twig', [

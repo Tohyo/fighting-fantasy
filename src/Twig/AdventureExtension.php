@@ -24,9 +24,9 @@ class AdventureExtension extends AbstractExtension
     public function formatAdventure(string $content): ?string
     {
         return preg_replace_callback(
-            self::LINK_REGEX, 
+            self::LINK_REGEX,
             function (array $matches) {
-                return $this->generateLink($matches); 
+                return $this->generateLink($matches);
             },
             $content
         );
@@ -34,7 +34,7 @@ class AdventureExtension extends AbstractExtension
 
     private function generateLink(array $matches): string
     {
-        $url = $this->urlGenerator->generate('app_get_chapter', ['id' => $matches[1]]);
+        $url = $this->urlGenerator->generate('app_chapter', ['id' => $matches[1]]);
 
         return "<a href=".$url.">".$matches[2]."</a>";
     }

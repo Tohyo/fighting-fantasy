@@ -10,9 +10,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdventureController extends AbstractController
 {
     #[Route('/adventure', name: 'app_adventure')]
-    public function index(AdventureRepository $adventureRepository): Response
+    public function getAdventure(AdventureRepository $adventureRepository): Response
     {
-        return $this->render('adventure/index.html.twig', [
+        return $this->render('adventure/adventure.html.twig', [
             'adventure' => $adventureRepository->findOneBy([], null, 1),
         ]);
     }
