@@ -1,19 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="w-4/5 m-auto">
-    <div class="flex">
-        <div class="w-3/4">
-            <turbo-frame id="chapter-content">
-                {% include 'chapter/chapter.html.twig' with { chapter: adventure.getChapter() } %}
-            </turbo-frame>
-        </div>
-        <div>
-            {{ component('AdventureSheetComponent', { adventureSheet: adventure.getAdventureSheet()}) }}
-            {# <turbo-frame id="adventure-sheet">
-                {% include 'adventure_sheet/adventure_sheet.html.twig' with { adventure_sheet: adventure.getAdventureSheet() } %}
-            </turbo-frame> #}
+<main class="-mt-24 pb-8">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+        <h1 class="sr-only">Page title</h1>
+        <div class="grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8">
+            <div class="grid grid-cols-1 gap-4 lg:col-span-2">
+                <section aria-labelledby="section-1-title">
+                    <h2 class="sr-only" id="section-1-title">Section title</h2>
+                    <div class="overflow-hidden rounded-lg bg-white shadow">
+                        <div class="p-6">
+                            <turbo-frame id="chapter-content">
+                                {% include 'chapter/chapter.html.twig' with { chapter: adventure.getChapter() } %}
+                            </turbo-frame>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="grid grid-cols-1 gap-4">
+                <section aria-labelledby="section-2-title">
+                    <h2 class="sr-only" id="section-2-title">Section title</h2>
+                    <div class="overflow-hidden rounded-lg bg-white shadow">
+                        <div class="p-6">
+                            {{ component('AdventureSheetComponent', { adventureSheet: adventure.getAdventureSheet()}) }}
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
     </div>
-</div>
+</main>
 {% endblock %}
