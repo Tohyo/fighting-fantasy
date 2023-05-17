@@ -4,13 +4,14 @@ namespace App\Components;
 
 use App\Entity\AdventureSheet;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 #[AsLiveComponent]
-class AdventureSheetComponent
+class AdventureSheetComponent extends AbstractController
 {
     use DefaultActionTrait;
 

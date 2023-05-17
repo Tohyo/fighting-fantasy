@@ -9,6 +9,9 @@
                     <h2 class="sr-only" id="section-1-title">Section title</h2>
                     <div class="overflow-hidden rounded-lg bg-white shadow">
                         <div class="p-6">
+                            {% for book in books %}
+                                <a href="{{ path('app_book', { slug: book.slug }) }}">{{ book.title }}</a>
+                            {% endfor %}
                         </div>
                     </div>
                 </section>
