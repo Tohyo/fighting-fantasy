@@ -38,6 +38,7 @@
         "symfony/string": "6.3.*",
         "symfony/translation": "6.3.*",
         "symfony/twig-bundle": "6.3.*",
+        "symfony/ux-live-component": "^2.8",
         "symfony/ux-turbo": "^2.8",
         "symfony/validator": "6.3.*",
         "symfony/web-link": "6.3.*",

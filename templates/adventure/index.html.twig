@@ -9,9 +9,10 @@
             </turbo-frame>
         </div>
         <div>
-            <turbo-frame id="adventure-sheet">
+            {{ component('AdventureSheetComponent', { adventureSheet: adventure.getAdventureSheet()}) }}
+            {# <turbo-frame id="adventure-sheet">
                 {% include 'adventure_sheet/adventure_sheet.html.twig' with { adventure_sheet: adventure.getAdventureSheet() } %}
-            </turbo-frame>
+            </turbo-frame> #}
         </div>
     </div>
 </div>
