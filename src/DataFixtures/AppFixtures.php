@@ -13,7 +13,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        BookFactory::createOne();
+        BookFactory::createMany(10);
 
         ChapterFactory::createOne(['book' => BookFactory::last()]);
         $chapter = ChapterFactory::random();
@@ -27,7 +27,7 @@ class AppFixtures extends Fixture
             'book' => BookFactory::last(),
             'chapter' => ChapterFactory::last()
         ]);
-        
+
         $manager->flush();
     }
 }
