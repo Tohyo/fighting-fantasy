@@ -1,10 +1,10 @@
 <div {{ attributes }} class="border border-black col-span-2 row-span-2">
     Equipment List
     {% for item in adventureSheet.getInventory() %}
-        {{ component('RemoveItemFromInventoryComponent', { adventureSheet, item }) }}
+        {{ component('removeItemFromInventory', { adventureSheet, item }) }}
     {% endfor %}
     {% if isAdding %}
-        {{ component('AddItemToInventoryComponent', { adventureSheet }) }}
+        {{ component('addItemToInventory', { adventureSheet }) }}
     {% else %}
         <button type="button" class="btn btn-secondary" data-action="live#action" data-action-name="addItem">
             add item

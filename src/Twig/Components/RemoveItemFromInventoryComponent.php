@@ -1,33 +1,34 @@
 <?php
 
-namespace App\Components;
+namespace App\Twig\Components;
 
 use App\Entity\AdventureSheet;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
-use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
-#[AsLiveComponent]
-class AddItemToInventoryComponent
+#[AsLiveComponent('removeItemFromInventory')]
+final class RemoveItemFromInventoryComponent
 {
     use DefaultActionTrait;
-    use ComponentToolsTrait;
 
-    #[LiveProp(writable: true)]
-    public ?string $item = null;
+    #[LiveProp]
+    public bool $deleted = false;
+
+    #[LiveProp]
+    public string $item;
 
     #[LiveProp]
     public AdventureSheet $adventureSheet;
 
     #[LiveAction]
-    public function saveItem(EntityManagerInterface $em): void
+    public function deleteItem(EntityManagerInterface $em): void
     {
-        $this->adventureSheet->addItem($this->item);
+        $this->adventureSheet->removeItem($this->item);
 
         $em->flush();
-        $this->emit('itemAddedToInventory');
+        $this->deleted = true;
     }
 }

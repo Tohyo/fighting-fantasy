@@ -6,7 +6,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
-class AdventureExtension extends AbstractExtension
+final class AdventureExtension extends AbstractExtension
 {
     private const LINK_REGEX = '/\[#(\d+)\]([\w\s.-]+)\[#\]/';
 

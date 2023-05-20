@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components;
+namespace App\Twig\Components;
 
 use App\Entity\AdventureSheet;
 use Doctrine\ORM\EntityManagerInterface;
@@ -10,8 +10,8 @@ use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
-#[AsLiveComponent]
-class LuckComponent
+#[AsLiveComponent('luck')]
+final class LuckComponent
 {
     use DefaultActionTrait;
 
