@@ -30,12 +30,7 @@
                                             {{ adventure.getAdventureSheet.getInitialSkill() }}<br>
                                             {{ adventure.getAdventureSheet.getSkill() }}
                                         </div>
-                                        <div class="border border-black">
-                                            Stamina<br>
-                                            Initial Stamina:
-                                            {{ adventure.getAdventureSheet.getInitialStamina() }}<br>
-                                            {{ adventure.getAdventureSheet.getStamina() }}
-                                        </div>
+                                        {{ component('stamina', { adventureSheet: adventure.getAdventureSheet()}) }}
                                         {{ component('luck', { adventureSheet: adventure.getAdventureSheet()}) }}
                                         {{ component('inventory', { adventureSheet: adventure.getAdventureSheet()}) }}
                                         <div class="border border-black">

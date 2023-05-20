@@ -160,4 +160,26 @@ class AdventureSheet
 
         return $this;
     }
+
+    public function addStamina(?int $stamina = null): self
+    {
+        if ($stamina) {
+            $this->stamina += $stamina;
+        } else {
+            $this->stamina++;
+        }
+
+        return $this;
+    }
+
+    public function removeStamina(?int $stamina = null): self
+    {
+        if ($stamina) {
+            $this->stamina -= $stamina;
+        } else {
+            $this->stamina--;
+        }
+
+        return $this;
+    }
 }
