@@ -7,28 +7,27 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
+use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 #[AsLiveComponent]
-class RemoveItemFromInventoryComponent
+class AddItemToInventoryComponent
 {
     use DefaultActionTrait;
+    use ComponentToolsTrait;
 
-    #[LiveProp]
-    public bool $deleted = false;
-
-    #[LiveProp]
-    public string $item;
+    #[LiveProp(writable: true)]
+    public ?string $item = null;
 
     #[LiveProp]
     public AdventureSheet $adventureSheet;
 
     #[LiveAction]
-    public function deleteItem(EntityManagerInterface $em): void
+    public function saveItem(EntityManagerInterface $em): void
     {
-        $this->adventureSheet->removeItem($this->item);
+        $this->adventureSheet->addItem($this->item);
 
         $em->flush();
-        $this->deleted = true;
+        $this->emit('itemAddedToInventory');
     }
 }

@@ -3,9 +3,9 @@
 namespace App\Components;
 
 use App\Entity\AdventureSheet;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
+use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
@@ -17,9 +17,6 @@ class InventoryComponent
     #[LiveProp]
     public bool $isAdding = false;
 
-    #[LiveProp(writable: true)]
-    public ?string $newItem = null;
-
     #[LiveProp]
     public AdventureSheet $adventureSheet;
 
@@ -29,12 +26,9 @@ class InventoryComponent
         $this->isAdding = true;
     }
 
-    #[LiveAction]
-    public function save(EntityManagerInterface $em): void
+    #[LiveListener('itemAddedToInventory')]
+    public function itemAdded(): void
     {
-        $this->adventureSheet->addItem($this->newItem);
-
-        $em->flush();
         $this->isAdding = false;
     }
 }
