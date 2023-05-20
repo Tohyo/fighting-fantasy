@@ -1,33 +1,56 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<main class="-mt-24 pb-8">
-    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-        <h1 class="sr-only">Page title</h1>
-        <div class="grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8">
-            <div class="grid grid-cols-1 gap-4 lg:col-span-2">
-                <section aria-labelledby="section-1-title">
-                    <h2 class="sr-only" id="section-1-title">Section title</h2>
-                    <div class="overflow-hidden rounded-lg bg-white shadow">
-                        <div class="p-6">
-                            <turbo-frame id="chapter-content">
-                                {% include 'chapter/chapter.html.twig' with { chapter: adventure.getChapter() } %}
-                            </turbo-frame>
+    <main class="-mt-24 pb-8">
+        <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+            <h1 class="sr-only">Page title</h1>
+            <div class="grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8">
+                <div class="grid grid-cols-1 gap-4 lg:col-span-2">
+                    <section aria-labelledby="section-1-title">
+                        <h2 class="sr-only" id="section-1-title">Section title</h2>
+                        <div class="overflow-hidden rounded-lg bg-white shadow">
+                            <div class="p-6">
+                                <turbo-frame id="chapter-content">
+                                    {% include 'chapter/chapter.html.twig' with { chapter: adventure.getChapter() } %}
+                                </turbo-frame>
+                            </div>
                         </div>
-                    </div>
-                </section>
-            </div>
-            <div class="grid grid-cols-1 gap-4">
-                <section aria-labelledby="section-2-title">
-                    <h2 class="sr-only" id="section-2-title">Section title</h2>
-                    <div class="overflow-hidden rounded-lg bg-white shadow">
-                        <div class="p-6">
-                            {{ component('AdventureSheetComponent', { adventureSheet: adventure.getAdventureSheet()}) }}
+                    </section>
+                </div>
+                <div class="grid grid-cols-1 gap-4">
+                    <section aria-labelledby="section-2-title">
+                        <h2 class="sr-only" id="section-2-title">Section title</h2>
+                        <div class="overflow-hidden rounded-lg bg-white shadow">
+                            <div class="p-6">
+                                <div>
+                                    <div class="grid grid-cols-3 gap-4">
+                                        <div class="border border-black">
+                                            Skill<br>
+                                            Initial Skill:
+                                            {{ adventure.getAdventureSheet.getInitialSkill() }}<br>
+                                            {{ adventure.getAdventureSheet.getSkill() }}
+                                        </div>
+                                        <div class="border border-black">
+                                            Stamina<br>
+                                            Initial Stamina:
+                                            {{ adventure.getAdventureSheet.getInitialStamina() }}<br>
+                                            {{ adventure.getAdventureSheet.getStamina() }}
+                                        </div>
+                                        {{ component('LuckComponent', { adventureSheet: adventure.getAdventureSheet()}) }}
+                                        {{ component('InventoryComponent', { adventureSheet: adventure.getAdventureSheet()}) }}
+                                        <div class="border border-black">
+                                            Gold
+                                        </div>
+                                        <div class="border border-black">
+                                            Provisions
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                </div>
             </div>
         </div>
-    </div>
-</main>
+    </main>
 {% endblock %}

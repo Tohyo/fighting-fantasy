@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\AdventureSheetRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AdventureSheetRepository::class)]
@@ -30,6 +31,10 @@ class AdventureSheet
 
     #[ORM\Column]
     private ?int $initialLuck = null;
+
+    #[ORM\Column(type: Types::SIMPLE_ARRAY, nullable: true)]
+    private array $inventory = [];
+
 
     public function getId(): ?int
     {
@@ -104,6 +109,25 @@ class AdventureSheet
     public function setInitialLuck(int $initialLuck): self
     {
         $this->initialLuck = $initialLuck;
+
+        return $this;
+    }
+
+    public function getInventory(): array
+    {
+        return $this->inventory;
+    }
+
+    public function setInventory(?array $inventory): self
+    {
+        $this->inventory = $inventory;
+
+        return $this;
+    }
+
+    public function addItem(string $item):self
+    {
+        array_push($this->inventory, $item);
 
         return $this;
     }

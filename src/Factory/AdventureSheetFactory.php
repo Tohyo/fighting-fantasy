@@ -26,6 +26,22 @@ use Zenstruck\Foundry\RepositoryProxy;
  * @method static AdventureSheet[]|Proxy[] findBy(array $attributes)
  * @method static AdventureSheet[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method static AdventureSheet[]|Proxy[] randomSet(int $number, array $attributes = [])
+ *
+ * @phpstan-method        Proxy<AdventureSheet> create(array|callable $attributes = [])
+ * @phpstan-method static Proxy<AdventureSheet> createOne(array $attributes = [])
+ * @phpstan-method static Proxy<AdventureSheet> find(object|array|mixed $criteria)
+ * @phpstan-method static Proxy<AdventureSheet> findOrCreate(array $attributes)
+ * @phpstan-method static Proxy<AdventureSheet> first(string $sortedField = 'id')
+ * @phpstan-method static Proxy<AdventureSheet> last(string $sortedField = 'id')
+ * @phpstan-method static Proxy<AdventureSheet> random(array $attributes = [])
+ * @phpstan-method static Proxy<AdventureSheet> randomOrCreate(array $attributes = [])
+ * @phpstan-method static RepositoryProxy<AdventureSheet> repository()
+ * @phpstan-method static list<Proxy<AdventureSheet>> all()
+ * @phpstan-method static list<Proxy<AdventureSheet>> createMany(int $number, array|callable $attributes = [])
+ * @phpstan-method static list<Proxy<AdventureSheet>> createSequence(iterable|callable $sequence)
+ * @phpstan-method static list<Proxy<AdventureSheet>> findBy(array $attributes)
+ * @phpstan-method static list<Proxy<AdventureSheet>> randomRange(int $min, int $max, array $attributes = [])
+ * @phpstan-method static list<Proxy<AdventureSheet>> randomSet(int $number, array $attributes = [])
  */
 final class AdventureSheetFactory extends ModelFactory
 {
@@ -53,6 +69,7 @@ final class AdventureSheetFactory extends ModelFactory
             'initialLuck' => self::faker()->numberBetween(1, 12),
             'initialSkill' => self::faker()->numberBetween(1,12),
             'initialStamina' => self::faker()->numberBetween(2, 24),
+            'inventory' => ['épée', 'talisman']
         ];
     }
 

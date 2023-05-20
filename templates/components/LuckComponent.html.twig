@@ -1,0 +1,9 @@
+<div {{ attributes }} class="border border-black">
+    Luck<br>
+    Initial Luck:
+    {{ adventureSheet.getInitialLuck() }}<br>
+    {{ adventureSheet.getLuck() }}
+    <button type="button" class="btn btn-secondary" data-action="live#action" data-action-name="addLuck">
+        up luck
+    </button>
+</div>

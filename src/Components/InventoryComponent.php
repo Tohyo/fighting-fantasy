@@ -10,22 +10,31 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 #[AsLiveComponent]
-class AdventureSheetComponent
+class InventoryComponent
 {
     use DefaultActionTrait;
 
     #[LiveProp]
+    public bool $isAdding = false;
+
+    #[LiveProp(writable: true)]
+    public ?string $newItem = null;
+
+    #[LiveProp]
     public AdventureSheet $adventureSheet;
 
-    public function __construct(
-        private EntityManagerInterface $entityManagerInterface
-    ) {}
+    #[LiveAction]
+    public function addItem(): void
+    {
+        $this->isAdding = true;
+    }
 
     #[LiveAction]
-    public function addLuck(): void
+    public function save(EntityManagerInterface $em): void
     {
-        $this->adventureSheet->setLuck($this->adventureSheet->getLuck() + 1);
+        $this->adventureSheet->addItem($this->newItem);
 
-        $this->entityManagerInterface->flush();
+        $em->flush();
+        $this->isAdding = false;
     }
 }

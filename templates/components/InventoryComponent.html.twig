@@ -1,0 +1,23 @@
+<div {{ attributes }} class="border border-black col-span-2 row-span-2">
+    Equipment List
+    {% for item in adventureSheet.getInventory() %}
+        {{ item }}
+    {% endfor %}
+
+    {% if isAdding %}
+        <form class="row g-3">
+            <div class="input-group mb-3 col">
+                <div class="form-floating">
+                    <input type="text" data-model="newItem" class="form-control form-control-lg" autofocus />
+                    <label >item name</label>
+                </div>
+
+                <button data-action="live#action" data-action-name="prevent|save" class="btn btn-outline btn-outline-secondary">Save</button>
+            </div>
+        </form>
+    {% else %}
+        <button type="button" class="btn btn-secondary" data-action="live#action" data-action-name="addItem">
+            add item
+        </button>
+    {% endif %}
+</div>
