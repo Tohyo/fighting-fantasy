@@ -24,12 +24,7 @@
                             <div class="p-6">
                                 <div>
                                     <div class="grid grid-cols-3 gap-4">
-                                        <div class="border border-black">
-                                            Skill<br>
-                                            Initial Skill:
-                                            {{ adventure.getAdventureSheet.getInitialSkill() }}<br>
-                                            {{ adventure.getAdventureSheet.getSkill() }}
-                                        </div>
+                                        {{ component('skill', { adventureSheet: adventure.getAdventureSheet()}) }}
                                         {{ component('stamina', { adventureSheet: adventure.getAdventureSheet()}) }}
                                         {{ component('luck', { adventureSheet: adventure.getAdventureSheet()}) }}
                                         {{ component('inventory', { adventureSheet: adventure.getAdventureSheet()}) }}

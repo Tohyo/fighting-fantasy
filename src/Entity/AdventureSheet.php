@@ -182,4 +182,26 @@ class AdventureSheet
 
         return $this;
     }
+
+    public function addSkill(?int $skill = null): self
+    {
+        if ($skill) {
+            $this->skill += $skill;
+        } else {
+            $this->skill++;
+        }
+
+        return $this;
+    }
+
+    public function removeSkill(?int $skill = null): self
+    {
+        if ($skill) {
+            $this->skill -= $skill;
+        } else {
+            $this->skill--;
+        }
+
+        return $this;
+    }
 }
