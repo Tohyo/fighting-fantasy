@@ -10,7 +10,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
-#[AsLiveComponent('addItemToIventory')]
+#[AsLiveComponent('addItemToInventory')]
 final class AddItemToInventoryComponent
 {
     use DefaultActionTrait;
