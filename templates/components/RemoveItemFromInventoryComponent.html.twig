@@ -1,0 +1,6 @@
+<div {{ attributes }}>
+    {% if not deleted %}
+        <span data-model="item">{{ item }}</span>
+        <button data-action="live#action" data-action-name="prevent|deleteItem" class="btn btn-outline btn-outline-secondary">Delete</button>
+    {% endif %}
+</div>

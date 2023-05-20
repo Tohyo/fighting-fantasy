@@ -131,4 +131,11 @@ class AdventureSheet
 
         return $this;
     }
+
+    public function removeItem(string $item): self
+    {
+        $this->inventory = array_diff($this->inventory, [$item]);
+
+        return $this;
+    }
 }

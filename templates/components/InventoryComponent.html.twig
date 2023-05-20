@@ -1,9 +1,8 @@
 <div {{ attributes }} class="border border-black col-span-2 row-span-2">
     Equipment List
     {% for item in adventureSheet.getInventory() %}
-        {{ item }}
+        {{ component('RemoveItemFromInventoryComponent', { adventureSheet, item }) }}
     {% endfor %}
-
     {% if isAdding %}
         <form class="row g-3">
             <div class="input-group mb-3 col">
