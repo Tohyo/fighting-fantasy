@@ -20,7 +20,7 @@ class LuckComponent
     #[LiveAction]
     public function addLuck(EntityManagerInterface $em): void
     {
-        $this->adventureSheet->setLuck($this->adventureSheet->getLuck() + 1);
+        $this->adventureSheet->addLuck();
 
         $em->flush();
     }

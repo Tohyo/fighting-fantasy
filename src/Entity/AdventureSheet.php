@@ -125,7 +125,7 @@ class AdventureSheet
         return $this;
     }
 
-    public function addItem(string $item):self
+    public function addItem(string $item): self
     {
         array_push($this->inventory, $item);
 
@@ -135,6 +135,28 @@ class AdventureSheet
     public function removeItem(string $item): self
     {
         $this->inventory = array_diff($this->inventory, [$item]);
+
+        return $this;
+    }
+
+    public function addLuck(?int $luck = null): self
+    {
+        if ($luck) {
+            $this->luck += $luck;
+        } else {
+            $this->luck++;
+        }
+
+        return $this;
+    }
+
+    public function removeLuck(?int $luck = null): self
+    {
+        if ($luck) {
+            $this->luck -= $luck;
+        } else {
+            $this->luck--;
+        }
 
         return $this;
     }
