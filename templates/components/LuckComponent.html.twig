@@ -2,8 +2,11 @@
     Luck<br>
     Initial Luck:
     {{ adventureSheet.getInitialLuck() }}<br>
+    <button type="button" class="btn btn-secondary" data-action="live#action" data-action-name="saveLuck(direction=down)">
+        down luck
+    </button>
     {{ adventureSheet.getLuck() }}
-    <button type="button" class="btn btn-secondary" data-action="live#action" data-action-name="addLuck">
+    <button type="button" class="btn btn-secondary" data-action="live#action" data-action-name="saveLuck(direction=up)">
         up luck
     </button>
 </div>
