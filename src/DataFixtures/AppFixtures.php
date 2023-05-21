@@ -6,6 +6,7 @@ use App\Factory\AdventureFactory;
 use App\Factory\AdventureSheetFactory;
 use App\Factory\BookFactory;
 use App\Factory\ChapterFactory;
+use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -27,6 +28,8 @@ class AppFixtures extends Fixture
             'book' => BookFactory::last(),
             'chapter' => ChapterFactory::last()
         ]);
+
+        UserFactory::createOne(['email' => 'kevin@tohyo.com']);
 
         $manager->flush();
     }
