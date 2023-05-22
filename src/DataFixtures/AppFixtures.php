@@ -29,7 +29,14 @@ class AppFixtures extends Fixture
             'chapter' => ChapterFactory::last()
         ]);
 
-        UserFactory::createOne(['email' => 'kevin@tohyo.com']);
+        UserFactory::createOne([
+            'email' => 'kevin@admin.com',
+            'roles' => ['ROLE_ADMIN'],
+        ]);
+
+        UserFactory::createOne([
+            'email' => 'kevin@user.com',
+        ]);
 
         $manager->flush();
     }
