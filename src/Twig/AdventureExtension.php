@@ -2,6 +2,7 @@
 
 namespace App\Twig;
 
+use App\Entity\Chapter;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -21,20 +22,23 @@ final class AdventureExtension extends AbstractExtension
         ];
     }
 
-    public function formatAdventure(string $content): ?string
+    public function formatAdventure(Chapter $chapter): ?string
     {
         return preg_replace_callback(
             self::LINK_REGEX,
-            function (array $matches) {
-                return $this->generateLink($matches);
+            function (array $matches) use ($chapter) {
+                return $this->generateLink($matches, $chapter);
             },
-            $content
+            $chapter->getContent()
         );
     }
 
-    private function generateLink(array $matches): string
+    private function generateLink(array $matches, Chapter $chapter): string
     {
-        $url = $this->urlGenerator->generate('app_chapter', ['id' => $matches[1]]);
+        $url = $this->urlGenerator->generate('app_chapter', [
+            'number' => $matches[1],
+            'slug' => $chapter->getBook()->getSlug(),
+        ]);
 
         return "<a href=".$url.">".$matches[2]."</a>";
     }

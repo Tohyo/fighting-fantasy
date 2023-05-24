@@ -25,16 +25,20 @@ class AppFixtures extends Fixture
 
         BookFactory::createMany(10);
 
-        ChapterFactory::createOne(['book' => BookFactory::last()]);
+        ChapterFactory::createOne([
+            'book' => BookFactory::last(),
+            'number' => ChapterFactory::faker()->numberBetween(2, 400)
+        ]);
         $chapter = ChapterFactory::random();
         ChapterFactory::createOne([
             'book' => BookFactory::last(),
-            'content' => ChapterFactory::faker()->text(100) .  ' [#'.$chapter->object()->getId().']Rendez-vous au chapitre 2[#]',
+            'content' => ChapterFactory::faker()->text(100) .  ' [#'.$chapter->object()->getNumber().']Rendez-vous au chapitre 2[#]',
             'number' => 1
         ]);
         ChapterFactory::createMany(4, [
             'book' => BookFactory::last(),
-            'content' => ChapterFactory::faker()->text(100) .  ' [#'.$chapter->object()->getId().']Rendez-vous au chapitre 48[#]',
+            'content' => ChapterFactory::faker()->text(100) .  ' [#'.$chapter->object()->getNumber().']Rendez-vous au chapitre 48[#]',
+            'number' => ChapterFactory::faker()->numberBetween(2, 400)
         ]);
 
         AdventureFactory::createOne([
