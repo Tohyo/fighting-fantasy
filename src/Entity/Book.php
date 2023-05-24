@@ -36,6 +36,10 @@ class Book
     #[ORM\OneToMany(mappedBy: 'book', targetEntity: Adventure::class, orphanRemoval: true)]
     private Collection $adventures;
 
+    #[ORM\ManyToOne(inversedBy: 'books')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $creator = null;
+
     public function __construct()
     {
         $this->chapters = new ArrayCollection();
@@ -146,5 +150,17 @@ class Book
     public function __toString()
     {
         return $this->title;
+    }
+
+    public function getCreator(): ?User
+    {
+        return $this->creator;
+    }
+
+    public function setCreator(?User $creator): self
+    {
+        $this->creator = $creator;
+
+        return $this;
     }
 }

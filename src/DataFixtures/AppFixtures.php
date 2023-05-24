@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Chapter;
 use App\Tests\Factory\AdventureFactory;
 use App\Tests\Factory\AdventureSheetFactory;
 use App\Tests\Factory\BookFactory;
@@ -24,7 +23,9 @@ class AppFixtures extends Fixture
             'email' => 'kevin@user.com',
         ]);
 
-        BookFactory::createOne();
+        BookFactory::createOne([
+            'creator' => UserFactory::find(['email' => 'kevin@admin.com']),
+        ]);
 
         ChapterFactory::createSequence(
             function() {
