@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Slug;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
+#[ORM\Index(columns: ['slug'], flags: ['fulltext'])]
 class Book
 {
     #[ORM\Id]
