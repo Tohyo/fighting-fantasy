@@ -62,13 +62,18 @@ final class AdventureSheetFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
+
+        $luck = self::faker()->numberBetween(7, 12);
+        $skill = self::faker()->numberBetween(7,12);
+        $stamina = self::faker()->numberBetween(14, 24);
+
         return [
-            'luck' => self::faker()->numberBetween(1, 12),
-            'skill' => self::faker()->numberBetween(1,12),
-            'stamina' => self::faker()->numberBetween(2, 24),
-            'initialLuck' => self::faker()->numberBetween(1, 12),
-            'initialSkill' => self::faker()->numberBetween(1,12),
-            'initialStamina' => self::faker()->numberBetween(2, 24),
+            'luck' => $luck,
+            'skill' => $skill,
+            'stamina' => $stamina,
+            'initialLuck' => $luck,
+            'initialSkill' => $skill,
+            'initialStamina' => $stamina,
             'inventory' => ['épée', 'talisman']
         ];
     }
