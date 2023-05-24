@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Chapter;
 use App\Tests\Factory\AdventureFactory;
 use App\Tests\Factory\AdventureSheetFactory;
 use App\Tests\Factory\BookFactory;
@@ -23,28 +24,24 @@ class AppFixtures extends Fixture
             'email' => 'kevin@user.com',
         ]);
 
-        BookFactory::createMany(10);
+        BookFactory::createOne();
 
-        ChapterFactory::createOne([
-            'book' => BookFactory::last(),
-            'number' => ChapterFactory::faker()->numberBetween(2, 400)
-        ]);
-        $chapter = ChapterFactory::random();
-        ChapterFactory::createOne([
-            'book' => BookFactory::last(),
-            'content' => ChapterFactory::faker()->text(100) .  ' [#'.$chapter->object()->getNumber().']Rendez-vous au chapitre 2[#]',
-            'number' => 1
-        ]);
-        ChapterFactory::createMany(4, [
-            'book' => BookFactory::last(),
-            'content' => ChapterFactory::faker()->text(100) .  ' [#'.$chapter->object()->getNumber().']Rendez-vous au chapitre 48[#]',
-            'number' => ChapterFactory::faker()->numberBetween(2, 400)
-        ]);
+        ChapterFactory::createSequence(
+            function() {
+                foreach (range(1, 10) as $i) {
+                    yield [
+                        'book' => BookFactory::last(),
+                        'content' => ChapterFactory::faker()->text(100) .  "[#".($i + 1)."]Rendez-vous au chapitre ".($i + 1)."[#]",
+                        'number' => $i
+                    ];
+                }
+            }
+        );
 
         AdventureFactory::createOne([
             'adventureSheet' => AdventureSheetFactory::createOne(),
             'book' => BookFactory::last(),
-            'chapter' => ChapterFactory::last(),
+            'chapter' => ChapterFactory::find(['number' => 1]),
             'player' => UserFactory::find(['email' => 'kevin@admin.com']),
         ]);
 
