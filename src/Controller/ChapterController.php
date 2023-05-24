@@ -5,15 +5,14 @@ namespace App\Controller;
 use App\Entity\Book;
 use App\Repository\AdventureRepository;
 use App\Repository\ChapterRepository;
+use App\Security\Voter\ChapterVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ChapterController extends AbstractController
 {
     #[Route('/chapter/{slug}/{number}', name: 'app_chapter')]
-    #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
     public function getChapter(
         Book $book,
         int $number,
@@ -24,6 +23,8 @@ class ChapterController extends AbstractController
             'book' => $book,
             'number' => $number,
         ]);
+
+        $this->denyAccessUnlessGranted(ChapterVoter::VIEW, $chapter);
 
         $adventure = $adventureRepository->findOneBy([
             'player' => $this->getUser(),
