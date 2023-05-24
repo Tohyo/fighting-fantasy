@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Adventure;
-use App\Entity\AdventureSheet;
 use App\Entity\Book;
+use App\Factory\AdventureSheetFactory;
 use App\Repository\AdventureRepository;
 use App\Repository\ChapterRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +19,8 @@ class AdventureController extends AbstractController
     public function getAdventure(
         Book $book,
         AdventureRepository $adventureRepository,
-        ChapterRepository $chapterRepository
+        ChapterRepository $chapterRepository,
+        AdventureSheetFactory $adventureSheetFactory
     ): Response {
         $adventure = $adventureRepository->findOneBy([
             'book' => $book,
@@ -31,7 +32,7 @@ class AdventureController extends AbstractController
                 ->setPlayer($this->getUser())
                 ->setBook($book)
                 ->setAdventureSheet(
-                    new AdventureSheet()
+                    $adventureSheetFactory->create()
                 )
                 ->setChapter($chapterRepository->findFirstChapterOfBook($book));
             $adventureRepository->save($adventure, true);
