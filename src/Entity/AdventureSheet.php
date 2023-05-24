@@ -35,7 +35,6 @@ class AdventureSheet
     #[ORM\Column(type: Types::SIMPLE_ARRAY, nullable: true)]
     private array $inventory = [];
 
-
     public function getId(): ?int
     {
         return $this->id;

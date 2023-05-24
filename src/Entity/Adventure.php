@@ -25,6 +25,10 @@ class Adventure
     #[ORM\JoinColumn(nullable: false)]
     private ?Book $book = null;
 
+    #[ORM\ManyToOne(inversedBy: 'adventures')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $player = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -62,6 +66,18 @@ class Adventure
     public function setBook(?Book $book): self
     {
         $this->book = $book;
+
+        return $this;
+    }
+
+    public function getPlayer(): ?User
+    {
+        return $this->player;
+    }
+
+    public function setPlayer(?User $player): self
+    {
+        $this->player = $player;
 
         return $this;
     }

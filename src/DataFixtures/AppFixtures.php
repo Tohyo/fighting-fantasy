@@ -2,11 +2,11 @@
 
 namespace App\DataFixtures;
 
-use App\Factory\AdventureFactory;
-use App\Factory\AdventureSheetFactory;
-use App\Factory\BookFactory;
-use App\Factory\ChapterFactory;
-use App\Factory\UserFactory;
+use App\Tests\Factory\AdventureFactory;
+use App\Tests\Factory\AdventureSheetFactory;
+use App\Tests\Factory\BookFactory;
+use App\Tests\Factory\ChapterFactory;
+use App\Tests\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -14,6 +14,15 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        UserFactory::createOne([
+            'email' => 'kevin@admin.com',
+            'roles' => ['ROLE_ADMIN'],
+        ]);
+
+        UserFactory::createOne([
+            'email' => 'kevin@user.com',
+        ]);
+
         BookFactory::createMany(10);
 
         ChapterFactory::createOne(['book' => BookFactory::last()]);
@@ -26,16 +35,8 @@ class AppFixtures extends Fixture
         AdventureFactory::createOne([
             'adventureSheet' => AdventureSheetFactory::createOne(),
             'book' => BookFactory::last(),
-            'chapter' => ChapterFactory::last()
-        ]);
-
-        UserFactory::createOne([
-            'email' => 'kevin@admin.com',
-            'roles' => ['ROLE_ADMIN'],
-        ]);
-
-        UserFactory::createOne([
-            'email' => 'kevin@user.com',
+            'chapter' => ChapterFactory::last(),
+            'player' => UserFactory::find(['email' => 'kevin@admin.com']),
         ]);
 
         $manager->flush();

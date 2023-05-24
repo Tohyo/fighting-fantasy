@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Book;
 use App\Entity\Chapter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -37,6 +38,11 @@ class ChapterRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findFirstChapterOfBook(Book $book): ?Chapter
+    {
+        return $this->findOneBy(['book' => $book, 'number' => 1]);
     }
 
 //    /**

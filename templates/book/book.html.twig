@@ -12,7 +12,9 @@
                         {{ book.getTitle() }}
                         {{ book.getDescription() }}
 
-                        <a href="{{ path('app_adventure') }}">Commencer l'aventure</a>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <a href="{{ path('app_adventure', { slug: book.slug }) }}">Commencer l'aventure</a>
+                        {% endif %}
                     </div>
                 </div>
             </section>

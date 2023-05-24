@@ -22,5 +22,7 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\Tests\Factory\:
+        resource: '../tests/Factory/'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

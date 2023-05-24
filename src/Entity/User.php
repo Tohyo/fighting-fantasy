@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -28,6 +30,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     private ?string $plainPassword = null;
+
+    #[ORM\OneToMany(mappedBy: 'player', targetEntity: Adventure::class, orphanRemoval: true)]
+    private Collection $adventures;
+
+    public function __construct()
+    {
+        $this->adventures = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +113,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPlainPassword($plainPassword): self
     {
         $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Adventure>
+     */
+    public function getAdventures(): Collection
+    {
+        return $this->adventures;
+    }
+
+    public function addAdventure(Adventure $adventure): self
+    {
+        if (!$this->adventures->contains($adventure)) {
+            $this->adventures->add($adventure);
+            $adventure->setPlayer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdventure(Adventure $adventure): self
+    {
+        if ($this->adventures->removeElement($adventure)) {
+            // set the owning side to null (unless already changed)
+            if ($adventure->getPlayer() === $this) {
+                $adventure->setPlayer(null);
+            }
+        }
 
         return $this;
     }
