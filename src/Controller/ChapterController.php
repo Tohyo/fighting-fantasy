@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Book;
 use App\Repository\AdventureRepository;
 use App\Repository\ChapterRepository;
+use App\Security\Voter\BookVoter;
 use App\Security\Voter\ChapterVoter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -12,6 +13,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ChapterController extends AppAbstractController
 {
+    #[Route('/chapter/list/{id}', name: 'app_chapter_list')]
+    public function list(Book $book): Response
+    {
+        $this->denyAccessUnlessGranted(BookVoter::VIEW, $book);
+
+        return $this->render('chapter/list.html.twig', [
+            'chapters' => $book->getChapters()
+        ]);
+    }
+
     #[Route('/chapter/{slug}/{number}', name: 'app_chapter')]
     public function getChapter(
         Book $book,

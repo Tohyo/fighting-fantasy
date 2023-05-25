@@ -22,10 +22,8 @@ class ProfileController extends AppAbstractController
     #[Route('/profile/books', name: 'app_books_profile')]
     public function getUserBooks(BookRepository $bookRepository): Response
     {
-        $books = $bookRepository->findBy(['creator' => $this->getUser()]);
-
         return $this->render('profile/books.html.twig', [
-            'books' => $books
+            'books' => $bookRepository->findBy(['creator' => $this->getUser()])
         ]);
     }
 }

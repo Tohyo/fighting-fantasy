@@ -1,23 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profile{% endblock %}
-
 {% block body %}
-    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-        {% include ('profile/nav.html.twig') %}
-        <main>
+    <div class="grid grid-cols-1 gap-4 lg:col-span-2">
+        <section aria-labelledby="section-1-title">
+            <h2 class="sr-only" id="section-1-title">Section title</h2>
             <div class="overflow-hidden rounded-lg bg-white shadow">
                 <div class="p-6">
-                    {% for book in books %}
-                        <ul class="divide-y divide-gray-100">
+                    {% for chapter in chapters %}
+                        <ul role="list" class="divide-y divide-gray-100">
                             <li class="flex items-center justify-between gap-x-6 py-5">
                                 <div class="min-w-0">
                                     <div class="flex items-start gap-x-3">
-                                        <p class="text-sm font-semibold leading-6 text-gray-900">{{ book.title }}</p>
+                                        <p class="text-sm font-semibold leading-6 text-gray-900">{{ chapter.number }}</p>
                                     </div>
                                     <div class="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
-                                        <p class="truncate">{{ book.description }}</p>
-                                        <a href="{{ path('app_chapter_list', { id: book.id }) }}">See chapters</a>
+                                        <p class="truncate">{{ chapter.content }}</p>
                                     </div>
                                 </div>
                             </li>
@@ -25,6 +22,6 @@
                     {% endfor %}
                 </div>
             </div>
-        </main>
+        </section>
     </div>
 {% endblock %}
