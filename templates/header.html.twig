@@ -8,6 +8,7 @@
                         <a href="{{ path('app_home') }}" class="text-black rounded-md bg-white bg-opacity-0 px-3 py-2 text-sm font-medium hover:bg-opacity-10" aria-current="page">Home</a>
                         <a href="{{ path('app_books') }}" class="text-black rounded-md bg-white bg-opacity-0 px-3 py-2 text-sm font-medium hover:bg-opacity-10">Books</a>
                         {% if is_granted('ROLE_USER') %}
+                            <a class="text-black rounded-md bg-white bg-opacity-0 px-3 py-2 text-sm font-medium hover:bg-opacity-10" href="{{ path('app_profile') }}">Profile</a>
                             <a class="text-black rounded-md bg-white bg-opacity-0 px-3 py-2 text-sm font-medium hover:bg-opacity-10" href="{{ path('app_logout') }}">Log out</a>
                         {% else %}
                             <a class="text-black rounded-md bg-white bg-opacity-0 px-3 py-2 text-sm font-medium hover:bg-opacity-10" href="{{ path('app_login') }}">Log in</a>
