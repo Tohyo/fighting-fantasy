@@ -23,6 +23,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
+    /** @var array<string> $roles */
     #[ORM\Column]
     private array $roles = [];
 
@@ -31,9 +32,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private ?string $plainPassword = null;
 
+    /** @var Collection<int, Adventure> $adventures */
     #[ORM\OneToMany(mappedBy: 'player', targetEntity: Adventure::class, orphanRemoval: true)]
     private Collection $adventures;
 
+    /** @var Collection<int, Book> $books */
     #[ORM\OneToMany(mappedBy: 'creator', targetEntity: Book::class, orphanRemoval: true)]
     private Collection $books;
 
@@ -82,6 +85,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
+    /** @param array<string> $roles */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -114,7 +118,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->plainPassword;
     }
 
-    public function setPlainPassword($plainPassword): self
+    public function setPlainPassword(string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
 

@@ -4,11 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Book;
 use App\Repository\BookRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class BookController extends AbstractController
+class BookController extends AppAbstractController
 {
     #[Route('/books', name: 'app_books')]
     public function getList(BookRepository $bookRepository): Response

@@ -32,6 +32,7 @@ class AdventureSheet
     #[ORM\Column]
     private ?int $initialLuck = null;
 
+    /** @var array<string> $inventory */
     #[ORM\Column(type: Types::SIMPLE_ARRAY, nullable: true)]
     private array $inventory = [];
 
@@ -112,12 +113,14 @@ class AdventureSheet
         return $this;
     }
 
+    /** @return array<string> */
     public function getInventory(): array
     {
         return $this->inventory;
     }
 
-    public function setInventory(?array $inventory): self
+    /** @param array<string> $inventory */
+    public function setInventory(array $inventory): self
     {
         $this->inventory = $inventory;
 

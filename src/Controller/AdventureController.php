@@ -7,12 +7,11 @@ use App\Entity\Book;
 use App\Factory\AdventureSheetFactory;
 use App\Repository\AdventureRepository;
 use App\Repository\ChapterRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-class AdventureController extends AbstractController
+class AdventureController extends AppAbstractController
 {
     #[Route('/adventure/{slug}', name: 'app_adventure')]
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]

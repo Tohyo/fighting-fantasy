@@ -15,11 +15,11 @@ class Chapter
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $content = null;
+    private string $content;
 
     #[ORM\ManyToOne(inversedBy: 'chapters')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Book $book = null;
+    private Book $book;
 
     #[ORM\Column]
     private ?int $number = null;
@@ -29,7 +29,7 @@ class Chapter
         return $this->id;
     }
 
-    public function getContent(): ?string
+    public function getContent(): string
     {
         return $this->content;
     }
@@ -41,12 +41,12 @@ class Chapter
         return $this;
     }
 
-    public function getBook(): ?Book
+    public function getBook(): Book
     {
         return $this->book;
     }
 
-    public function setBook(?Book $book): self
+    public function setBook(Book $book): self
     {
         $this->book = $book;
 

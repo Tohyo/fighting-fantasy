@@ -23,7 +23,7 @@ class Adventure
 
     #[ORM\ManyToOne(inversedBy: 'adventures')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Book $book = null;
+    private Book $book;
 
     #[ORM\ManyToOne(inversedBy: 'adventures')]
     #[ORM\JoinColumn(nullable: false)]
@@ -58,12 +58,12 @@ class Adventure
         return $this;
     }
 
-    public function getBook(): ?Book
+    public function getBook(): Book
     {
         return $this->book;
     }
 
-    public function setBook(?Book $book): self
+    public function setBook(Book $book): self
     {
         $this->book = $book;
 

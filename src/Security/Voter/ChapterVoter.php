@@ -2,9 +2,10 @@
 
 namespace App\Security\Voter;
 
+use App\Entity\Chapter;
+use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class ChapterVoter extends Voter
 {
@@ -21,7 +22,11 @@ class ChapterVoter extends Voter
     {
         $user = $token->getUser();
         // if the user is anonymous, do not grant access
-        if (!$user instanceof UserInterface) {
+        if (!$user instanceof User) {
+            return false;
+        }
+
+        if (!$subject instanceof Chapter) {
             return false;
         }
 

@@ -6,11 +6,11 @@ use App\Entity\Book;
 use App\Repository\AdventureRepository;
 use App\Repository\ChapterRepository;
 use App\Security\Voter\ChapterVoter;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ChapterController extends AbstractController
+class ChapterController extends AppAbstractController
 {
     #[Route('/chapter/{slug}/{number}', name: 'app_chapter')]
     public function getChapter(
@@ -18,11 +18,15 @@ class ChapterController extends AbstractController
         int $number,
         AdventureRepository $adventureRepository,
         ChapterRepository $chapterRepository
-    ): Response {
+    ): Response|NotFoundHttpException {
         $chapter = $chapterRepository->findOneBy([
             'book' => $book,
             'number' => $number,
         ]);
+
+        if (!$chapter) {
+            return $this->createNotFoundException();
+        }
 
         $this->denyAccessUnlessGranted(ChapterVoter::VIEW, $chapter);
 

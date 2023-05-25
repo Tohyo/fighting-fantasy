@@ -19,7 +19,7 @@ class Book
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $title = null;
+    private string $title;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
@@ -51,7 +51,7 @@ class Book
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -101,18 +101,12 @@ class Book
             $this->chapters->add($chapter);
             $chapter->setBook($this);
         }
-
         return $this;
     }
 
     public function removeChapter(Chapter $chapter): self
     {
-        if ($this->chapters->removeElement($chapter)) {
-            // set the owning side to null (unless already changed)
-            if ($chapter->getBook() === $this) {
-                $chapter->setBook(null);
-            }
-        }
+        $this->chapters->removeElement($chapter);
 
         return $this;
     }
@@ -137,12 +131,7 @@ class Book
 
     public function removeAdventure(Adventure $adventure): self
     {
-        if ($this->adventures->removeElement($adventure)) {
-            // set the owning side to null (unless already changed)
-            if ($adventure->getBook() === $this) {
-                $adventure->setBook(null);
-            }
-        }
+        $this->adventures->removeElement($adventure);
 
         return $this;
     }

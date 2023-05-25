@@ -25,6 +25,10 @@ final class AddItemToInventoryComponent
     #[LiveAction]
     public function saveItem(EntityManagerInterface $em): void
     {
+        if (!$this->item) {
+            return;
+        }
+
         $this->adventureSheet->addItem($this->item);
 
         $em->flush();

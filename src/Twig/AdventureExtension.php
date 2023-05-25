@@ -33,6 +33,7 @@ final class AdventureExtension extends AbstractExtension
         );
     }
 
+    /** @param array<int|string, string> $matches */
     private function generateLink(array $matches, Chapter $chapter): string
     {
         $url = $this->urlGenerator->generate('app_chapter', [
