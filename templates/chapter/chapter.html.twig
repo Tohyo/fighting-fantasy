@@ -1,5 +1,9 @@
-<turbo-frame id="chapter-content">
-    <div>
-        {{ chapter|adventure|raw }}
-    </div>
-</turbo-frame>
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <turbo-frame id="chapter-content">
+        <div>
+            {{ chapter|adventure|raw }}
+        </div>
+    </turbo-frame>
+{% endblock %}

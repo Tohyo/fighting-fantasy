@@ -10,8 +10,10 @@
                         <h2 class="sr-only" id="section-1-title">Section title</h2>
                         <div class="overflow-hidden rounded-lg bg-white shadow">
                             <div class="p-6">
-                                <turbo-frame id="chapter-content">
-                                    {% include 'chapter/chapter.html.twig' with { chapter: adventure.getChapter() } %}
+                                <turbo-frame
+                                    id="chapter-content"
+                                    src={{ path('app_chapter', { slug: adventure.book.slug, number: adventure.chapter.number }) }}
+                                >
                                 </turbo-frame>
                             </div>
                         </div>
