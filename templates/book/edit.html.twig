@@ -6,12 +6,7 @@
             <h2 class="sr-only" id="section-1-title">Section title</h2>
             <div class="overflow-hidden rounded-lg bg-white shadow">
                 <div class="p-6">
-                    {{ book.getTitle() }}
-                    {{ book.getDescription() }}
-
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <a href="{{ path('app_adventure', { slug: book.slug }) }}">Commencer l'aventure</a>
-                    {% endif %}
+                    Edit
                 </div>
             </div>
         </section>
