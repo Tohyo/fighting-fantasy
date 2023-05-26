@@ -10,121 +10,45 @@ use Doctrine\ORM\Mapping as ORM;
 class AdventureSheet
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: Types::GUID)]
+    public readonly string $id;
 
     #[ORM\Column]
-    private ?int $skill = null;
+    public int $skill;
 
     #[ORM\Column]
-    private ?int $stamina = null;
+    public int $stamina;
 
     #[ORM\Column]
-    private ?int $luck = null;
+    public int $luck;
 
     #[ORM\Column]
-    private ?int $initialSkill = null;
+    public int $initialSkill;
 
     #[ORM\Column]
-    private ?int $initialStamina = null;
+    public int $initialStamina;
 
     #[ORM\Column]
-    private ?int $initialLuck = null;
+    public int $initialLuck;
 
     /** @var array<string> $inventory */
     #[ORM\Column(type: Types::SIMPLE_ARRAY, nullable: true)]
-    private array $inventory = [];
+    public array $inventory = [];
 
-    public function getId(): ?int
+    public function __construct()
     {
-        return $this->id;
-    }
+        $this->id = uuid_create(UUID_TYPE_RANDOM);
 
-    public function getSkill(): ?int
-    {
-        return $this->skill;
-    }
+        $skill = random_int(7, 12);
+        $stamina = random_int(14, 24);
+        $luck = random_int(7, 12);
 
-    public function setSkill(int $skill): self
-    {
         $this->skill = $skill;
-
-        return $this;
-    }
-
-    public function getStamina(): ?int
-    {
-        return $this->stamina;
-    }
-
-    public function setStamina(int $stamina): self
-    {
         $this->stamina = $stamina;
-
-        return $this;
-    }
-
-    public function getLuck(): ?int
-    {
-        return $this->luck;
-    }
-
-    public function setLuck(int $luck): self
-    {
         $this->luck = $luck;
-
-        return $this;
-    }
-
-    public function getInitialSkill(): ?int
-    {
-        return $this->initialSkill;
-    }
-
-    public function setInitialSkill(int $initialSkill): self
-    {
-        $this->initialSkill = $initialSkill;
-
-        return $this;
-    }
-
-    public function getInitialStamina(): ?int
-    {
-        return $this->initialStamina;
-    }
-
-    public function setInitialStamina(int $initialStamina): self
-    {
-        $this->initialStamina = $initialStamina;
-
-        return $this;
-    }
-
-    public function getInitialLuck(): ?int
-    {
-        return $this->initialLuck;
-    }
-
-    public function setInitialLuck(int $initialLuck): self
-    {
-        $this->initialLuck = $initialLuck;
-
-        return $this;
-    }
-
-    /** @return array<string> */
-    public function getInventory(): array
-    {
-        return $this->inventory;
-    }
-
-    /** @param array<string> $inventory */
-    public function setInventory(array $inventory): self
-    {
-        $this->inventory = $inventory;
-
-        return $this;
+        $this->initialSkill = $skill;
+        $this->initialStamina = $stamina;
+        $this->initialLuck = $luck;
     }
 
     public function addItem(string $item): self

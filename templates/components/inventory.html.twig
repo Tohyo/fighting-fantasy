@@ -1,6 +1,6 @@
 <div {{ attributes }} class="border border-black col-span-2 row-span-2">
     Equipment List
-    {% for item in adventureSheet.getInventory() %}
+    {% for item in adventureSheet.inventory %}
         {{ component('removeItemFromInventory', { adventureSheet, item }) }}
     {% endfor %}
     {% if isAdding %}

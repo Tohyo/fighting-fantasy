@@ -1,11 +1,11 @@
 <div{{attributes}} class="border border-black">
     Skill<br>
     Initial Skill:
-    {{ adventureSheet.getInitialSkill() }}<br>
+    {{ adventureSheet.initialSkill }}<br>
     <button type="button" class="btn btn-secondary" data-action="live#action" data-action-name="saveSkill(direction=down)">
         down skill
     </button>
-    {{ adventureSheet.getSkill() }}
+    {{ adventureSheet.skill }}
     <button type="button" class="btn btn-secondary" data-action="live#action" data-action-name="saveSkill(direction=up)">
         up skill
     </button>

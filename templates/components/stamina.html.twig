@@ -1,11 +1,11 @@
 <div{{attributes}} class="border border-black">
     Stamina<br>
     Initial Stamina:
-    {{ adventureSheet.getInitialStamina() }}<br>
+    {{ adventureSheet.initialStamina }}<br>
     <button type="button" class="btn btn-secondary" data-action="live#action" data-action-name="saveStamina(direction=down)">
         down stamina
     </button>
-    {{ adventureSheet.getStamina() }}
+    {{ adventureSheet.stamina }}
     <button type="button" class="btn btn-secondary" data-action="live#action" data-action-name="saveStamina(direction=up)">
         up stamina
     </button>

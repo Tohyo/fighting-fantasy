@@ -3,82 +3,34 @@
 namespace App\Entity;
 
 use App\Repository\AdventureRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AdventureRepository::class)]
 class Adventure
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: Types::GUID)]
+    public readonly string $id;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Chapter $chapter = null;
+    public Chapter $chapter;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?AdventureSheet $adventureSheet = null;
+    public ?AdventureSheet $adventureSheet = null;
 
     #[ORM\ManyToOne(inversedBy: 'adventures')]
     #[ORM\JoinColumn(nullable: false)]
-    private Book $book;
+    public Book $book;
 
     #[ORM\ManyToOne(inversedBy: 'adventures')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $player = null;
+    public ?User $player = null;
 
-    public function getId(): ?int
+    public function __construct()
     {
-        return $this->id;
-    }
-
-    public function getChapter(): ?Chapter
-    {
-        return $this->chapter;
-    }
-
-    public function setChapter(?Chapter $chapter): self
-    {
-        $this->chapter = $chapter;
-
-        return $this;
-    }
-
-    public function getAdventureSheet(): ?AdventureSheet
-    {
-        return $this->adventureSheet;
-    }
-
-    public function setAdventureSheet(AdventureSheet $adventureSheet): self
-    {
-        $this->adventureSheet = $adventureSheet;
-
-        return $this;
-    }
-
-    public function getBook(): Book
-    {
-        return $this->book;
-    }
-
-    public function setBook(Book $book): self
-    {
-        $this->book = $book;
-
-        return $this;
-    }
-
-    public function getPlayer(): ?User
-    {
-        return $this->player;
-    }
-
-    public function setPlayer(?User $player): self
-    {
-        $this->player = $player;
-
-        return $this;
+        $this->id = uuid_create(UUID_TYPE_RANDOM);
     }
 }

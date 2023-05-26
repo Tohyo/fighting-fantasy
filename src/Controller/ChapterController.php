@@ -10,6 +10,8 @@ use App\Security\Voter\ChapterVoter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 class ChapterController extends AppAbstractController
 {
@@ -19,7 +21,7 @@ class ChapterController extends AppAbstractController
         $this->denyAccessUnlessGranted(BookVoter::VIEW, $book);
 
         return $this->render('chapter/list.html.twig', [
-            'chapters' => $book->getChapters()
+            'chapters' => $book->chapters
         ]);
     }
 
@@ -28,7 +30,8 @@ class ChapterController extends AppAbstractController
         Book $book,
         int $number,
         AdventureRepository $adventureRepository,
-        ChapterRepository $chapterRepository
+        ChapterRepository $chapterRepository,
+        #[CurrentUser] UserInterface $user
     ): Response|NotFoundHttpException {
         $chapter = $chapterRepository->findOneBy([
             'book' => $book,
@@ -42,9 +45,11 @@ class ChapterController extends AppAbstractController
         $this->denyAccessUnlessGranted(ChapterVoter::VIEW, $chapter);
 
         $adventure = $adventureRepository->findOneBy([
-            'player' => $this->getUser(),
-            'book' => $chapter->getBook(),
-        ])->setChapter($chapter);
+            'player' => $user,
+            'book' => $chapter->book,
+        ]);
+        $adventure->chapter = $chapter;
+
         $adventureRepository->save($adventure, true);
 
         return $this->render('chapter/chapter.html.twig', [

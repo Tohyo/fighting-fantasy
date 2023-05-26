@@ -31,7 +31,7 @@ class ChapterVoter extends Voter
         }
 
         foreach ($user->getAdventures() as $adventure) {
-            if ($adventure->getBook()->getId() === $subject->getBook()->getId()) {
+            if ($adventure->book->id === $subject->book->id) {
                 return true;
             }
         }

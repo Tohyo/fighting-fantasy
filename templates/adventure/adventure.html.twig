@@ -20,10 +20,10 @@
                     <div class="p-6">
                         <div>
                             <div class="grid grid-cols-3 gap-4">
-                                {{ component('skill', { adventureSheet: adventure.getAdventureSheet()}) }}
-                                {{ component('stamina', { adventureSheet: adventure.getAdventureSheet()}) }}
-                                {{ component('luck', { adventureSheet: adventure.getAdventureSheet()}) }}
-                                {{ component('inventory', { adventureSheet: adventure.getAdventureSheet()}) }}
+                                {{ component('skill', { adventureSheet: adventure.adventureSheet }) }}
+                                {{ component('stamina', { adventureSheet: adventure.adventureSheet }) }}
+                                {{ component('luck', { adventureSheet: adventure.adventureSheet }) }}
+                                {{ component('inventory', { adventureSheet: adventure.adventureSheet }) }}
                                 <div class="border border-black">
                                     Gold
                                 </div>

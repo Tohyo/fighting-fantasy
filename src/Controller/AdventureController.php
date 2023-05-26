@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Adventure;
+use App\Entity\AdventureSheet;
 use App\Entity\Book;
-use App\Factory\AdventureSheetFactory;
 use App\Repository\AdventureRepository;
 use App\Repository\ChapterRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class AdventureController extends AppAbstractController
@@ -19,21 +21,19 @@ class AdventureController extends AppAbstractController
         Book $book,
         AdventureRepository $adventureRepository,
         ChapterRepository $chapterRepository,
-        AdventureSheetFactory $adventureSheetFactory
+        #[CurrentUser] UserInterface $user
     ): Response {
         $adventure = $adventureRepository->findOneBy([
             'book' => $book,
-            'player' => $this->getUser(),
+            'player' => $user,
         ]);
 
         if (!$adventure) {
-            $adventure = (new Adventure())
-                ->setPlayer($this->getUser())
-                ->setBook($book)
-                ->setAdventureSheet(
-                    $adventureSheetFactory->create()
-                )
-                ->setChapter($chapterRepository->findFirstChapterOfBook($book));
+            $adventure = new Adventure();
+            $adventure->player = $user;
+            $adventure->book = $book;
+            $adventure->adventureSheet = new AdventureSheet();
+            $adventure->chapter = $chapterRepository->findFirstChapterOfBook($book);
             $adventureRepository->save($adventure, true);
         }
 

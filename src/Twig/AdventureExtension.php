@@ -29,7 +29,7 @@ final class AdventureExtension extends AbstractExtension
             function (array $matches) use ($chapter) {
                 return $this->generateLink($matches, $chapter);
             },
-            $chapter->getContent()
+            $chapter->content
         );
     }
 
@@ -38,7 +38,7 @@ final class AdventureExtension extends AbstractExtension
     {
         $url = $this->urlGenerator->generate('app_chapter', [
             'number' => $matches[1],
-            'slug' => $chapter->getBook()->getSlug(),
+            'slug' => $chapter->book->slug,
         ]);
 
         return "<a href=".$url.">".$matches[2]."</a>";

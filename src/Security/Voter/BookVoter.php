@@ -32,7 +32,7 @@ class BookVoter extends Voter
             return false;
         }
 
-        if ($user === $subject->getCreator()) {
+        if ($user === $subject->creator) {
             return true;
         }
 

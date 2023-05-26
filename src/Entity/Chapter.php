@@ -10,58 +10,21 @@ use Doctrine\ORM\Mapping as ORM;
 class Chapter
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: Types::GUID)]
+    public readonly string $id;
 
     #[ORM\Column(type: Types::TEXT)]
-    private string $content;
+    public string $content;
 
     #[ORM\ManyToOne(inversedBy: 'chapters')]
     #[ORM\JoinColumn(nullable: false)]
-    private Book $book;
+    public Book $book;
 
     #[ORM\Column]
-    private ?int $number = null;
+    public int $number;
 
-    public function getId(): ?int
+    public function __construct()
     {
-        return $this->id;
-    }
-
-    public function getContent(): string
-    {
-        return $this->content;
-    }
-
-    public function setContent(string $content): self
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    public function getBook(): Book
-    {
-        return $this->book;
-    }
-
-    public function setBook(Book $book): self
-    {
-        $this->book = $book;
-
-        return $this;
-    }
-
-    public function getNumber(): ?int
-    {
-        return $this->number;
-    }
-
-    public function setNumber(int $number): self
-    {
-        $this->number = $number;
-
-        return $this;
+        $this->id = uuid_create(UUID_TYPE_RANDOM);
     }
 }
