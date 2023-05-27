@@ -6,16 +6,19 @@ use App\Entity\Chapter;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class ChapterVoter extends Voter
 {
     public const VIEW = 'ADVENTURE_CHAPTER_VIEW';
+    public const EDIT = 'CHAPTER_EDIT';
 
     protected function supports(string $attribute, mixed $subject): bool
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return $attribute === self::VIEW && $subject instanceof \App\Entity\Chapter;
+        return in_array($attribute, [self::VIEW, self::EDIT ])
+            && $subject instanceof \App\Entity\Chapter;
     }
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
@@ -30,8 +33,17 @@ class ChapterVoter extends Voter
             return false;
         }
 
+        return match ($attribute) {
+            self::VIEW => $this->hasActiveAdventure($user, $subject),
+            self::EDIT => $user === $subject->book->creator,
+            default => false,
+        };
+    }
+
+    private function hasActiveAdventure(UserInterface $user, Chapter $chapter): bool
+    {
         foreach ($user->getAdventures() as $adventure) {
-            if ($adventure->book->id === $subject->book->id) {
+            if ($adventure->book->id === $chapter->book->id) {
                 return true;
             }
         }

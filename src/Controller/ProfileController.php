@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Repository\BookRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,7 +16,7 @@ class ProfileController extends AppAbstractController
     public function index(#[CurrentUser] UserInterface $user): Response
     {
         return $this->render('profile/index.html.twig', [
-            'adventures' => $user->adventures,
+            'adventures' => $user->getAdventures(),
         ]);
     }
 
