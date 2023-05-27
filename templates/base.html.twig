@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="dark" style="color-scheme: dark;">
     <head>
         <meta charset="UTF-8">
         <title>
@@ -17,14 +17,8 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body>
+    <body class="dark:bg-black">
         {% include 'header.html.twig' %}
-        <main class="-mt-24 pb-8">
-            <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-                <h1 class="sr-only">Page title</h1>
-                {% block body %}{% endblock %}
-            </div>
-        </main>
-        {% include 'footer.html.twig' %}
+        {% block body %}{% endblock %}
     </body>
 </html></div></html>

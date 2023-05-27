@@ -60,6 +60,16 @@ class BookController extends AppAbstractController
         ]);
     }
 
+    #[Route('/book/list', name: 'app_book_list')]
+    public function list(BookRepository $bookRepository): Response
+    {
+        $books = $bookRepository->findAll();
+
+        return $this->render('book/list.html.twig', [
+            'books' => $books,
+        ]);
+    }
+
     #[Route('/book/{slug}', name: 'app_book')]
     public function show(Book $book): Response
     {
@@ -67,5 +77,4 @@ class BookController extends AppAbstractController
             'book' => $book,
         ]);
     }
-
 }

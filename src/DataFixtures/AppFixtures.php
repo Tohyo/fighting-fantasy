@@ -46,6 +46,10 @@ class AppFixtures extends Fixture
             'player' => UserFactory::find(['email' => 'kevin@admin.com']),
         ]);
 
+        BookFactory::createMany(10, [
+            'creator' => UserFactory::find(['email' => 'kevin@admin.com']),
+        ]);
+
         $manager->flush();
     }
 }
