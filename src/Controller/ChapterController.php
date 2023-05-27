@@ -43,6 +43,16 @@ class ChapterController extends AppAbstractController
         ]);
     }
 
+    #[Route('/chapter/{id}', name: 'app_chapter_show')]
+    public function show(Chapter $chapter): Response
+    {
+        $this->denyAccessUnlessGranted(ChapterVoter::VIEW, $chapter);
+
+        return $this->render('chapter/show.html.twig', [
+            'chapter' => $chapter,
+        ]);
+    }
+
     #[Route('/chapter/list/{id}', name: 'app_chapter_list')]
     public function list(Book $book): Response
     {
@@ -70,7 +80,7 @@ class ChapterController extends AppAbstractController
             return $this->createNotFoundException();
         }
 
-        $this->denyAccessUnlessGranted(ChapterVoter::VIEW, $chapter);
+        $this->denyAccessUnlessGranted(ChapterVoter::ADVENTURE, $chapter);
 
         $adventure = $adventureRepository->findOneBy([
             'player' => $user,

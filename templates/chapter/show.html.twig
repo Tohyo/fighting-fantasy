@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="grid grid-cols-1 gap-4 lg:col-span-2">
+        <section aria-labelledby="section-1-title">
+            <h2 class="sr-only" id="section-1-title">Section title</h2>
+            <div class="overflow-hidden rounded-lg bg-white shadow">
+                <div class="p-6">
+                    {{ chapter.number }}
+                    {{ chapter.content }}
+                </div>
+            </div>
+
+            {% if is_granted(constant('App\\Security\\Voter\\ChapterVoter::EDIT'), chapter) %}
+                <a href="{{ path('app_chapter_edit', { id: chapter.id }) }}">edit</a>
+            {% endif %}
+        </section>
+    </div>
+{% endblock %}

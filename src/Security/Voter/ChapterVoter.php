@@ -10,8 +10,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class ChapterVoter extends Voter
 {
-    public const VIEW = 'ADVENTURE_CHAPTER_VIEW';
+    public const VIEW = 'CHAPTER_VIEW';
     public const EDIT = 'CHAPTER_EDIT';
+    public const ADVENTURE = 'ADVENTURE_CHAPTER_VIEW';
 
     protected function supports(string $attribute, mixed $subject): bool
     {
@@ -34,8 +35,9 @@ class ChapterVoter extends Voter
         }
 
         return match ($attribute) {
-            self::VIEW => $this->hasActiveAdventure($user, $subject),
+            self::ADVENTURE => $this->hasActiveAdventure($user, $subject),
             self::EDIT => $user === $subject->book->creator,
+            self::VIEW => $user === $subject->book->creator,
             default => false,
         };
     }

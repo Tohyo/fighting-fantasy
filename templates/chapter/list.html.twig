@@ -16,6 +16,9 @@
                                     <div class="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
                                         <p class="truncate">{{ chapter.content }}</p>
                                     </div>
+                                    {% if is_granted(constant('App\\Security\\Voter\\ChapterVoter::EDIT'), chapter) %}
+                                        <a href="{{ path('app_chapter_show', { id: chapter.id }) }}">view</a>
+                                    {% endif %}
                                 </div>
                             </li>
                         </ul>
