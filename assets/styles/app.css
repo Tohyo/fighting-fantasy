@@ -36,6 +36,10 @@
     background-color: rgb(9 14 52);
   }
 
+  .light-dark {
+    background-color: rgb(29 33 68);
+  }
+
   .container {
     width: 100%;
     margin-right: auto;

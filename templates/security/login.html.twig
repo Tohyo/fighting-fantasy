@@ -1,50 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log In!
+{% block title %}
+    Log In!
 {% endblock %}
 
 {% block body %}
-    <div class="grid grid-cols-1 gap-4 lg:col-span-2">
-        <section aria-labelledby="section-1-title">
-            <h2 class="sr-only" id="section-1-title">Section title</h2>
-            <div class="overflow-hidden rounded-lg bg-white shadow">
-                <div class="p-6">
-                    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-                        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-                            <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
-                        </div>
-                        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                            <form method="post" action={{ path('app_login') }} class="row g-3">
-                                {% if error %}
-                                    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                                {% endif %}
+    <section class="relative z-10 overflow-hidden pt-36 pb-16 md:pb-20 lg:pt-[180px] lg:pb-28">
+        <div class="container">
+            <div class="-mx-4 flex flex-wrap">
+                <div class="w-full px-4">
+                    <div class="mx-auto max-w-[500px] rounded-md light-dark bg-opacity-5 py-10 px-6 dark:bg-dark sm:p-[60px]">
+                        <h3 class="mb-3 text-center text-2xl font-bold dark:text-white sm:text-3xl">Sign in to your account</h3>
+                        <form method="post" action={{ path('app_login') }} data-bitwarden-watching="1">
+                            {% if error %}
+                                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
 
-                                <div>
-                                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
-                                    <div class="mt-2">
-                                        <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    </div>
-                                </div>
+                            <div class="mb-8">
+                                <label for="email" class="mb-3 block text-sm font-medium text-dark dark:text-white">Your Email</label><input id="email" type="email" name="email" placeholder="Enter your Email" class="w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"></div>
+                            <div class="mb-8">
+                                <label for="password" class="mb-3 block text-sm font-medium text-dark dark:text-white">Your Password</label><input id="password" type="password" name="password" placeholder="Enter your Password" class="w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"></div>
 
-                                <div>
-                                    <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-                                    <div class="mt-2">
-                                        <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    </div>
-                                </div>
-
-                                <div class="mt-2">
-                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                                </div>
-
-                                <div>
-                                    <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
-                                </div>
-                            </form>
-                        </div>
+                            <div class="mt-2">
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            </div>
+                            <div class="mb-6">
+                                <button class="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">Sign in</button>
+                            </div>
+                        </form>
+                        <p class="text-center text-base font-medium text-body-color">Don’t you have an account?<a class="text-primary hover:underline" href="{{ path('app_register') }}">Sign up</a>
+                        </p>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 {% endblock %}
