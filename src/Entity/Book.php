@@ -3,11 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\BookRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Slug;
+use Gedmo\Mapping\Annotation\Timestampable;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 #[ORM\Index(columns: ['slug'], flags: ['fulltext'])]
@@ -38,6 +40,14 @@ class Book
     #[ORM\ManyToOne(inversedBy: 'books')]
     #[ORM\JoinColumn(nullable: false)]
     public User $creator;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Timestampable(on: "create")]
+    public DateTime $createdAt;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Timestampable(on: "create")]
+    public DateTime $updatedAt;
 
     public function __construct()
     {
