@@ -223,4 +223,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return trim(sprintf('%s %s', $this->firstname, $this->lastname));
     }
+
+    /**
+     * @return Adventure[]
+     */
+    public function getActiveAdventures(): array
+    {
+        $adventures = [];
+
+        foreach ($this->adventures as $adventure) {
+            if ($adventure->book->published) {
+                $adventures[] = $adventure;
+            }
+        }
+
+        return $adventures;
+    }
 }

@@ -2,17 +2,14 @@
 
 namespace App\Controller;
 
-use App\Repository\BookRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AppAbstractController
 {
     #[Route('/', name: 'app_home', methods: ['GET'])]
-    public function index(BookRepository $bookRepository): Response
+    public function index(): Response
     {
-        return $this->render('home/index.html.twig', [
-            'books' => $bookRepository->findAll(),
-        ]);
+        return $this->render('home/index.html.twig');
     }
 }

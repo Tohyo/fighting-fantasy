@@ -25,6 +25,7 @@ class AppFixtures extends Fixture
 
         BookFactory::createOne([
             'creator' => UserFactory::find(['email' => 'kevin@admin.com']),
+            'published' => true
         ]);
 
         ChapterFactory::createSequence(

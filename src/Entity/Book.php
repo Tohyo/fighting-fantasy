@@ -49,6 +49,9 @@ class Book
     #[Timestampable(on: "create")]
     public DateTime $updatedAt;
 
+    #[ORM\Column]
+    public bool $published = false;
+
     public function __construct()
     {
         $this->id = uuid_create(UUID_TYPE_RANDOM);

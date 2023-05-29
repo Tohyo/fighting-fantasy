@@ -63,10 +63,8 @@ class BookController extends AppAbstractController
     #[Route('/book/list', name: 'app_book_list', methods: ['GET'])]
     public function list(BookRepository $bookRepository): Response
     {
-        $books = $bookRepository->findAll();
-
         return $this->render('book/list.html.twig', [
-            'books' => $books,
+            'books' => $bookRepository->findBy(['published' => true]),
         ]);
     }
 

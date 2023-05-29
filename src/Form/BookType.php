@@ -15,6 +15,7 @@ class BookType extends AbstractType
         $builder
             ->add('title')
             ->add('description', TextareaType::class)
+            ->add('published')
         ;
     }
 

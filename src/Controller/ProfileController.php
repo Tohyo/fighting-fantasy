@@ -31,7 +31,7 @@ class ProfileController extends AppAbstractController
     public function getUserAdventures(#[CurrentUser] UserInterface $user): Response
     {
         return $this->render('profile/_adventures.html.twig', [
-            'adventures' => $user->getAdventures(),
+            'adventures' => $user->getActiveAdventures(),
         ]);
     }
 }
