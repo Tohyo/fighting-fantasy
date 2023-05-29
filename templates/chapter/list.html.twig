@@ -1,30 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="grid grid-cols-1 gap-4 lg:col-span-2">
-        <section aria-labelledby="section-1-title">
-            <h2 class="sr-only" id="section-1-title">Section title</h2>
-            <div class="overflow-hidden rounded-lg bg-white shadow">
-                <div class="p-6">
+    <section class="pt-[120px] pb-[120px]">
+        <div class="container">
+            <div class="-mx-4 flex flex-wrap light-dark w-full">
+                <ul class="p-8">
                     {% for chapter in chapters %}
-                        <ul role="list" class="divide-y divide-gray-100">
-                            <li class="flex items-center justify-between gap-x-6 py-5">
-                                <div class="min-w-0">
+                        <li class="mb-6 border-b border-body-color border-opacity-10 pb-6 border-white">
+                            <div class="flex items-center lg:block xl:flex">
+                                <div class="w-full">
                                     <div class="flex items-start gap-x-3">
-                                        <p class="text-sm font-semibold leading-6 text-gray-900">{{ chapter.number }}</p>
+                                        <p class="text-sm font-semibold leading-6 ">{{ chapter.number }}</p>
                                     </div>
                                     <div class="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
                                         <p class="truncate">{{ chapter.content }}</p>
                                     </div>
                                     {% if is_granted(constant('App\\Security\\Voter\\ChapterVoter::EDIT'), chapter) %}
-                                        <a href="{{ path('app_chapter_show', { id: chapter.id }) }}">view</a>
+                                        <a class="inline-flex items-center justify-center rounded-full bg-primary py-2 px-4 text-sm font-semibold text-white" href="{{ path('app_chapter_show', { id: chapter.id }) }}">view</a>
                                     {% endif %}
                                 </div>
-                            </li>
-                        </ul>
+                            </div>
+                        </li>
                     {% endfor %}
-                </div>
+                </ul>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 {% endblock %}
