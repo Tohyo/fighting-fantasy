@@ -15,7 +15,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class AdventureController extends AppAbstractController
 {
-    #[Route('/adventure/{slug}', name: 'app_adventure')]
+    #[Route('/adventure/{slug}', name: 'app_adventure', methods: ['GET'])]
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
     public function getAdventure(
         Book $book,

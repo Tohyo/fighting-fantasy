@@ -12,7 +12,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class ProfileController extends AppAbstractController
 {
     #[IsGranted("IS_AUTHENTICATED_REMEMBERED")]
-    #[Route('/profile', name: 'app_profile')]
+    #[Route('/profile', name: 'app_profile', methods: ['GET'])]
     public function index(#[CurrentUser] UserInterface $user): Response
     {
         return $this->render('profile/index.html.twig', [
@@ -21,7 +21,7 @@ class ProfileController extends AppAbstractController
     }
 
     #[IsGranted("IS_AUTHENTICATED_REMEMBERED")]
-    #[Route('/profile/books', name: 'app_books_profile')]
+    #[Route('/profile/books', name: 'app_books_profile', methods: ['GET'])]
     public function getUserBooks(
         BookRepository $bookRepository,
         #[CurrentUser] UserInterface $user

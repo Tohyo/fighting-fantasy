@@ -18,7 +18,7 @@ use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 class ChapterController extends AppAbstractController
 {
-    #[Route('/chapter/create/{id}', name: 'app_chapter_create')]
+    #[Route('/chapter/create/{id}', name: 'app_chapter_create', methods: ['GET', 'POST'])]
     public function create(
         Request $request,
         Book $book,
@@ -46,7 +46,7 @@ class ChapterController extends AppAbstractController
         ]);
     }
 
-    #[Route('/chapter/edit/{id}', name: 'app_chapter_edit')]
+    #[Route('/chapter/edit/{id}', name: 'app_chapter_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,
         Chapter $chapter,
@@ -93,7 +93,7 @@ class ChapterController extends AppAbstractController
         ]);
     }
 
-    #[Route('/chapter/list/{id}', name: 'app_chapter_list')]
+    #[Route('/chapter/list/{id}', name: 'app_chapter_list', methods: ['GET'])]
     public function list(Book $book): Response
     {
         $this->denyAccessUnlessGranted(BookVoter::VIEW, $book);
@@ -104,7 +104,7 @@ class ChapterController extends AppAbstractController
         ]);
     }
 
-    #[Route('/chapter/{slug}/{number}', name: 'app_chapter')]
+    #[Route('/chapter/{slug}/{number}', name: 'app_chapter', methods: ['GET'])]
     public function getChapter(
         Book $book,
         int $number,

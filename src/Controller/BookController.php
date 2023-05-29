@@ -16,7 +16,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class BookController extends AppAbstractController
 {
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
-    #[Route('/book/create', name: 'app_book_create')]
+    #[Route('/book/create', name: 'app_book_create', methods: ['GET', 'POST'])]
     public function create(
         Request $request,
         BookRepository $bookRepository,
@@ -40,7 +40,7 @@ class BookController extends AppAbstractController
         ]);
     }
 
-    #[Route('/book/edit/{id}',  name: 'app_book_edit')]
+    #[Route('/book/edit/{id}',  name: 'app_book_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Book $book, BookRepository $bookRepository): Response
     {
         $this->denyAccessUnlessGranted(BookVoter::EDIT, $book);
@@ -60,7 +60,7 @@ class BookController extends AppAbstractController
         ]);
     }
 
-    #[Route('/book/list', name: 'app_book_list')]
+    #[Route('/book/list', name: 'app_book_list', methods: ['GET'])]
     public function list(BookRepository $bookRepository): Response
     {
         $books = $bookRepository->findAll();
@@ -70,7 +70,7 @@ class BookController extends AppAbstractController
         ]);
     }
 
-    #[Route('/book/{slug}', name: 'app_book')]
+    #[Route('/book/{slug}', name: 'app_book', methods: ['GET'])]
     public function show(Book $book): Response
     {
         return $this->render('book/show.html.twig', [
