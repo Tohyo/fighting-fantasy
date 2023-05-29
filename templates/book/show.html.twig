@@ -1,25 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {# <div class="grid grid-cols-1 gap-4 lg:col-span-2">
-                <section aria-labelledby="section-1-title">
-                    <h2 class="sr-only" id="section-1-title">Section title</h2>
-                    <div class="overflow-hidden rounded-lg bg-white shadow">
-                        <div class="p-6">
-                            {{ book.title }}
-                            {{ book.description }}
-
-                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                <a href="{{ path('app_adventure', { slug: book.slug }) }}">Commencer l'aventure</a>
-                            {% endif %}
-                        </div>
-                    </div>
-
-                    {% if is_granted(constant('App\\Security\\Voter\\BookVoter::EDIT'), book) %}
-                        <a href="{{ path('app_book_edit', { id: book.id }) }}">Edit</a>
-                    {% endif %}
-                </section>
-            </div> #}
     <section class="pt-[150px] pb-[120px]">
         <div class="container">
             <div class="-mx-4 flex flex-wrap justify-center">
