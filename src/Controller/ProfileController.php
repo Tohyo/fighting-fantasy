@@ -13,21 +13,25 @@ class ProfileController extends AppAbstractController
 {
     #[IsGranted("IS_AUTHENTICATED_REMEMBERED")]
     #[Route('/profile', name: 'app_profile', methods: ['GET'])]
-    public function index(#[CurrentUser] UserInterface $user): Response
+    public function index(): Response
     {
-        return $this->render('profile/index.html.twig', [
-            'adventures' => $user->getAdventures(),
+        return $this->render('profile/index.html.twig');
+    }
+
+    #[IsGranted("IS_AUTHENTICATED_REMEMBERED")]
+    #[Route('/profile/books', name: 'app_profile_books', methods: ['GET'])]
+    public function getUserBooks(BookRepository $bookRepository, #[CurrentUser] UserInterface $user): Response {
+        return $this->render('profile/_books.html.twig', [
+            'books' => $bookRepository->findBy(['creator' => $user])
         ]);
     }
 
     #[IsGranted("IS_AUTHENTICATED_REMEMBERED")]
-    #[Route('/profile/books', name: 'app_books_profile', methods: ['GET'])]
-    public function getUserBooks(
-        BookRepository $bookRepository,
-        #[CurrentUser] UserInterface $user
-    ): Response {
-        return $this->render('profile/books.html.twig', [
-            'books' => $bookRepository->findBy(['creator' => $user])
+    #[Route('/profile/adventures', name: 'app_profile_adventures', methods: ['GET'])]
+    public function getUserAdventures(#[CurrentUser] UserInterface $user): Response
+    {
+        return $this->render('profile/_adventures.html.twig', [
+            'adventures' => $user->getAdventures(),
         ]);
     }
 }

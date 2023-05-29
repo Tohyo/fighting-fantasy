@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <turbo-frame id="profile">
+        <a
+            class="inline-flex items-center justify-center rounded-full bg-primary py-2 px-4 text-sm font-semibold text-white"
+            href="{{ path('app_profile_books') }}"
+        >
+            View your books
+        </a>
+        {% for adventure in adventures %}
+            <li class="mb-6 border-b border-body-color border-opacity-10 pb-6 border-white">
+                <div class="flex items-center lg:block xl:flex">
+                    <div class="w-full">
+                        <h4>{{ adventure.book.title }}
+                            <a href="{{ path('app_adventure', { slug: adventure.book.slug }) }}" class="inline-flex items-center justify-center rounded-full bg-primary py-2 px-4 text-sm font-semibold text-white">
+                                Continue
+                            </a>
+                        </h4>
+                        <h5>
+                            <a class="mb-[6px] block text-base font-medium leading-snug hover:text-primary text-white hover:text-primary" href="#">{{ adventure.book.description }}.</a>
+                        </h5>
+                        <p class="text-xs font-medium text-body-color">{{ adventure.book.createdAt|date('d-m-Y') }}</p>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </turbo-frame>
+{% endblock %}
