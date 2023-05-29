@@ -1,17 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register
+{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <section class="relative z-10 overflow-hidden pt-36 pb-16 md:pb-20 lg:pt-[180px] lg:pb-28">
+        <div class="container">
+            <div class="-mx-4 flex flex-wrap">
+                <div class="w-full px-4">
+                    <div class="mx-auto max-w-[500px] rounded-md  bg-opacity-5 py-10 px-6 light-dark sm:p-[60px]">
+                        <h3 class="mb-3 text-center text-2xl font-bol text-white sm:text-3xl">Create your account</h3>
+                        {{ form_start(registrationForm) }}
+                            <div class="mb-8">
+                                {{ form_label(registrationForm.email, '', { 'attr': { 'class': 'mb-3 block text-sm font-medium text-white' }}) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+                                {{ form_widget(registrationForm.email, { 'attr': { 'class': 'w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none bg-[#242B51] shadow-signUp' } }) }}
+                            </div>
+                            <div class="mb-8">
+                                {{ form_label(registrationForm.plainPassword, 'Password', { 'attr': { 'class': 'mb-3 block text-sm font-medium text-white' } }) }}
+                                {{ form_widget(registrationForm.plainPassword, { 'attr': { 'class': 'w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none bg-[#242B51] shadow-signUp' } }) }}
+                            </div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                            <div class="mb-8 flex">
+                                {{ form_widget(registrationForm.agreeTerms, { 'attr': {
+                                    'class': 'box mr-4 mt-1 flex h-5 w-5 items-center justify-center rounded border border-body-color border-white border-opacity-10'
+                                } }) }}
+                                {{ form_label(registrationForm.agreeTerms, 'creating account means you agree to Terms and Conditions', {
+                                    'attr': {
+                                        'class': 'flex cursor-pointer select-none text-sm font-medium text-body-color'
+                                    }
+                                }) }}
+                            </div>
+                            <div class="mb-6">
+                                <button type="submit" class="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">Sign up</button>
+                            </div>
+                        {{ form_end(registrationForm) }}
+                        <p class="text-center text-base font-medium text-body-color">Already have a account? <a class="text-primary hover:underline" href="{{ path('app_login') }}">Sign in</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

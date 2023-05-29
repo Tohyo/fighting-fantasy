@@ -47,7 +47,7 @@ class RegistrationController extends AppAbstractController
         }
 
         return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
+            'registrationForm' => $form,
         ]);
     }
 }
