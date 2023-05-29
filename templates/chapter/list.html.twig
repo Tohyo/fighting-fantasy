@@ -4,6 +4,9 @@
     <section class="pt-[120px] pb-[120px]">
         <div class="container">
             <div class="-mx-4 flex flex-wrap light-dark w-full">
+                <a class="w-full inline-flex items-center justify-center rounded-full bg-primary py-2 px-4 text-sm font-semibold text-white" href="{{ path('app_chapter_create', { id: book.id }) }}">
+                    Add a chapter
+                </a>
                 <ul class="p-8">
                     {% for chapter in chapters %}
                         <li class="mb-6 border-b border-body-color border-opacity-10 pb-6 border-white">

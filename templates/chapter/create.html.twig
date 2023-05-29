@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="pt-[120px] pb-[120px]">
+        <div class="container">
+            <div class="-mx-4 flex flex-wrap light-dark w-full justify-center items-center">
+                <div class="w-full m-4">
+                    <h1 class="text-4xl font-bold text-center mb-8">Create a new Chapter</h1>
+                </div>
+                {{ form_start(form, { 'action': path('app_chapter_create', { id: chapter.book.id }) }) }}
+                    <div class="mb-8">
+                        {{ form_label(form.number, '', { 'attr': { 'class': 'mb-3 block text-sm font-medium text-white' }}) }}
+
+                        {{ form_widget(form.number, { 'attr': { 'class': 'w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none bg-[#242B51] shadow-signUp' } }) }}
+                    </div>
+
+                    <div class="mb-8">
+                        {{ form_label(form.content, '', { 'attr': { 'class': 'mb-3 block text-sm font-medium text-white' }}) }}
+
+                        {{ form_widget(form.content, { 'attr': { 'class': 'w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none bg-[#242B51] shadow-signUp' } }) }}
+                    </div>
+
+                    {{ form_widget(form.book, { 'attr': { 'class': 'hidden' } }) }}
+
+                    <button type="submit" class="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp mb-8">Save</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </section>
+{% endblock %}

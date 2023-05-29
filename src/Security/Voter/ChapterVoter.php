@@ -11,13 +11,14 @@ class ChapterVoter extends Voter
 {
     public const VIEW = 'CHAPTER_VIEW';
     public const EDIT = 'CHAPTER_EDIT';
+    public const CREATE = 'CHAPTER_CREATE';
     public const ADVENTURE = 'ADVENTURE_CHAPTER_VIEW';
 
     protected function supports(string $attribute, mixed $subject): bool
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, [self::VIEW, self::EDIT, self::ADVENTURE])
+        return in_array($attribute, [self::VIEW, self::EDIT, self::ADVENTURE, self::CREATE])
             && $subject instanceof \App\Entity\Chapter;
     }
 
@@ -36,6 +37,7 @@ class ChapterVoter extends Voter
         return match ($attribute) {
             self::ADVENTURE => $this->hasActiveAdventure($user, $subject),
             self::EDIT => $user === $subject->book->creator,
+            self::CREATE => $user === $subject->book->creator,
             self::VIEW => $user === $subject->book->creator,
             default => false,
         };

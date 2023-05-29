@@ -18,6 +18,35 @@ use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 class ChapterController extends AppAbstractController
 {
+    #[Route('/chapter/create/{id}', name: 'app_chapter_create')]
+    public function create(
+        Request $request,
+        Book $book,
+        ChapterRepository $chapterRepository
+    ): Response {
+        $chapter = new Chapter();
+        $chapter->book = $book;
+
+        $this->denyAccessUnlessGranted(ChapterVoter::CREATE, $chapter);
+
+        $form = $this->createForm(ChapterType::class, $chapter);
+
+        // dd($chapter, $book);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $chapterRepository->save($chapter, true);
+
+            return $this->redirectToRoute('app_chapter_show', [
+                'id' => $chapter->id
+            ]);
+        }
+
+        return $this->render('chapter/create.html.twig', [
+            'chapter' => $chapter,
+            'form' => $form,
+        ]);
+    }
+
     #[Route('/chapter/edit/{id}', name: 'app_chapter_edit')]
     public function edit(
         Request $request,
@@ -59,7 +88,8 @@ class ChapterController extends AppAbstractController
         $this->denyAccessUnlessGranted(BookVoter::VIEW, $book);
 
         return $this->render('chapter/list.html.twig', [
-            'chapters' => $book->chapters
+            'chapters' => $book->chapters,
+            'book' => $book,
         ]);
     }
 

@@ -16,7 +16,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class BookController extends AppAbstractController
 {
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
-    #[Route('/book/create')]
+    #[Route('/book/create', name: 'app_book_create')]
     public function create(
         Request $request,
         BookRepository $bookRepository,

@@ -9,8 +9,8 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class BookVoter extends Voter
 {
-    public const EDIT = 'POST_EDIT';
-    public const VIEW = 'POST_VIEW';
+    public const EDIT = 'BOOK_EDIT';
+    public const VIEW = 'BOOK_VIEW';
 
     protected function supports(string $attribute, mixed $subject): bool
     {
