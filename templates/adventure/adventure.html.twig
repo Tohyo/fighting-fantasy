@@ -1,39 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-    <div class="grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8">
-        <div class="grid grid-cols-1 gap-4 lg:col-span-2">
-            <section aria-labelledby="section-1-title">
-                <h2 class="sr-only" id="section-1-title">Section title</h2>
-                <div class="overflow-hidden rounded-lg bg-white shadow">
-                    <div class="p-6">
+    <section class="overflow-hidden py-16 md:py-20 lg:py-28">
+        <div class="container">
+            <div class="-mx-4 flex flex-wrap">
+                <div class="w-full px-4 lg:w-7/12 xl:w-8/12">
+                    <div class="wow fadeInUp mb-12 rounded-md  py-11 px-8 light-dark sm:p-[55px] lg:mb-5 lg:px-8 xl:p-[55px]" data-wow-delay=".15s ">
                         <turbo-frame id="chapter-content" src={{ path('app_chapter', { slug: adventure.book.slug, number: adventure.chapter.number } ) }}></turbo-frame>
                     </div>
                 </div>
-            </section>
-        </div>
-        <div class="grid grid-cols-1 gap-4">
-            <section aria-labelledby="section-2-title">
-                <h2 class="sr-only" id="section-2-title">Section title</h2>
-                <div class="overflow-hidden rounded-lg bg-white shadow">
-                    <div class="p-6">
-                        <div>
-                            <div class="grid grid-cols-3 gap-4">
-                                {{ component('skill', { adventureSheet: adventure.adventureSheet }) }}
-                                {{ component('stamina', { adventureSheet: adventure.adventureSheet }) }}
-                                {{ component('luck', { adventureSheet: adventure.adventureSheet }) }}
-                                {{ component('inventory', { adventureSheet: adventure.adventureSheet }) }}
-                                <div class="border border-black">
-                                    Gold
-                                </div>
-                                <div class="border border-black">
-                                    Provisions
-                                </div>
+                <div class="w-full px-4 lg:w-5/12 xl:w-4/12">
+                    <div class="wow fadeInUp relative z-10 rounded-md p-8 light-dark sm:p-11 lg:p-8 xl:p-11" data-wow-delay=".2s">
+                        <h3 class="mb-4 text-2xl font-bold leading-tight text-white">Inventory</h3>
+                        <div class="grid grid-cols-3 gap-4">
+                            {{ component('skill', { adventureSheet: adventure.adventureSheet }) }}
+                            {{ component('stamina', { adventureSheet: adventure.adventureSheet }) }}
+                            {{ component('luck', { adventureSheet: adventure.adventureSheet }) }}
+                            {{ component('inventory', { adventureSheet: adventure.adventureSheet }) }}
+                            <div class="border border-black">
+                                Gold
+                            </div>
+                            <div class="border border-black">
+                                Provisions
                             </div>
                         </div>
+
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
-    {% endblock %}
+    </section>
+{% endblock %}
