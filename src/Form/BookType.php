@@ -3,8 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Book;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,7 +14,7 @@ class BookType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('description', TextareaType::class)
+            ->add('description', CKEditorType::class)
             ->add('published')
         ;
     }
