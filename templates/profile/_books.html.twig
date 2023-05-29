@@ -10,6 +10,7 @@
         >
             View adventures
         </a>
+        <ul class="p-8">
         {% for book in books %}
             <li class="mb-6 border-b border-body-color border-opacity-10 pb-6 border-white">
                 <div class="flex items-center lg:block xl:flex">
@@ -20,10 +21,17 @@
                         <div class="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
                             <p class="truncate">{{ book.description }}</p>
                         </div>
-                        <a class="inline-flex items-center justify-center rounded-full bg-primary py-2 px-4 text-sm font-semibold text-white" href="{{ path('app_chapter_list', { id: book.id }) }}">See chapters</a>
+                        <a
+                            class="inline-flex items-center justify-center rounded-full bg-primary py-2 px-4 text-sm font-semibold text-white"
+                            href="{{ path('app_chapter_list', { id: book.id }) }}"
+                            target="_top"
+                        >
+                            See chapters
+                        </a>
                     </div>
                 </div>
             </li>
         {% endfor %}
+        </ul>
     </turbo-frame>
 {% endblock %}
