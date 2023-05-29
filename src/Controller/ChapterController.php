@@ -31,7 +31,6 @@ class ChapterController extends AppAbstractController
 
         $form = $this->createForm(ChapterType::class, $chapter);
 
-        // dd($chapter, $book);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $chapterRepository->save($chapter, true);
@@ -72,13 +71,25 @@ class ChapterController extends AppAbstractController
         ]);
     }
 
-    #[Route('/chapter/{id}', name: 'app_chapter_show')]
+    #[Route('/chapter/{id}', name: 'app_chapter_show', methods: ['GET'])]
     public function show(Chapter $chapter): Response
     {
         $this->denyAccessUnlessGranted(ChapterVoter::VIEW, $chapter);
 
         return $this->render('chapter/show.html.twig', [
             'chapter' => $chapter,
+        ]);
+    }
+
+    #[Route('/chapter/{id}', name: 'app_chapter_delete', methods: ['DELETE'])]
+    public function delete(Chapter $chapter, ChapterRepository $chapterRepository): Response
+    {
+        $this->denyAccessUnlessGranted(ChapterVoter::DELETE, $chapter);
+
+        $chapterRepository->remove($chapter, true);
+
+        return $this->redirectToRoute('app_chapter_list', [
+            'id' => $chapter->book->id,
         ]);
     }
 
