@@ -1,7 +1,7 @@
 <div{{attributes}} class="border border-white p-2">
-    Initial Skill:
-    {{ adventureSheet.initialSkill }}<br>
-    <div class="flex justify-center">Skill:</div>
+    <div class="flex justify-center">Skill</div>
+    Initial: {{ adventureSheet.initialSkill }}
+    <div class="flex">Current:</div>
     <div class="flex justify-center items-center py-4">
         <button type="button" class="btn btn-secondary" data-action="live#action" data-action-name="saveSkill(direction=down)">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

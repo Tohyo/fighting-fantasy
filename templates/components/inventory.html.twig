@@ -1,13 +1,19 @@
-<div {{ attributes }} class="border border-black col-span-2 row-span-2">
-    Equipment List
+<div {{ attributes }} class="border border-white p-2 col-span-2 row-span-2">
+    <div class="flex justify-center">
+        Equipment
+        {% if not isAdding %}
+            <button type="button" class="btn btn-secondary ml-2" data-action="live#action" data-action-name="addItem">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+                </svg>
+
+            </button>
+        {% endif %}
+    </div>
     {% for item in adventureSheet.inventory %}
         {{ component('removeItemFromInventory', { adventureSheet, item }) }}
     {% endfor %}
     {% if isAdding %}
         {{ component('addItemToInventory', { adventureSheet }) }}
-    {% else %}
-        <button type="button" class="btn btn-secondary" data-action="live#action" data-action-name="addItem">
-            add item
-        </button>
     {% endif %}
 </div>

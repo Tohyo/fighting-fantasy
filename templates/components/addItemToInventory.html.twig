@@ -1,9 +1,7 @@
 <form {{ attributes }} class="row g-3">
-    <div class="input-group mb-3 col">
-        <div class="form-floating">
-            <input type="text" data-model="item" class="form-control form-control-lg" autofocus />
-        </div>
-
-        <button data-action="live#action" data-action-name="prevent|saveItem" class="btn btn-outline btn-outline-secondary">Save</button>
+    <div class="mb-2">
+        <input type="text" data-model="item" class="w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp" autofocus/>
     </div>
+
+    <button data-action="live#action" data-action-name="prevent|saveItem" class="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">Save</button>
 </form>
