@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Chapter;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,7 +15,6 @@ class ChapterType extends AbstractType
             ->add('content')
             ->add('number')
             ->add('book')
-            ->add('save', SubmitType::class)
         ;
     }
 

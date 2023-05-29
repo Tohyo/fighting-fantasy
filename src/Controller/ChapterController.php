@@ -32,8 +32,8 @@ class ChapterController extends AppAbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $chapterRepository->save($chapter, true);
 
-            return $this->redirectToRoute('app_chapter_list', [
-                'id' => $chapter->book->id
+            return $this->redirectToRoute('app_chapter_show', [
+                'id' => $chapter->id
             ]);
         }
 

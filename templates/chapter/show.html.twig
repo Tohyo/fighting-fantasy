@@ -1,19 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="grid grid-cols-1 gap-4 lg:col-span-2">
-        <section aria-labelledby="section-1-title">
-            <h2 class="sr-only" id="section-1-title">Section title</h2>
-            <div class="overflow-hidden rounded-lg bg-white shadow">
-                <div class="p-6">
-                    {{ chapter.number }}
-                    {{ chapter.content }}
+    <section class="pt-[150px] pb-[120px]">
+        <div class="container">
+            <div class="-mx-4 flex flex-wrap justify-center light-dark">
+                <div class="p-8 w-full px-4 lg:w-8/12">
+                    <div>
+                        <h2 class="mb-8 text-3xl font-bold leading-tight text-white sm:text-4xl sm:leading-tight">{{ chapter.number }}</h2>
+                    </div>
+                    <div>
+                        <p class="mb-10 text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">{{ chapter.content }}</p>
+                    </div>
+                    {% if is_granted(constant('App\\Security\\Voter\\ChapterVoter::EDIT'), chapter) %}
+                        <a class="inline-flex items-center justify-center rounded-full bg-primary py-2 px-4 text-sm font-semibold text-white" href="{{ path('app_chapter_edit', { id: chapter.id }) }}">edit</a>
+                    {% endif %}
                 </div>
-            </div>
-
-            {% if is_granted(constant('App\\Security\\Voter\\ChapterVoter::EDIT'), chapter) %}
-                <a href="{{ path('app_chapter_edit', { id: chapter.id }) }}">edit</a>
-            {% endif %}
-        </section>
-    </div>
+            </div
+        </div>
+    </section>
 {% endblock %}
