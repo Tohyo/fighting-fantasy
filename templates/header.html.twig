@@ -6,11 +6,6 @@
             </div>
             <div class="flex w-full items-center justify-between px-4">
                 <div>
-                    <button id="navbarToggler" aria-label="Mobile Menu" class="absolute right-4 top-1/2 block translate-y-[-50%] rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden">
-                        <span class="relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white  "></span>
-                        <span class="relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white  "></span>
-                        <span class="relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white  "></span>
-                    </button>
                     <nav id="navbarCollapse" class="navbar absolute right-0 z-30 w-[250px] rounded border-[.5px] border-body-color/50 bg-white py-4 px-6 duration-300 dark:border-body-color/20 dark:bg-dark lg:visible lg:static lg:w-auto lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100 invisible top-[120%] opacity-0">
                         <ul class="block lg:flex lg:space-x-12">
                             <li class="group relative">
@@ -19,11 +14,6 @@
                             <li class="group relative">
                                 <a class="flex py-2 text-base text-dark group-hover:opacity-70 dark:text-white lg:mr-0 lg:inline-flex lg:py-6 lg:px-0" href="{{ path('app_book_list') }}">Books</a>
                             </li>
-                            <li class="group relative">
-                                <a class="flex py-2 text-base text-dark group-hover:opacity-70 dark:text-white lg:mr-0 lg:inline-flex lg:py-6 lg:px-0" href="/blog">Blog</a>
-                            </li>
-                            <li class="group relative">
-                                <a class="flex py-2 text-base text-dark group-hover:opacity-70 dark:text-white lg:mr-0 lg:inline-flex lg:py-6 lg:px-0" href="/contact">Support</a>
                             </li>
                         </ul>
                     </nav>
@@ -33,7 +23,6 @@
                         <a class="hidden py-3 px-7 text-base font-bold text-dark hover:opacity-70 dark:text-white md:block" href="{{ path('app_profile') }}">Profile</a>
                         <a class="hidden py-3 px-7 text-base font-bold text-dark hover:opacity-70 dark:text-white md:block" href="{{ path('app_logout') }}">Log out</a>
                     {% else %}
-
                         <a class="hidden py-3 px-7 text-base font-bold text-dark hover:opacity-70 dark:text-white md:block" href="{{ path('app_login') }}">Sign In</a>
                         <a class="ease-in-up hidden rounded-md bg-primary py-3 px-8 text-base font-bold text-white transition duration-300 hover:bg-opacity-90 hover:shadow-signUp md:block md:px-9 lg:px-6 xl:px-9" href="{{ path('app_register') }}">Sign Up</a>
                     {% endif %}
