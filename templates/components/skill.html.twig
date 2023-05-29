@@ -1,12 +1,18 @@
-<div{{attributes}} class="border border-black">
-    Skill<br>
+<div{{attributes}} class="border border-white p-2">
     Initial Skill:
     {{ adventureSheet.initialSkill }}<br>
-    <button type="button" class="btn btn-secondary" data-action="live#action" data-action-name="saveSkill(direction=down)">
-        down skill
-    </button>
-    {{ adventureSheet.skill }}
-    <button type="button" class="btn btn-secondary" data-action="live#action" data-action-name="saveSkill(direction=up)">
-        up skill
-    </button>
+    <div class="flex justify-center">Skill:</div>
+    <div class="flex justify-center items-center py-4">
+        <button type="button" class="btn btn-secondary" data-action="live#action" data-action-name="saveSkill(direction=down)">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m0 0l6.75-6.75M12 19.5l-6.75-6.75" />
+            </svg>
+        </button>
+        {{ adventureSheet.skill }}
+        <button type="button" class="btn btn-secondary" data-action="live#action" data-action-name="saveSkill(direction=up)">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 19.5v-15m0 0l-6.75 6.75M12 4.5l6.75 6.75" />
+            </svg>
+        </button>
+    </div>
 </div>
