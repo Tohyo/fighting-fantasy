@@ -34,16 +34,10 @@
                                 </div>
                             </div>
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                <div class="mb-5">
-                                    <a class="inline-flex items-center justify-center rounded-full bg-primary py-2 px-4 text-sm font-semibold text-white" href="{{ path('app_adventure', { slug: book.slug }) }}">Commencer l'aventure</a>
+                                <div class="flex w-full justify-center">
+                                    <a class="w-3/4 text-center rounded-full bg-primary py-2 px-4 text-sm font-semibold text-white" href="{{ path('app_adventure', { slug: book.slug }) }}">Begin</a>
                                 </div>
                             {% endif %}
-                            {% if is_granted(constant('App\\Security\\Voter\\BookVoter::EDIT'), book) %}
-                                <div class="mb-5">
-                                    <a href="{{ path('app_book_edit', { id: book.id }) }}" class="inline-flex items-center justify-center rounded-full bg-primary py-2 px-4 text-sm font-semibold text-white">Edit</a>
-                                </div>
-                            {% endif %}
-
                         </div>
                         <div>
                             <p class="mb-10 text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">{{ book.description|raw }}</p>
