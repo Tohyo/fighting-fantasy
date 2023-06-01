@@ -26,7 +26,7 @@
                                         </div>
                                     </div>
                                     <div class="inline-block">
-                                        <h4 class="mb-1 text-sm font-medium text-dark dark:text-white">Date</h4>
+                                        <h4 class="mb-1 text-sm font-medium text-white">Date</h4>
                                         <p class="text-xs text-body-color">{{ book.createdAt|date('d-m-Y') }}</p>
                                     </div>
                                 </div>
@@ -35,36 +35,7 @@
                     </div>
                 {% endfor %}
             </div>
-            <div class="navigation">
-                {{ knp_pagination_render(pagination) }}
-            </div>
-            {# <div class="wow fadeInUp -mx-4 flex flex-wrap" data-wow-delay=".15s">
-                <div class="w-full px-4">
-                    <ul class="flex items-center justify-center pt-8">
-                        <li class="mx-1">
-                            <a href="#0" class="flex h-9 min-w-[36px] items-center justify-center rounded-md bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white">Prev</a>
-                        </li>
-                        <li class="mx-1">
-                            <a href="#0" class="flex h-9 min-w-[36px] items-center justify-center rounded-md bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white">1</a>
-                        </li>
-                        <li class="mx-1">
-                            <a href="#0" class="flex h-9 min-w-[36px] items-center justify-center rounded-md bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white">2</a>
-                        </li>
-                        <li class="mx-1">
-                            <a href="#0" class="flex h-9 min-w-[36px] items-center justify-center rounded-md bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white">3</a>
-                        </li>
-                        <li class="mx-1">
-                            <a class="flex h-9 min-w-[36px] cursor-not-allowed items-center justify-center rounded-md bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color">...</a>
-                        </li>
-                        <li class="mx-1">
-                            <a href="#0" class="flex h-9 min-w-[36px] items-center justify-center rounded-md bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white">12</a>
-                        </li>
-                        <li class="mx-1">
-                            <a href="#0" class="flex h-9 min-w-[36px] items-center justify-center rounded-md bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white">Next</a>
-                        </li>
-                    </ul>
-                </div>
-            </div> #}
+            <div>{{ knp_pagination_render(pagination) }}</div>
         </div>
     </section>
 {% endblock %}
