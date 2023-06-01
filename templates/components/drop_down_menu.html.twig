@@ -1,0 +1,30 @@
+<div{{attributes}} class="relative inline-block text-left">
+    <div>
+        <button
+            data-action="live#action"
+            data-action-name="toogle"
+            type="button"
+            class="flex w-full items-center justify-center rounded-md bg-primary py-4 px-6 text-base font-medium text-white"
+        >
+            actions
+        </button>
+    </div>
+
+    {% if open %}
+        <div
+            class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+        >
+            <div class="py-1" role="none">
+                {% for item in items %}
+                    <a
+                        href="{{ item.url }}"
+                        target="_top"
+                        class="text-gray-700 block px-4 py-2 text-sm"
+                    >
+                        {{ item.title }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</div>
