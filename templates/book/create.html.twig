@@ -7,7 +7,7 @@
                 <div class="w-full m-4">
                     <h1 class="text-4xl font-bold text-center mb-8">Create a new Book</h1>
                 </div>
-                {{ form_start(form) }}
+                {{ form_start(form, { 'attr': { 'class': 'w-full p-8' } }) }}
                     <div class="mb-8">
                         {{ form_label(form.title, '', { 'attr': { 'class': 'mb-3 block text-sm font-medium text-white' }}) }}
 
@@ -25,7 +25,10 @@
                         {{ form_label(form.published, '', { 'attr': { 'class': 'flex cursor-pointer select-none text-sm font-medium text-body-color' }}) }}
                     </div>
 
-                    <button type="submit" class="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">Save</button>
+                    <div class="flex w-full space-x-4">
+                        <button type="submit" class="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">Save</button>
+                        <a href="{{ path('app_book_list') }}" class="flex w-full items-center justify-center rounded-md bg-secondary py-4 px-9 text-base font-medium text-white hover:bg-opacity-80">Cancel</a>
+                    </div>
                 {{ form_end(form) }}
             </div>
         </div>
