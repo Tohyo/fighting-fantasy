@@ -22,7 +22,10 @@
 
                     {{ form_widget(form.book, { 'attr': { 'class': 'hidden' } }) }}
 
-                    <button type="submit" class="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp mb-8">Save</button>
+                    <div class="flex w-full space-x-4">
+                        <button type="submit" class="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp mb-8">Save</button>
+                        <a href={{ path('app_chapter_list', { id: chapter.book.id }) }} class="flex w-full items-center justify-center rounded-md bg-secondary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">Cancel</a>
+                    </div>
                 {{ form_end(form) }}
             </div>
         </div>
