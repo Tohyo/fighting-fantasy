@@ -6,6 +6,7 @@ use App\Entity\Book;
 use App\Form\BookType;
 use App\Repository\BookRepository;
 use App\Security\Voter\BookVoter;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -61,10 +62,20 @@ class BookController extends AppAbstractController
     }
 
     #[Route('/book/list', name: 'app_book_list', methods: ['GET'])]
-    public function list(BookRepository $bookRepository): Response
-    {
+    public function list(
+        BookRepository $bookRepository,
+        PaginatorInterface $paginator,
+        Request $request
+    ): Response {
+
+        $pagination = $paginator->paginate(
+            $bookRepository->findBooksQueryBuilder(),
+            $request->query->getInt('page', 1),
+            3
+        );
+
         return $this->render('book/list.html.twig', [
-            'books' => $bookRepository->findBy(['published' => true]),
+            'pagination' => $pagination,
         ]);
     }
 

@@ -1,0 +1,25 @@
+{% if pageCount > 1 %}
+    <ul class="flex items-center justify-center pt-8">
+        {% if previous is defined %}
+            <li class="mx-1">
+                <a href="{{ path(route, query|merge({(pageParameterName): previous})) }}" class="flex h-9 min-w-[36px] items-center justify-center rounded-md bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white">Prev</a>
+            </li>
+        {% endif %}
+
+        {% for page in pagesInRange %}
+            {% if page != current %}
+                <li class="mx-1">
+                    <a href="{{ path(route, query|merge({(pageParameterName): page})) }}" class="flex h-9 min-w-[36px] items-center justify-center rounded-md bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white">{{ page }}</a>
+                </li>
+            {% else %}
+                <span class="flex h-9 min-w-[36px] font-bold items-center justify-center rounded-md bg-primary bg-opacity-[15%] px-4 text-sm text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white">{{ page }}</span>
+            {% endif %}
+        {% endfor %}
+
+        {% if next is defined %}
+            <li class="mx-1">
+                <a href="{{ path(route, query|merge({(pageParameterName): next})) }}" class="flex h-9 min-w-[36px] items-center justify-center rounded-md bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white">Next</a>
+            </li>
+        {% endif %}
+    </ul>
+{% endif %}
