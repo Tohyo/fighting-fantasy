@@ -32,7 +32,7 @@ class BookController extends AppAbstractController
             $book->creator = $user;
             $bookRepository->save($book, true);
 
-            return $this->redirectToRoute('app_book', ['slug' => $book->slug]);
+            return $this->redirectToRoute('app_book_show', ['slug' => $book->slug]);
         }
 
         return $this->render('book/create.html.twig', [
@@ -52,7 +52,7 @@ class BookController extends AppAbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $bookRepository->save($book, true);
 
-            return $this->redirectToRoute('app_book', ['slug' => $book->slug]);
+            return $this->redirectToRoute('app_book_show', ['slug' => $book->slug]);
         }
 
         return $this->render('book/edit.html.twig', [
@@ -79,7 +79,7 @@ class BookController extends AppAbstractController
         ]);
     }
 
-    #[Route('/book/{slug}', name: 'app_book', methods: ['GET'])]
+    #[Route('/book/{slug}', name: 'app_book_show', methods: ['GET'])]
     public function show(Book $book): Response
     {
         return $this->render('book/show.html.twig', [
