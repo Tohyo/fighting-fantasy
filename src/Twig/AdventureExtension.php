@@ -41,6 +41,6 @@ final class AdventureExtension extends AbstractExtension
             'slug' => $chapter->book->slug,
         ]);
 
-        return "<a href=".$url.">".$matches[2]."</a>";
+        return "<a href=".$url."><u>".$matches[2]."</u></a>";
     }
 }
