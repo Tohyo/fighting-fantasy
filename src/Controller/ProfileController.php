@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Repository\BookRepository;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -20,9 +22,21 @@ class ProfileController extends AppAbstractController
 
     #[IsGranted("IS_AUTHENTICATED_REMEMBERED")]
     #[Route('/profile/books', name: 'app_profile_books', methods: ['GET'])]
-    public function getUserBooks(BookRepository $bookRepository, #[CurrentUser] UserInterface $user): Response {
+    public function getUserBooks(
+        BookRepository $bookRepository,
+        #[CurrentUser] UserInterface $user,
+        PaginatorInterface $paginator,
+        HttpFoundationRequest $request
+    ): Response {
+
+        $pagination = $paginator->paginate(
+            $bookRepository->findBooksQueryBuilder($user),
+            $request->query->getInt('page', 1),
+            5
+        );
+
         return $this->render('profile/_books.html.twig', [
-            'books' => $bookRepository->findBy(['creator' => $user])
+            'pagination' => $pagination,
         ]);
     }
 

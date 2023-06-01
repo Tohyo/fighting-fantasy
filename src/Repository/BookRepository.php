@@ -6,6 +6,7 @@ use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @extends ServiceEntityRepository<Book>
@@ -40,10 +41,19 @@ class BookRepository extends ServiceEntityRepository
         }
     }
 
-    public function findBooksQueryBuilder(): QueryBuilder
+    public function findBooksQueryBuilder(UserInterface $user = null): QueryBuilder
     {
-        return $this->createQueryBuilder('b')
-            ->orderBy('b.id', 'DESC');
+        $queryBuilder = $this->createQueryBuilder('b');
+
+        if ($user) {
+            $queryBuilder
+                ->andWhere('b.creator = :user')
+                ->setParameter('user', $user);
+        }
+
+        $queryBuilder->orderBy('b.id', 'DESC');
+
+        return $queryBuilder;
     }
 
 //    /**
