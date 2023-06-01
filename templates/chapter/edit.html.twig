@@ -25,7 +25,10 @@
                         {{ form_widget(form.book, { 'attr': { 'class': 'w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none bg-[#242B51] shadow-signUp' } }) }}
                     </div>
 
-                    <button type="submit" class="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">Save</button>
+                    <div class="flex w-full space-x-4">
+                        <button type="submit" class="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">Save</button>
+                        <a href={{ path('app_chapter_show', { id: chapter.id }) }} class="flex w-full items-center justify-center rounded-md bg-secondary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">Cancel</a>
+                    </div>
                 {{ form_end(form) }}
                 </div>
             </div>
