@@ -1,0 +1,11 @@
+
+{% set active="text-center block border border-blue-500 rounded py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white" %}
+{% set inactive="text-center block border border-white rounded hover:border-gray-200 text-blue-500 hover:bg-gray-200 py-2 px-4" %}
+<ul class="flex">
+    <li class="flex-1 mr-2">
+        <a class="{{ title is same as "adventures" ? active : inactive }}" href="{{ path('app_profile_adventures') }}">Your adventures</a>
+    </li>
+    <li class="flex-1 mr-2">
+        <a class="{{ title is same as "books" ? active : inactive }}" href="{{ path('app_profile_books') }}">Your books</a>
+    </li>
+</ul>

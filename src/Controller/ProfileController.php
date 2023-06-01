@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Repository\BookRepository;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -26,7 +26,7 @@ class ProfileController extends AppAbstractController
         BookRepository $bookRepository,
         #[CurrentUser] UserInterface $user,
         PaginatorInterface $paginator,
-        HttpFoundationRequest $request
+        Request $request
     ): Response {
 
         $pagination = $paginator->paginate(
@@ -37,6 +37,7 @@ class ProfileController extends AppAbstractController
 
         return $this->render('profile/_books.html.twig', [
             'pagination' => $pagination,
+            'title' => 'books'
         ]);
     }
 
@@ -46,6 +47,7 @@ class ProfileController extends AppAbstractController
     {
         return $this->render('profile/_adventures.html.twig', [
             'adventures' => $user->getActiveAdventures(),
+            'title' => 'adventures'
         ]);
     }
 }
