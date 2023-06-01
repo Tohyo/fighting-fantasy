@@ -9,6 +9,8 @@ use App\Repository\AdventureRepository;
 use App\Repository\ChapterRepository;
 use App\Security\Voter\BookVoter;
 use App\Security\Voter\ChapterVoter;
+use Knp\Component\Pager\Paginator;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -94,12 +96,22 @@ class ChapterController extends AppAbstractController
     }
 
     #[Route('/chapter/list/{id}', name: 'app_chapter_list', methods: ['GET'])]
-    public function list(Book $book): Response
-    {
+    public function list(
+        Book $book,
+        PaginatorInterface $paginator,
+        ChapterRepository $chapterRepository,
+        Request $request
+    ): Response {
         $this->denyAccessUnlessGranted(BookVoter::VIEW, $book);
 
+        $pagination = $paginator->paginate(
+            $chapterRepository->findChaptersQueryBuilder($book),
+            $request->query->getInt('page', 1),
+            5
+        );
+
         return $this->render('chapter/list.html.twig', [
-            'chapters' => $book->chapters,
+            'pagination' => $pagination,
             'book' => $book,
         ]);
     }

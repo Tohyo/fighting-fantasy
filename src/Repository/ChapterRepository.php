@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Book;
 use App\Entity\Chapter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -43,6 +44,14 @@ class ChapterRepository extends ServiceEntityRepository
     public function findFirstChapterOfBook(Book $book): ?Chapter
     {
         return $this->findOneBy(['book' => $book, 'number' => 1]);
+    }
+
+    public function findChaptersQueryBuilder(Book $book): QueryBuilder
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.book = :book')
+            ->setParameter('book', $book)
+            ->orderBy('c.number', 'ASC');
     }
 
 //    /**
