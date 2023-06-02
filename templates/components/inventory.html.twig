@@ -10,7 +10,7 @@
             </button>
         {% endif %}
     </div>
-    {% for  item in adventureSheet.inventory %}
+    {% for item in adventureSheet.inventory %}
         <div class="flex items-justify">
             <span data-model="item">{{ item }}</span>
             <button data-action="live#action" data-action-name="deleteItem(item={{ item }})" class="btn btn-outline btn-outline-secondary">
@@ -22,12 +22,12 @@
     {% endfor %}
     {% if isAdding %}
         <div class="mb-2">
-            <input type="text" data-model="item" class="w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp" autofocus/>
+            <input type="text" data-model="item" class="w-full rounded-md border border-transparent py-3 px-6 text-base  placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none bg-[#242B51]" autofocus/>
         </div>
 
-        <button data-action="live#action" data-action-name="prevent|saveItem" class="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">Save</button>
+        <button data-action="live#action" data-action-name="prevent|saveItem" class="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white">Save</button>
 
-        <button data-action="live#action" data-action-name="cancelItem" class="flex w-full items-center justify-center rounded-md bg-secondary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+        <button data-action="live#action" data-action-name="cancelItem" class="flex w-full items-center justify-center rounded-md bg-secondary py-4 px-9 text-base font-medium text-white">
             Cancel
         </button>
     {% endif %}
