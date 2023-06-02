@@ -1,29 +1,31 @@
-<header class="header top-0 left-0 z-40 flex w-full items-center bg-transparent absolute">
+<header class="top-0 left-0 z-40 flex w-full items-center">
     <div class="container">
-        <div class="relative -mx-4 flex items-center justify-between">
+        <div class="-mx-4 flex items-center justify-between">
             <div class="flex w-full items-center justify-between px-4">
                 <div>
-                    <nav id="navbarCollapse" class="navbar absolute right-0 z-30 w-[250px] rounded border-[.5px] border-body-color/50 bg-white py-4 px-6 duration-300 dark:border-body-color/20 dark:bg-dark lg:visible lg:static lg:w-auto lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100 invisible top-[120%] opacity-0">
+                    <nav
+                        id="navbarCollapse"
+                        class=" right-0 z-30 w-[250px] border-[.5px] border-body-color/50 bg-white py-4 px-6  border-body-color/20 lg:visible lg:static lg:w-auto lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100 invisible top-[120%] opacity-0">
                         <ul class="block lg:flex lg:space-x-12">
-                            <li class="group relative">
-                                <a class="flex py-2 text-base text-dark group-hover:opacity-70 dark:text-white lg:mr-0 lg:inline-flex lg:py-6 lg:px-0" href="{{ path('app_home') }}">Home</a>
+                            <li>
+                                <a class="flex py-2 text-base group-hover:opacity-70 text-white lg:mr-0 lg:inline-flex lg:py-6 lg:px-0" href="{{ path('app_home') }}">Home</a>
                             </li>
-                            <li class="group relative">
-                                <a class="flex py-2 text-base text-dark group-hover:opacity-70 dark:text-white lg:mr-0 lg:inline-flex lg:py-6 lg:px-0" href="{{ path('app_book_list') }}">Books</a>
+                            <li>
+                                <a class="flex py-2 text-base group-hover:opacity-70 text-white lg:mr-0 lg:inline-flex lg:py-6 lg:px-0" href="{{ path('app_book_list') }}">Books</a>
                             </li>
-                            <li class="group relative">
-                                <a class="flex py-2 text-base text-dark group-hover:opacity-70 dark:text-white lg:mr-0 lg:inline-flex lg:py-6 lg:px-0" href="{{ path('app_book_create') }}">Create a Book</a>
+                            <li>
+                                <a class="flex py-2 text-base group-hover:opacity-70 text-white lg:mr-0 lg:inline-flex lg:py-6 lg:px-0" href="{{ path('app_book_create') }}">Create a Book</a>
                             </li>
                         </ul>
                     </nav>
                 </div>
                 <div class="flex items-center justify-end pr-16 lg:pr-0">
                     {% if is_granted('ROLE_USER') %}
-                        <a class="hidden py-3 px-7 text-base font-bold text-dark hover:opacity-70 dark:text-white md:block" href="{{ path('app_profile') }}">Profile</a>
-                        <a class="hidden py-3 px-7 text-base font-bold text-dark hover:opacity-70 dark:text-white md:block" href="{{ path('app_logout') }}">Log out</a>
+                        <a class="py-3 px-7 text-base font-bold hover:opacity-70 text-white" href="{{ path('app_profile') }}">Profile</a>
+                        <a class="py-3 px-7 text-base font-bold hover:opacity-70 text-white" href="{{ path('app_logout') }}">Log out</a>
                     {% else %}
-                        <a class="hidden py-3 px-7 text-base font-bold text-dark hover:opacity-70 dark:text-white md:block" href="{{ path('app_login') }}">Sign In</a>
-                        <a class="ease-in-up hidden rounded-md bg-primary py-3 px-8 text-base font-bold text-white transition duration-300 hover:bg-opacity-90 hover:shadow-signUp md:block md:px-9 lg:px-6 xl:px-9" href="{{ path('app_register') }}">Sign Up</a>
+                        <a class="py-3 px-7 text-base font-bold hover:opacity-7 text-white" href="{{ path('app_login') }}">Sign In</a>
+                        <a class="rounded-md bg-primary py-3 px-8 text-base font-bold text-white xl:px-9" href="{{ path('app_register') }}">Sign Up</a>
                     {% endif %}
                 </div>
             </div>
