@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\AdventureStatusEnum;
 use App\Repository\AdventureRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -28,6 +29,9 @@ class Adventure
     #[ORM\ManyToOne(inversedBy: 'adventures')]
     #[ORM\JoinColumn(nullable: false)]
     public ?User $player = null;
+
+    #[ORM\Column]
+    public int $status = AdventureStatusEnum::ACTIVE->value;
 
     public function __construct()
     {

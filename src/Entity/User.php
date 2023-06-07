@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\AdventureStatusEnum;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -232,7 +233,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $adventures = [];
 
         foreach ($this->adventures as $adventure) {
-            if ($adventure->book->published) {
+            if ($adventure->book->published && $adventure->status === AdventureStatusEnum::ACTIVE->value) {
                 $adventures[] = $adventure;
             }
         }

@@ -2,6 +2,8 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\AdventureSheet;
+use App\Enum\AdventureStatusEnum;
 use App\Tests\Factory\AdventureFactory;
 use App\Tests\Factory\AdventureSheetFactory;
 use App\Tests\Factory\BookFactory;
@@ -45,6 +47,7 @@ class AppFixtures extends Fixture
             'book' => BookFactory::last(),
             'chapter' => ChapterFactory::find(['number' => 1]),
             'player' => UserFactory::find(['email' => 'kevin@admin.com']),
+            'status' => AdventureStatusEnum::ACTIVE->value
         ]);
 
         BookFactory::createMany(100, [
