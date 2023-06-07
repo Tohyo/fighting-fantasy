@@ -21,6 +21,10 @@
                                     {
                                         title: 'Continue your adventure',
                                         url: path('app_adventure', { slug: adventure.book.slug }),
+                                    },
+                                    {
+                                        title: 'Resign from adventure',
+                                        url: path('app_adventure_resign', { id: adventure.id }),
                                     }
                                 ]}) }}
                             </div>

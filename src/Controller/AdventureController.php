@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\Adventure;
 use App\Entity\AdventureSheet;
 use App\Entity\Book;
+use App\Enum\AdventureStatusEnum;
 use App\Repository\AdventureRepository;
 use App\Repository\ChapterRepository;
+use App\Security\Voter\AdventureVoter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -40,5 +42,17 @@ class AdventureController extends AppAbstractController
         return $this->render('adventure/adventure.html.twig', [
             'adventure' => $adventure,
         ]);
+    }
+
+    #[Route('/adventure/{id}/resign', name: 'app_adventure_resign', methods: ['GET'])]
+    #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
+    public function resignFromAdventure(Adventure $adventure, AdventureRepository $adventureRepository): Response
+    {
+        $this->denyAccessUnlessGranted(AdventureVoter::RESIGN, $adventure);
+
+        $adventure->status = AdventureStatusEnum::ABANDONED->value;
+        $adventureRepository->save($adventure, true);
+
+        return $this->redirectToRoute('app_home');
     }
 }
