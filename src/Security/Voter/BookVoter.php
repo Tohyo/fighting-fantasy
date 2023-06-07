@@ -11,12 +11,13 @@ class BookVoter extends Voter
 {
     public const EDIT = 'BOOK_EDIT';
     public const VIEW = 'BOOK_VIEW';
+    public const PUBLISH = 'BOOK_PUBLISH';
 
     protected function supports(string $attribute, mixed $subject): bool
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, [self::EDIT, self::VIEW])
+        return in_array($attribute, [self::EDIT, self::VIEW, self::PUBLISH])
             && $subject instanceof \App\Entity\Book;
     }
 

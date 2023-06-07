@@ -86,4 +86,16 @@ class BookController extends AppAbstractController
             'book' => $book,
         ]);
     }
+
+    #[Route('/book/publish/{id}', name: 'app_book_publish', methods: ['GET'])]
+    #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
+    public function togglePublish(Book $book, BookRepository $bookRepository): Response
+    {
+        $this->denyAccessUnlessGranted(BookVoter::PUBLISH, $book);
+
+        $book->published = !$book->published;
+        $bookRepository->save($book, true);
+
+        return $this->redirectToRoute('app_book_show', ['slug' => $book->slug]);
+    }
 }

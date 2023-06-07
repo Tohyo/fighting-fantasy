@@ -29,6 +29,10 @@
                                     {
                                         title: 'See chapters',
                                         url: path('app_chapter_list', { id: book.id }),
+                                    },
+                                    {
+                                        title: book.published ? 'Unpublish book' : 'Publish book' ,
+                                        url: path('app_book_publish', { id: book.id }),
                                     }
                                 ]}) }}
                             </div>
