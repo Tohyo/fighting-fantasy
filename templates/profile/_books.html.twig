@@ -23,6 +23,10 @@
                             <div >
                                 {{ component('drop_down_menu', { items: [
                                     {
+                                        title: 'Edit book',
+                                        url: path('app_book_edit', { id: book.id }),
+                                    },
+                                    {
                                         title: 'See chapters',
                                         url: path('app_chapter_list', { id: book.id }),
                                     }
