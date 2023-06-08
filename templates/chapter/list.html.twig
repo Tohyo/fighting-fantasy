@@ -15,15 +15,19 @@
                     {% for chapter in pagination %}
                         <li class="mb-6 border-b border-body-color border-opacity-10 pb-6 border-white">
                             <div class="flex items-center lg:block xl:flex">
-                                <div class="w-full">
-                                    <div class="flex items-start gap-x-3">
-                                        <p class="text-sm font-semibold leading-6 ">{{ chapter.number }}</p>
-                                    </div>
-                                    <div class="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
-                                        <p class="truncate">{{ chapter.content }}</p>
+                                <div class="flex w-full">
+                                    <div class="w-10/12">
+                                        <div class="flex items-start gap-x-3">
+                                            <p class="text-sm font-semibold leading-6 ">{{ chapter.number }}</p>
+                                        </div>
+                                        <div class="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
+                                            <p class="truncate">{{ chapter.content }}</p>
+                                        </div>
                                     </div>
                                     {% if is_granted(constant('App\\Security\\Voter\\ChapterVoter::EDIT'), chapter) %}
-                                        <a class="inline-flex items-center justify-center rounded-full bg-primary py-2 px-4 text-sm font-semibold text-white" href="{{ path('app_chapter_show', { id: chapter.id }) }}">view</a>
+                                        <div>
+                                            <a class="inline-flex items-center justify-center rounded-full bg-primary py-2 px-4 text-sm font-semibold text-white" href="{{ path('app_chapter_show', { id: chapter.id }) }}">view</a>
+                                        </div>
                                     {% endif %}
                                 </div>
                             </div>
