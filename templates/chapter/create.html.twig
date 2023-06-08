@@ -7,7 +7,7 @@
                 <div class="w-full m-4">
                     <h1 class="text-4xl font-bold text-center mb-8">Create a new Chapter</h1>
                 </div>
-                {{ form_start(form, { 'action': path('app_chapter_create', { id: chapter.book.id }) }) }}
+                {{ form_start(form, { 'attr': { 'class': 'w-full p-8' }, 'action': path('app_chapter_create', { id: chapter.book.id }) }) }}
                     <div class="mb-8">
                         {{ form_label(form.number, '', { 'attr': { 'class': 'mb-3 block text-sm font-medium text-white' }}) }}
 
@@ -23,7 +23,7 @@
                     {{ form_widget(form.book, { 'attr': { 'class': 'hidden' } }) }}
 
                     <div class="flex w-full space-x-4">
-                        <button type="submit" class="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white hover:bg-opacity-80  mb-8">Save</button>
+                        <button type="submit" class="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white hover:bg-opacity-80">Save</button>
                         <a href={{ path('app_chapter_list', { id: chapter.book.id }) }} class="flex w-full items-center justify-center rounded-md bg-secondary py-4 px-9 text-base font-medium text-white hover:bg-opacity-80 ">Cancel</a>
                     </div>
                 {{ form_end(form) }}
